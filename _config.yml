@@ -100,10 +100,10 @@ theme: aero
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
-deploy:
-  type: git
-  repository: https://github.com/Winn9910/suoma-blog.github.io.git 
-  branch: main
+# deploy:
+#   type: git
+#   repository: https://github.com/Winn9910/suoma-blog.github.io.git
+#   branch: main
 #订阅
 feed:
   enable: true
