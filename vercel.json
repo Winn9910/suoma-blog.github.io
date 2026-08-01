@@ -1,4 +1,10 @@
 {
+  "framework": null,
   "buildCommand": "npm run build",
-  "outputDirectory": "public"
+  "outputDirectory": "public",
+  "functions": {
+    "api/submit-link.js": {
+      "maxDuration": 10
+    }
+  }
 }
