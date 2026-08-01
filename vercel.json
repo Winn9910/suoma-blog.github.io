@@ -1,10 +1,15 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "public",
-  "framework": "hexo",
   "functions": {
-    "api/*.js": {
+    "api/submit-link.js": {
       "maxDuration": 10
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/api/submit-link",
+      "destination": "/api/submit-link"
+    }
+  ]
 }
