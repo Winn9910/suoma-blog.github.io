@@ -160,6 +160,117 @@
     top: 1px;
 }
 
+/* 播放模式按钮 */
+.mode-btn {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 播放列表面板 */
+.playlist-wrapper {
+    position: relative;
+}
+
+.playlist-toggle {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playlist-panel {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 220px;
+    max-height: 280px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    background: var(--white-main);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.16), 0 0 0 0.5px var(--black-main);
+    border-radius: 16px;
+    z-index: 10;
+}
+
+.playlist-panel.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.playlist-header {
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black-main);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.playlist-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    max-height: 220px;
+    scrollbar-width: thin;
+}
+
+.playlist-items::-webkit-scrollbar {
+    width: 6px;
+}
+
+.playlist-items::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+}
+
+.playlist-items::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--primary-color), white 50%);
+    border-radius: 3px;
+}
+
+.playlist-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 10px;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.playlist-item:hover,
+.playlist-item.active {
+    background: color-mix(in srgb, var(--primary-color), white 88%);
+}
+
+.playlist-item-title {
+    font-size: 13px;
+    line-height: 1.2;
+    color: var(--black-main);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.playlist-item-artist {
+    font-size: 11px;
+    line-height: 1.2;
+    color: color-mix(in srgb, var(--black-main), white 30%);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .ctrl-btn::after {
     border-radius: inherit;
 }

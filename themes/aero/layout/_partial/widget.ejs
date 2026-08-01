@@ -47,6 +47,18 @@
             <button class="button ctrl-btn" id="nextBtn">
                 <span class="ri-skip-forward-fill"></span>
             </button>
+            <button class="button ctrl-btn mode-btn" id="playModeBtn" type="button" title="切换播放模式">
+                <span id="playModeIcon" class="ri-repeat-line"></span>
+            </button>
+            <div class="playlist-wrapper">
+                <button class="button ctrl-btn playlist-toggle" id="playlistToggle" type="button">
+                    <span class="ri-play-list-fill"></span>
+                </button>
+                <div class="playlist-panel" id="playlistPanel">
+                    <div class="playlist-header">播放列表</div>
+                    <ul class="playlist-items" id="playlistItems"></ul>
+                </div>
+            </div>
         </div>
     </div>
 
