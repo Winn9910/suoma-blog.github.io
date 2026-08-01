@@ -1,0 +1,29 @@
+menu:
+  about: /about
+  links: /links
+favicon:
+  enable: true
+  icon: /image/icon/favicon.ico
+profile:
+  enable: true
+  author: '索玛'
+  avatar: '/image/icon/maodie.webp'  # 头像图片, for example, https://avatars.githubusercontent.com/username
+  avatar_link: 'https://suo.ma' # The link you click on the avatar and jump to, for example, https://github.com/username
+  #social: # you can customize which and how many social links to show
+    #- name: Github
+    #  link: '' # https://github.com/username
+    #  icon: /image/icon/github.png
+    #- name: Bilibili
+    #  link: '' # https://space.bilibili.com/youruid
+    #  icon: /image/icon/bilibili.png
+music:    #音乐播放器
+  enable: true
+  autoplay: false
+  songs:
+    - title: 'Koonichi Wa'
+      artist: 'Caroline'
+      cover: '/img/Koonichi Wa.jpg'
+      url: '/music/Koonichi Wa.mp3'
+math:
+  enable: true
+  engine: mathjax

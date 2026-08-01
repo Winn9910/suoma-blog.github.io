@@ -1,0 +1,53 @@
+name: Approve Friend Link
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  approve-link:
+    # 仅当标签为 approved 时触发
+    if: github.event.label.name == 'approved'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Parse issue and update links
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          node .github/scripts/approve-link.mjs
+
+      - name: Commit and push
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add source/_data/links.yml
+          git commit -m "feat: add friend link - ${ISSUE_TITLE#\[友链申请\] }" || echo "No changes to commit"
+          git push
+
+      - name: Close issue with success comment
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh issue close ${{ github.event.issue.number }} --repo ${{ github.repository }} --comment "✅ 友链已添加并自动部署！
+
+          页面将在 Vercel 重新构建后更新（通常 1-2 分钟）。"
+
+      - name: Comment on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment ${{ github.event.issue.number }} --repo ${{ github.repository }} --body "❌ 处理失败，请检查 Issue 格式或联系站长手动添加。"
