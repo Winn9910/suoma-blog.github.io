@@ -13,14 +13,15 @@
             <div class="links-grid">
                 <% site.data.links.blogs.forEach(function(link) { %>
                 <a class="link-card" href="<%= link.url %>" target="_blank" rel="noopener">
-                    <% if (link.avatar) { %>
-                    <img src="<%= link.avatar %>" alt="<%= link.name %>" class="link-avatar" loading="lazy" onerror="this.style.display='none'">
-                    <% } else { %>
-                    <span class="link-avatar-placeholder"><%= link.name.charAt(0) %></span>
-                    <% } %>
+                    <div class="link-avatar-wrap">
+                        <% if (link.avatar && link.avatar.trim()) { %>
+                        <img src="<%= link.avatar %>" alt="<%= link.name %>" class="link-avatar" loading="lazy" onerror="this.classList.add('avatar-failed')">
+                        <% } %>
+                        <span class="link-avatar-placeholder"><%= link.name.charAt(0) %></span>
+                    </div>
                     <div class="link-info">
                         <span class="link-name"><%= link.name %></span>
-                        <% if (link.description) { %>
+                        <% if (link.description && link.description.trim()) { %>
                         <span class="link-desc"><%= link.description %></span>
                         <% } %>
                     </div>
@@ -31,10 +32,12 @@
 
             <% if (site.data.links.circles && site.data.links.circles.length) { %>
             <h3>圈子</h3>
-            <div class="links-grid">
+            <div class="links-grid links-grid-circles">
                 <% site.data.links.circles.forEach(function(link) { %>
-                <a class="link-card" href="<%= link.url %>" target="_blank" rel="noopener">
-                    <span class="link-avatar-placeholder"><%= link.name.charAt(0) %></span>
+                <a class="link-card link-card-sm" href="<%= link.url %>" target="_blank" rel="noopener">
+                    <div class="link-avatar-wrap">
+                        <span class="link-avatar-placeholder"><%= link.name.charAt(0) %></span>
+                    </div>
                     <div class="link-info">
                         <span class="link-name"><%= link.name %></span>
                     </div>
