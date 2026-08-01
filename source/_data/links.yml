@@ -1,6 +1,8 @@
 # 友链数据（自动维护，请勿手动编辑）
 # 新友链通过 GitHub Issue 提交，审核通过后由 GitHub Action 自动添加
 blogs:
+  - name: "索玛"
+    url: "https://suo.ma"
   - name: "寒士杰克"
     url: "https://www.hansjack.com/"
   - name: "云白"
