@@ -15,9 +15,12 @@
                 <a class="link-card" href="<%= link.url %>" target="_blank" rel="noopener">
                     <div class="link-avatar-wrap">
                         <% if (link.avatar && link.avatar.trim()) { %>
-                        <img src="<%= link.avatar %>" alt="<%= link.name %>" class="link-avatar" loading="lazy" onerror="this.classList.add('avatar-failed')">
-                        <% } %>
+                        <img src="<%= link.avatar %>" alt="<%= link.name %>" class="link-avatar" loading="lazy"
+                             data-fallback="<%= link.name.charAt(0) %>"
+                             onerror="var s=document.createElement('span');s.className='link-avatar-placeholder';s.textContent=this.dataset.fallback;this.replaceWith(s)">
+                        <% } else { %>
                         <span class="link-avatar-placeholder"><%= link.name.charAt(0) %></span>
+                        <% } %>
                     </div>
                     <div class="link-info">
                         <span class="link-name"><%= link.name %></span>

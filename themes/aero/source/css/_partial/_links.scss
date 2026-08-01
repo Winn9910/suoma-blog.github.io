@@ -41,7 +41,6 @@
 
 /* --- 头像区域 --- */
 .link-avatar-wrap {
-    position: relative;
     width: 40px;
     height: 40px;
     flex-shrink: 0;
@@ -52,20 +51,10 @@
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    position: relative;
-    z-index: 1;
-    background: var(--secondary-color);
-}
-
-/* 头像加载失败时隐藏，露出底层占位符 */
-.link-avatar.avatar-failed {
-    display: none;
+    display: block;
 }
 
 .link-avatar-placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -76,19 +65,23 @@
     justify-content: center;
     font-size: 18px;
     font-weight: 700;
-    z-index: 0;
     box-shadow: inset 0 0 0 1px var(--white-main), 0 0 0 0.5px var(--black-main);
 }
 
 /* 圈子卡片用更小的头像 */
-.link-card-sm .link-avatar-wrap,
-.link-card-sm .link-avatar,
-.link-card-sm .link-avatar-placeholder {
+.link-card-sm .link-avatar-wrap {
+    width: 32px;
+    height: 32px;
+}
+
+.link-card-sm .link-avatar {
     width: 32px;
     height: 32px;
 }
 
 .link-card-sm .link-avatar-placeholder {
+    width: 32px;
+    height: 32px;
     font-size: 15px;
 }
 
