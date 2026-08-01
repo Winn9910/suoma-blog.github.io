@@ -22,14 +22,15 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 14px;
+    padding: 10px 14px;
+    height: 62px;
+    box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.55);
     border: 1px solid var(--secondary-color);
     border-radius: 8px;
     text-decoration: none;
     color: var(--black-main);
     transition: all 0.25s ease;
-    overflow: hidden;
 }
 
 .link-card:hover {
@@ -44,19 +45,20 @@
     width: 40px;
     height: 40px;
     flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
 .link-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
 
 .link-avatar-placeholder {
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     background: var(--aero-grad);
     color: var(--black-main);
@@ -66,22 +68,20 @@
     font-size: 18px;
     font-weight: 700;
     box-shadow: inset 0 0 0 1px var(--white-main), 0 0 0 0.5px var(--black-main);
+    box-sizing: border-box;
 }
 
 /* 圈子卡片用更小的头像 */
+.link-card-sm {
+    height: 50px;
+}
+
 .link-card-sm .link-avatar-wrap {
     width: 32px;
     height: 32px;
 }
 
-.link-card-sm .link-avatar {
-    width: 32px;
-    height: 32px;
-}
-
 .link-card-sm .link-avatar-placeholder {
-    width: 32px;
-    height: 32px;
     font-size: 15px;
 }
 
@@ -92,6 +92,7 @@
     gap: 2px;
     overflow: hidden;
     min-width: 0;
+    flex: 1;
 }
 
 .link-name {
@@ -105,11 +106,9 @@
 .link-desc {
     font-size: 12px;
     color: #666;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    white-space: nowrap;
     overflow: hidden;
-    line-height: 1.4;
+    text-overflow: ellipsis;
 }
 
 /* --- 申请表单 --- */
