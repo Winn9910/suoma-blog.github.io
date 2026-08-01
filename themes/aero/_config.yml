@@ -24,6 +24,18 @@ music:    #音乐播放器
       artist: 'Caroline'
       cover: '/img/Koonichi Wa.jpg'
       url: '/music/Koonichi Wa.mp3'
+    - title: 'Ring a ling'
+      artist: 'Tiggy'
+      cover: '/img/ringaling.jpg'
+      url: '/music/Ring a ling.mp3' 
+    - title: 'Lato lato song'
+      artist: 'Sean AI'
+      cover: '/img/latolatosong.jpg'
+      url: '/music/Lato lato song.mp3' 
+    - title: 'Be my satellite'
+      artist: 'Banaroo'
+      cover: '/img/bemysatellite.jpg'
+      url: '/music/Be my satellite.mp3' 
 math:
   enable: true
   engine: mathjax
