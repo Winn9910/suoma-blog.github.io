@@ -1,5 +1,13 @@
+@font-face {
+    font-family: "PingFang SC";
+    src: url("/img/pingfang.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
-    font-family: "Segoe UI", sans-serif;
+    font-family: "PingFang SC", "Segoe UI", sans-serif;
     color: var(--black-main);
     margin: 0 auto;
     background-image: var(--bg-image);
