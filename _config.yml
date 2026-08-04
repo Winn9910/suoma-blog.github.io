@@ -113,6 +113,12 @@ feed:
   content: true
   content_limit: 200
   order_by: -date
+#站点地图
+sitemap:
+  path: sitemap.xml
+  rel: false
+  tags: true
+  categories: true
 #文章加密
 encrypt:
   enable: true
