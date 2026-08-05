@@ -22,20 +22,20 @@ music:    #音乐播放器
   songs:
     - title: 'Koonichi Wa'
       artist: 'Caroline'
-      cover: '/img/Koonichi Wa.jpg'
-      url: '/music/Koonichi Wa.mp3'
+      cover: 'https://img.cnm.pw/suo.ma/music/Koonichi%20Wa.jpg'
+      url: 'https://img.cnm.pw/suo.ma/music/Koonichi%20Wa.mp3'
     - title: 'Ring a ling'
       artist: 'Tiggy'
-      cover: '/img/ringaling.jpg'
-      url: '/music/Ring a ling.mp3' 
+      cover: 'https://img.cnm.pw/suo.ma/music/ringaling.jpg'
+      url: 'https://img.cnm.pw/suo.ma/music/Ring%20a%20ling.mp3' 
     - title: 'Lato lato song'
       artist: 'Sean AI'
-      cover: '/img/latolatosong.jpg'
-      url: '/music/Lato lato song.mp3' 
+      cover: 'https://img.cnm.pw/suo.ma/music/latolatosong.jpg'
+      url: 'https://img.cnm.pw/suo.ma/music/Lato%20lato%20song.mp3' 
     - title: 'Be my satellite'
       artist: 'Banaroo'
-      cover: '/img/bemysatellite.jpg'
-      url: '/music/Be my satellite.mp3' 
+      cover: 'https://img.cnm.pw/suo.ma/music/bemysatellite.jpg'
+      url: 'https://img.cnm.pw/suo.ma/music/Be%20my%20satellite.mp3' 
 math:
   enable: true
   engine: mathjax
