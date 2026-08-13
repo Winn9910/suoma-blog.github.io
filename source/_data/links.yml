@@ -1,6 +1,10 @@
 # 友链数据（自动维护，请勿手动编辑）
 # 新友链通过 GitHub Issue 提交，审核通过后由 GitHub Action 自动添加
 blogs:
+  - name: "upxuu's blog"
+    url: "https://upxuu.com"
+    description: "逐光而上！"
+    avatar: "https://upxuu.com/images/me.jpg"
   - name: "懋和道人"
     url: "https://blog.dao.js.cn/"
     description: "李懋和，俗名李栋梁。书法、国画爱好者，互联网安全与前端建设者。"
