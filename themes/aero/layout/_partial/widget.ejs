@@ -24,6 +24,26 @@
 </div>
 
 
+<% if (site_stats) { %>
+<div class="widget card stats-widget">
+    <div class="stats-title">站点统计</div>
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-num"><%= site_stats.posts %></div>
+            <div class="stat-label">篇文章</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num"><%= site_stats.charsLabel %></div>
+            <div class="stat-label">字数</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num"><%= site_stats.readLabel %></div>
+            <div class="stat-label">阅读时长</div>
+        </div>
+    </div>
+</div>
+<% } %>
+
 <div class="widget music-widget">
     <div class="player-content">
         <div class="song-info">
