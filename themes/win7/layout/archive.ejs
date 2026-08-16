@@ -1,0 +1,24 @@
+<h1 class="win7-section-title"><%- __('archive_title') %></h1>
+
+<% var posts = site.posts.toArray().sort(function (a, b) { return b.date - a.date; });
+   var years = {};
+   posts.forEach(function (p) { var y = date(p.date, 'YYYY'); (years[y] = years[y] || []).push(p); }); %>
+
+<div class="win7-archive-tools">
+  <label for="win7ArchiveYear"><%- __('filter_year') %></label>
+  <select id="win7ArchiveYear">
+    <option value="all"><%- __('all_years') %></option>
+    <% Object.keys(years).sort().reverse().forEach(function (y) { %>
+      <option value="<%- y %>"><%- y %> (<%- years[y].length %>)</option>
+    <% }); %>
+  </select>
+</div>
+
+<ul class="win7-archive-lv" role="listbox" aria-label="<%- __('archive_title') %>">
+  <% posts.forEach(function (p) { %>
+    <li role="option" data-year="<%- date(p.date, 'YYYY') %>">
+      <a href="<%- url_for(p.path) %>"><span class="ico ico-doc"></span> <%- p.title %></a>
+      <small class="win7-lv-date"><%- date(p.date, 'YYYY-MM-DD') %></small>
+    </li>
+  <% }); %>
+</ul>

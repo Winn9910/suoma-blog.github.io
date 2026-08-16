@@ -1,0 +1,7 @@
+<p class="status-bar-field win7-sb-left">
+  <span class="ico ico-ok"></span> <%- __('title_hello') %>, <%- config.title %> · <%- _p('posts_count', site.posts.length) %>
+</p>
+<p class="status-bar-field win7-sb-right">
+  <% if (theme.rss) { %><a href="<%- url_for(theme.rss) %>" class="win7-sb-link">RSS</a><% } %>
+  <span class="win7-sb-copy"><%- theme.copyright %></span>
+</p>

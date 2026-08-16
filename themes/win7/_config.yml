@@ -1,0 +1,58 @@
+# ============================================================
+# win7 — a Windows 7 (Aero) themed Hexo theme, powered by 7.css
+# https://khang-nd.github.io/7.css  (MIT)
+# ------------------------------------------------------------
+# All options below are read via the `theme` variable in templates.
+# Tip: you can also override any of these from your site _config.yml
+#      under a `win7:` key (Hexo merges theme config automatically).
+# ============================================================
+
+# --- Window chrome ------------------------------------------
+# Aero glass tint for the main window + title bar. Any CSS color.
+# Classic Windows 7 blue is #4580c4. Try #3a6ea5 / #5a3a8c / #2d7d46.
+window_color: "#4580c4"
+
+# Desktop wallpaper preset: "aurora" (default Win7-like) or "solid".
+wallpaper: aurora
+
+# --- Navigation ---------------------------------------------
+# Shown in the sidebar tree-view.
+# (Falls back to site-level `menu` if this is empty.)
+menu:
+  Home: /
+  Archives: /archives/
+  About: /about/
+  Links: /links/
+
+# --- Sidebar widgets (top to bottom) ------------------------
+# Available: nav, recent_posts, tagcloud, categories
+widgets:
+  - nav
+
+# How many recent posts to show.
+recent_posts_count: 5
+
+# --- Post display -------------------------------------------
+# Show date / categories / tags line under each post title.
+post_meta: true
+
+# --- Feed / footer ------------------------------------------
+# RSS/Atom link shown in the status bar. false to hide.
+rss: /atom.xml
+
+# Text shown in the right side of the status bar.
+copyright: "Powered by Hexo · styled with 7.css"
+
+# --- Comments (optional) ------------------------------------
+# Leave empty to disable. To enable, paste a raw HTML snippet, e.g.
+# an Utterances / Disqus / Giscus script. It is injected at the end
+# of every post.
+# comments: |
+#   <script src="https://utteranc.es/client.js"
+#     repo="your/repo" issue-term="pathname" theme="github-light"
+#     crossorigin="anonymous" async></script>
+comments:
+
+# --- Misc ---------------------------------------------------
+# Title shown on the window title-bar. Empty -> uses site title.
+title_bar_text:

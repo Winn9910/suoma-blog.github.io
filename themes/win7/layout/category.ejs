@@ -1,0 +1,10 @@
+<h1 class="win7-section-title"><%- __('category_title') %>: <%- page.category %></h1>
+<ul class="win7-archive-lv" role="listbox" aria-label="<%- page.category %>">
+  <% page.posts.toArray().forEach(function (post) { %>
+    <li role="option" data-year="<%- date(post.date, 'YYYY') %>">
+      <a href="<%- url_for(post.path) %>"><span class="ico ico-doc"></span> <%- post.title %></a>
+      <small class="win7-lv-date"><%- date(post.date, 'YYYY-MM-DD') %></small>
+    </li>
+  <% }); %>
+</ul>
+<%- partial('partial/pagination') %>

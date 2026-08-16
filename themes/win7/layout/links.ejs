@@ -1,0 +1,88 @@
+<article class="win7-article">
+  <h1 class="win7-article-title"><%- page.title %></h1>
+
+  <div class="win7-content"><%- page.content %></div>
+
+  <% if (site.data.links) { %>
+  <div class="win7-links-section">
+
+    <% if (site.data.links.blogs && site.data.links.blogs.length) { %>
+    <h3 class="win7-links-h3"><span class="ico ico-folder"></span> 博客</h3>
+    <div class="win7-links-grid">
+      <% site.data.links.blogs.forEach(function (link) { %>
+      <a class="win7-link-card" href="<%= link.url %>" target="_blank" rel="noopener">
+        <div class="win7-link-avatar-wrap">
+          <% if (link.avatar && link.avatar.trim()) { %>
+          <img src="<%= link.avatar %>" alt="<%= link.name %>" class="win7-link-avatar" loading="lazy"
+               data-fallback="<%= link.name.charAt(0) %>"
+               onerror="var s=document.createElement('span');s.className='win7-link-avatar-placeholder';s.textContent=this.dataset.fallback;this.replaceWith(s)">
+          <% } else { %>
+          <span class="win7-link-avatar-placeholder"><%= link.name.charAt(0) %></span>
+          <% } %>
+        </div>
+        <div class="win7-link-info">
+          <span class="win7-link-name"><%= link.name %></span>
+          <% if (link.description && link.description.trim()) { %>
+          <span class="win7-link-desc"><%= link.description %></span>
+          <% } %>
+        </div>
+      </a>
+      <% }) %>
+    </div>
+    <% } %>
+
+    <% if (site.data.links.circles && site.data.links.circles.length) { %>
+    <h3 class="win7-links-h3"><span class="ico ico-tag"></span> 圈子</h3>
+    <div class="win7-links-grid win7-links-grid-sm">
+      <% site.data.links.circles.forEach(function (link) { %>
+      <a class="win7-link-card win7-link-card-sm" href="<%= link.url %>" target="_blank" rel="noopener">
+        <div class="win7-link-avatar-wrap">
+          <span class="win7-link-avatar-placeholder"><%= link.name.charAt(0) %></span>
+        </div>
+        <div class="win7-link-info">
+          <span class="win7-link-name"><%= link.name %></span>
+        </div>
+      </a>
+      <% }) %>
+    </div>
+    <% } %>
+
+  </div>
+  <% } %>
+
+  <!-- 申请友链 -->
+  <fieldset class="group win7-link-form-section">
+    <legend>申请友链</legend>
+    <p class="win7-form-hint">填写以下信息提交友链申请，审核通过后将自动添加到上方列表。</p>
+    <form id="friend-link-form" class="win7-link-form">
+      <div class="win7-form-row">
+        <label for="link-name">站名 <span class="win7-required">*</span></label>
+        <input type="text" id="link-name" name="name" required maxlength="30" placeholder="你的博客名称">
+      </div>
+      <div class="win7-form-row">
+        <label for="link-url">网址 <span class="win7-required">*</span></label>
+        <input type="url" id="link-url" name="url" required placeholder="https://example.com">
+      </div>
+      <div class="win7-form-row">
+        <label for="link-desc">描述</label>
+        <input type="text" id="link-desc" name="description" maxlength="100" placeholder="一句话介绍你的博客（选填）">
+      </div>
+      <div class="win7-form-row">
+        <label for="link-avatar">头像 URL</label>
+        <input type="url" id="link-avatar" name="avatar" placeholder="https://example.com/favicon.ico（选填）">
+      </div>
+      <div class="win7-form-row">
+        <label for="link-email">联系邮箱 <span class="win7-required">*</span></label>
+        <input type="email" id="link-email" name="email" required placeholder="your@email.com">
+      </div>
+      <input type="text" name="website" class="win7-honeypot" tabindex="-1" autocomplete="off">
+      <button type="submit" id="link-submit-btn" class="button">提交申请</button>
+    </form>
+    <div id="link-form-msg" class="win7-link-form-msg"></div>
+  </fieldset>
+
+  <nav class="win7-commandlinks" aria-label="链接">
+    <a class="command-link" href="<%- url_for('/') %>"><span class="ico ico-win"></span> <%- __('back_home') %></a>
+    <% if (theme.rss) { %><a class="command-link" href="<%- url_for(theme.rss) %>"><span class="ico ico-rss"></span> <%- __('subscribe_rss') %></a><% } %>
+  </nav>
+</article>

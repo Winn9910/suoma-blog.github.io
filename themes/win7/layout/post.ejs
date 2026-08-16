@@ -1,0 +1,57 @@
+<article class="win7-article">
+  <% var cats = page.categories.toArray(); %>
+
+  <%# Explorer-style address bar (breadcrumb) %>
+  <nav class="address-bar win7-crumbs" aria-label="位置">
+    <span class="ico ico-folder"></span>
+    <a href="<%- url_for('/') %>">主页</a>
+    <% if (cats.length) { %>
+      <span class="sep">›</span>
+      <% cats.forEach(function (c, i) { %><a href="<%- url_for(c.path) %>"><%- c.name %></a><% if (i < cats.length - 1) { %>, <% } %><% }); %>
+    <% } %>
+    <span class="sep">›</span>
+    <span class="here"><%- page.title %></span>
+  </nav>
+
+  <h1 class="win7-article-title"><%- page.title %></h1>
+
+  <% if (theme.post_meta) { %>
+    <div class="win7-post-meta win7-article-meta">
+      <span class="ico ico-clock"></span> <%- __('published_label') %> <%- date(page.date, 'YYYY-MM-DD HH:mm') %>
+      <% if (cats.length) { %>
+        <span class="win7-meta-sep">·</span>
+        <span class="ico ico-folder"></span>
+        <% cats.forEach(function (c, i) { %><a href="<%- url_for(c.path) %>"><%- c.name %></a><% if (i < cats.length - 1) { %>, <% } %><% }); %>
+      <% } %>
+    </div>
+  <% } %>
+
+  <div class="win7-content"><%- page.content %></div>
+
+  <% var tags = page.tags.toArray(); %>
+  <% if (tags.length) { %>
+    <div class="win7-tags">
+      <span class="win7-tags-label"><%- __('tags_label') %></span>
+      <% tags.forEach(function (t) { %><a class="button" href="<%- url_for(t.path) %>"><%- t.name %></a><% }); %>
+    </div>
+  <% } %>
+
+  <%# 7.css reveal (details/summary) — post info card %>
+  <details class="win7-meta-card">
+    <summary><span class="ico ico-doc"></span> <%- __('post_info') %></summary>
+    <ul class="win7-meta-list">
+      <li><b><%- __('published_label') %></b> <%- date(page.date, 'YYYY-MM-DD HH:mm') %></li>
+      <% if (cats.length) { %><li><b><%- __('categories_label') %></b> <% cats.forEach(function (c, i) { %><a href="<%- url_for(c.path) %>"><%- c.name %></a><% if (i < cats.length - 1) { %>, <% } %><% }); %></li><% } %>
+      <% if (tags.length) { %><li><b><%- __('tags_label') %></b> <% tags.forEach(function (t, i) { %><a href="<%- url_for(t.path) %>"><%- t.name %></a><% if (i < tags.length - 1) { %>, <% } %><% }); %></li><% } %>
+    </ul>
+  </details>
+
+  <nav class="win7-post-nav">
+    <% if (page.prev) { %><a class="button" href="<%- url_for(page.prev.path) %>"><%- __('prev_post') %></a><% } %>
+    <% if (page.next) { %><a class="button" href="<%- url_for(page.next.path) %>"><%- __('next_post') %></a><% } %>
+  </nav>
+
+  <% if (theme.comments && theme.comments.length) { %>
+    <section class="win7-comments"><%- theme.comments %></section>
+  <% } %>
+</article>

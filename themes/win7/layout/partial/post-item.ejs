@@ -1,0 +1,35 @@
+<%
+  var post = postItem;
+  var cats = post.categories.toArray();
+  var tags = post.tags.toArray();
+%>
+<article class="win7-post">
+  <header class="win7-post-head">
+    <h2 class="win7-post-title">
+      <a href="<%- url_for(post.path) %>"><%- post.title %></a>
+    </h2>
+    <% if (theme.post_meta) { %>
+      <div class="win7-post-meta">
+        <span class="ico ico-clock"></span> <%- date(post.date, 'YYYY-MM-DD') %>
+        <% if (cats.length) { %>
+          <span class="win7-meta-sep">·</span>
+          <span class="ico ico-folder"></span>
+          <% cats.forEach(function (c, i) { %><a href="<%- url_for(c.path) %>"><%- c.name %></a><% if (i < cats.length - 1) { %>, <% } %><% }); %>
+        <% } %>
+        <% if (tags.length) { %>
+          <span class="win7-meta-sep">·</span>
+          <span class="ico ico-tag"></span>
+          <% tags.forEach(function (t, i) { %><a href="<%- url_for(t.path) %>"><%- t.name %></a><% if (i < tags.length - 1) { %>, <% } %><% }); %>
+        <% } %>
+      </div>
+    <% } %>
+  </header>
+
+  <div class="win7-post-excerpt">
+    <%- post.excerpt || truncate(strip_html(post.content), { length: 220 }) %>
+  </div>
+
+  <p class="win7-post-more">
+    <a class="button" href="<%- url_for(post.path) %>"><%- __('read_more') %> »</a>
+  </p>
+</article>

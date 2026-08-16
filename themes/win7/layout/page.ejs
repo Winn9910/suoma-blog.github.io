@@ -1,0 +1,22 @@
+<article class="win7-article">
+  <h1 class="win7-article-title"><%- page.title %></h1>
+
+  <div class="win7-content"><%- page.content %></div>
+
+  <%# 7.css radio demo — live window tint %>
+  <fieldset class="group win7-about-card">
+    <legend><%- __('theme_preview') %></legend>
+    <div class="win7-theme-swatches">
+      <label><input type="radio" name="w7theme" value="#4580c4" checked> 经典蓝</label>
+      <label><input type="radio" name="w7theme" value="#5a3a8c"> 紫晶</label>
+      <label><input type="radio" name="w7theme" value="#2d7d46"> 森林绿</label>
+      <label><input type="radio" name="w7theme" value="#b5651d"> 琥珀橙</label>
+    </div>
+  </fieldset>
+
+  <%# 7.css command-link style %>
+  <nav class="win7-commandlinks" aria-label="链接">
+    <a class="command-link" href="<%- url_for('/') %>"><span class="ico ico-win"></span> <%- __('back_home') %></a>
+    <% if (theme.rss) { %><a class="command-link" href="<%- url_for(theme.rss) %>"><span class="ico ico-rss"></span> <%- __('subscribe_rss') %></a><% } %>
+  </nav>
+</article>

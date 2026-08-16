@@ -1,0 +1,87 @@
+<%
+  var menu = (theme.menu && Object.keys(theme.menu).length) ? theme.menu : (config.menu || {});
+  var widgets = theme.widgets || ['nav', 'recent_posts', 'tagcloud', 'categories'];
+%>
+
+<% widgets.forEach(function (w) { %>
+  <% if (w === 'nav') { %>
+    <fieldset class="group sidebar-block">
+      <legend><%- __('navigation') %></legend>
+      <ul class="tree-view win7-nav">
+        <li class="win7-folder">
+          <details open>
+            <summary><span class="ico ico-folder"></span> <%- config.title %></summary>
+            <ul>
+              <% Object.keys(menu).forEach(function (label) { %>
+                <li>
+                  <a href="<%- url_for(menu[label]) %>" class="win7-link">
+                    <span class="ico ico-doc"></span> <%- label %>
+                  </a>
+                </li>
+              <% }); %>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </fieldset>
+
+  <% } else if (w === 'recent_posts') { %>
+    <fieldset class="group sidebar-block">
+      <legend><%- __('recent_posts') %></legend>
+      <ul class="win7-recent">
+        <% site.posts.limit(theme.recent_posts_count || 5).toArray().forEach(function (post) { %>
+          <li>
+            <a href="<%- url_for(post.path) %>"><%- post.title %></a>
+            <small><%- date(post.date, 'YYYY-MM-DD') %></small>
+          </li>
+        <% }); %>
+      </ul>
+    </fieldset>
+
+  <% } else if (w === 'tagcloud') { %>
+    <fieldset class="group sidebar-block">
+      <legend><%- __('all_tags') %></legend>
+      <div class="win7-tagcloud">
+        <% site.tags.toArray().forEach(function (tag) { %>
+          <% var sz = (0.8 + Math.min(tag.posts.length, 20) / 20 * 0.9).toFixed(2); %>
+          <a href="<%- url_for(tag.path) %>" style="font-size:<%- sz %>em"><%- tag.name %></a>
+        <% }); %>
+      </div>
+    </fieldset>
+
+  <% } else if (w === 'categories') { %>
+    <fieldset class="group sidebar-block">
+      <legend><%- __('all_categories') %></legend>
+      <ul class="tree-view win7-cats">
+        <% site.categories.toArray().forEach(function (cat) { %>
+          <li>
+            <a href="<%- url_for(cat.path) %>">
+              <span class="ico ico-folder"></span> <%- cat.name %>
+              <span class="win7-count"><%- cat.posts.length %></span>
+            </a>
+          </li>
+        <% }); %>
+      </ul>
+    </fieldset>
+  <% } %>
+<% }); %>
+
+<% if (theme.rss) { %>
+  <div class="sidebar-block win7-sidebar-rss">
+    <a class="button" href="<%- url_for(theme.rss) %>"><span class="ico ico-rss"></span> 订阅 RSS</a>
+  </div>
+<% } %>
+
+<%# Display settings — demo 7.css slider (font size) + checkbox (line numbers) %>
+<fieldset class="group sidebar-block win7-display">
+  <legend><%- __('display_settings') %></legend>
+  <div class="win7-fs-row">
+    <label for="win7FontSize">正文字号</label>
+    <input type="range" id="win7FontSize" min="13" max="20" step="1" value="15">
+    <span class="win7-fs-val" id="win7FsVal">15</span>
+  </div>
+  <div class="win7-fs-row">
+    <input type="checkbox" id="win7Gutter" checked>
+    <label for="win7Gutter">显示代码行号</label>
+  </div>
+</fieldset>

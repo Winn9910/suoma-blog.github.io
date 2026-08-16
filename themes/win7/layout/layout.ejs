@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="<%- config.language || 'zh-CN' %>">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%- (page.title ? page.title + ' | ' : '') + config.title %></title>
+  <meta name="description" content="<%- page.description || config.description || config.title %>">
+  <meta name="generator" content="Hexo">
+  <link rel="stylesheet" href="<%- url_for('css/7.css') %>">
+  <link rel="stylesheet" href="<%- url_for('css/theme.css') %>">
+  <% if (theme.rss) { %><link rel="alternate" type="application/atom+xml" title="<%- config.title %>" href="<%- url_for(theme.rss) %>"><% } %>
+</head>
+<body class="wallpaper-<%- theme.wallpaper || 'aurora' %>">
+  <div class="desktop">
+    <main class="window glass active win7-window" id="win7Window"
+          style="--w7-w-bg: <%- theme.window_color || '#4580c4' %>;"
+          data-home="<%- url_for('/') %>">
+      <%- partial('partial/title-bar') %>
+      <% if (theme.menu && Object.keys(theme.menu).length) { %>
+        <nav class="win7-menubar" aria-label="主导航">
+          <% Object.keys(theme.menu).forEach(function (label) { %>
+            <a href="<%- url_for(theme.menu[label]) %>"><span class="ico ico-doc"></span> <%- label %></a>
+          <% }); %>
+        </nav>
+      <% } %>
+      <div class="window-body has-space win7-layout">
+        <aside class="win7-sidebar">
+          <%- partial('partial/sidebar') %>
+        </aside>
+        <section class="win7-main" id="win7Main">
+          <%- body %>
+        </section>
+      </div>
+      <%- partial('partial/status-bar') %>
+      <nav class="win7-commandlinks win7-footer-links" aria-label="快捷链接">
+        <a class="command-link" href="<%- url_for('/') %>"><span class="ico ico-win"></span> <%- __('back_home') %></a>
+        <a class="command-link" id="win7BackTop" href="#top"><span class="ico ico-up"></span> <%- __('back_to_top') %></a>
+        <% if (theme.rss) { %><a class="command-link" href="<%- url_for(theme.rss) %>"><span class="ico ico-rss"></span> <%- __('subscribe_rss') %></a><% } %>
+      </nav>
+    </main>
+  </div>
+
+  <script src="<%- url_for('js/theme.js') %>"></script>
+  <script src="<%- url_for('js/links.js') %>"></script>
+</body>
+</html>

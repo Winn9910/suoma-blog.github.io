@@ -1,0 +1,47 @@
+<section class="tabs win7-home-tabs">
+  <menu role="tablist" aria-label="视图">
+    <button role="tab" aria-selected="true" aria-controls="tab-posts" id="tab-posts-btn">
+      <span class="ico ico-doc"></span> 最新文章
+    </button>
+    <button role="tab" aria-controls="tab-tags" id="tab-tags-btn">
+      <span class="ico ico-tag"></span> 标签
+    </button>
+    <button role="tab" aria-controls="tab-cats" id="tab-cats-btn">
+      <span class="ico ico-folder"></span> 分类
+    </button>
+  </menu>
+
+  <article role="tabpanel" id="tab-posts" class="win7-tabpanel">
+    <div class="win7-posts">
+      <% page.posts.toArray().forEach(function (post) { %>
+        <%- partial('partial/post-item', { postItem: post }) %>
+      <% }); %>
+    </div>
+    <%- partial('partial/pagination') %>
+  </article>
+
+  <article role="tabpanel" id="tab-tags" class="win7-tabpanel" hidden>
+    <h2 class="win7-section-title"><%- __('all_tags') %></h2>
+    <div class="win7-tagcloud win7-tagcloud-lg">
+      <% site.tags.toArray().forEach(function (tag) { %>
+        <% var sz = (0.85 + Math.min(tag.posts.length, 20) / 20 * 1.1).toFixed(2); %>
+        <a href="<%- url_for(tag.path) %>" style="font-size:<%- sz %>em"><%- tag.name %></a>
+        <span class="win7-count"><%- tag.posts.length %></span>
+      <% }); %>
+    </div>
+  </article>
+
+  <article role="tabpanel" id="tab-cats" class="win7-tabpanel" hidden>
+    <h2 class="win7-section-title"><%- __('all_categories') %></h2>
+    <ul class="tree-view win7-cats win7-cats-lg">
+      <% site.categories.toArray().forEach(function (cat) { %>
+        <li>
+          <a href="<%- url_for(cat.path) %>">
+            <span class="ico ico-folder"></span> <%- cat.name %>
+            <span class="win7-count"><%- cat.posts.length %></span>
+          </a>
+        </li>
+      <% }); %>
+    </ul>
+  </article>
+</section>
