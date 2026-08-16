@@ -1,0 +1,159 @@
+<%
+// ============================================================
+//  Aero 主题 · 下载站独立页布局（内容片段 · 详细信息/表格版）
+//  样式参考 Windows 资源管理器「查看 → 详细信息」：
+//  带列头的表格，一行一个资源 —— 软件名称 | 大小 | 立即下载 | 备注
+//  用法：source/download/index.md 的 front-matter 写 layout: download
+//  Hexo 会自动把本片段塞进主题的 layout.ejs（含头部/侧边栏/页脚）。
+//  资源数据：优先读页面 front-matter 的 resources，否则读 source/_data/download.yml
+// ============================================================
+var resources = page.resources;
+if (!resources && site.data && site.data.download) resources = site.data.download.resources;
+resources = resources || [];
+
+var ICONS = {
+  local:  '💾', baidu: '🔵', aliyun: '🟠', weiyun: '🟢', lanzou: '🌩️',
+  ctfile: '📮', github: '🐙', onedrive: '☁️', google: '🌐', other: '🔗'
+};
+var DEFAULTS = {
+  local: '本地下载', baidu: '百度网盘', aliyun: '阿里云盘', weiyun: '腾讯微云',
+  lanzou: '蓝奏云', ctfile: '城通网盘', github: 'GitHub', onedrive: 'OneDrive',
+  google: 'Google Drive', other: '下载'
+};
+var CLOUD = ['baidu','aliyun','weiyun','lanzou','ctfile','onedrive','google'];
+%>
+
+<div class="card post-full">
+    <span class="post-title article-title">
+        <%= page.title || '资源下载' %>
+    </span>
+
+    <div class="post-content">
+        <% if (page.description) { %><p class="dl-desc"><%= page.description %></p><% } %>
+
+        <input id="dlSearch" class="dl-search" type="search" placeholder="🔍 搜索资源名称 / 标签…" autocomplete="off">
+
+        <div class="dl-table-wrap">
+            <table class="dl-table" id="dlTable">
+                <thead>
+                    <tr>
+                        <th class="dl-th-name">软件名称</th>
+                        <th class="dl-th-size">大小</th>
+                        <th class="dl-th-dl">立即下载</th>
+                        <th class="dl-th-note">备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% resources.forEach(function(r){ %>
+                    <tr class="dl-row" data-key="<%= (r.name + ' ' + (r.tags||[]).join(' ')).toLowerCase() %>">
+                        <td class="dl-td-name">
+                            <span class="dl-thumb">
+                                <% if (r.icon) { %><img src="<%= r.icon %>" alt="<%= r.name %>" referrerpolicy="no-referrer"><% } else { %><span class="dl-emoji"><%= r.emoji || '📦' %></span><% } %>
+                            </span>
+                            <span class="dl-name-text">
+                                <span class="dl-name"><%= r.name %></span>
+                                <% if (r.desc) { %><span class="dl-sub"><%= r.desc %></span><% } %>
+                            </span>
+                        </td>
+                        <td class="dl-td-size" data-label="大小"><%= r.size || '—' %></td>
+                        <td class="dl-td-dl" data-label="立即下载">
+                            <% (r.links||[]).forEach(function(l){
+                                var cloud = CLOUD.indexOf(l.type) > -1;
+                                var ic = ICONS[l.type] || ICONS.other;
+                                var label = l.name || DEFAULTS[l.type] || '下载';
+                            %>
+                            <a class="dl-btn" href="<%= l.url %>" <% if (cloud) { %>target="_blank" rel="noopener"<% } else { %>download<% } %>>
+                                <span class="dl-btn-ico"><%= ic %></span>
+                                <span class="dl-btn-label"><%= label %></span>
+                                <% if (l.pwd) { %><span class="dl-btn-key" title="提取码">🔑<%= l.pwd %></span><% } %>
+                            </a>
+                            <% }); %>
+                        </td>
+                        <td class="dl-td-note" data-label="备注"><%= r.note || (r.tags||[]).join(' · ') || '—' %></td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+            <p class="dl-noresult" id="dlNoResult" hidden>没有找到匹配的资源 🤔</p>
+        </div>
+    </div>
+</div>
+
+<style>
+.dl-desc{opacity:.8;margin:.1em 0 1em}
+.dl-search{display:block;width:100%;max-width:420px;padding:10px 16px;margin:0 0 14px;
+  border:1px solid rgba(255,255,255,.6);border-radius:999px;background:rgba(255,255,255,.55);
+  font-size:15px;outline:none}
+.dl-search:focus{border-color:#5b9bd5;box-shadow:0 0 0 3px rgba(91,155,213,.25)}
+.dl-table-wrap{width:100%;overflow-x:auto}
+.dl-table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+.dl-table thead th{
+  text-align:left;padding:10px 14px;font-weight:600;color:#134b85;white-space:nowrap;
+  background:rgba(91,155,213,.16);border-bottom:2px solid rgba(91,155,213,.4)}
+.dl-table tbody td{padding:10px 14px;border-bottom:1px solid rgba(91,155,213,.18);
+  vertical-align:middle;line-height:1.45}
+.dl-row:hover td{background:rgba(91,155,213,.09)}
+.dl-td-name{display:flex;align-items:center;gap:10px;min-width:200px}
+.dl-thumb{width:34px;height:34px;border-radius:8px;overflow:hidden;flex:0 0 auto;
+  background:rgba(91,155,213,.18);display:flex;align-items:center;justify-content:center}
+.dl-thumb img{width:100%;height:100%;object-fit:cover}
+.dl-emoji{font-size:19px}
+.dl-name-text{display:flex;flex-direction:column;min-width:0}
+.dl-name{font-weight:600}
+.dl-sub{font-size:12px;opacity:.7}
+.dl-td-size{white-space:nowrap;color:#4a6b88}
+.dl-td-note{color:#3f5f7c;font-size:13px;min-width:120px}
+.dl-td-dl{white-space:nowrap}
+.dl-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;color:#1f3b57;
+  border:1px solid rgba(91,155,213,.4);
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(225,240,255,.7));
+  padding:5px 10px;border-radius:8px;font-size:13px;cursor:pointer;transition:all .15s;margin:2px 4px 2px 0}
+.dl-btn:hover{border-color:#5b9bd5;color:#134b85;box-shadow:0 2px 8px rgba(91,155,213,.3)}
+.dl-btn-ico{font-size:14px}
+.dl-btn-key{font-size:11px;color:#9a6b00;background:#fff3cd;padding:1px 5px;border-radius:6px}
+.dl-noresult{text-align:center;opacity:.7;margin-top:18px}
+
+/* ===== 手机端：保持表格样式，压缩到屏幕宽度，不横滑 ===== */
+@media(max-width:640px){
+  .dl-table-wrap{overflow-x:auto}
+  .dl-table{min-width:0;table-layout:fixed}
+  .dl-table thead th,.dl-table tbody td{padding:8px 9px;font-size:13px}
+  .dl-th-name{width:46%}
+  .dl-th-size{width:18%}
+  .dl-th-dl{width:36%}
+  .dl-th-note,.dl-td-note{display:none}          /* 手机上隐藏「备注」列 */
+  .dl-td-name{min-width:0}
+  .dl-td-size{white-space:nowrap}
+  .dl-td-dl{white-space:normal}                   /* 下载按钮在单元格内换行 */
+  .dl-thumb{width:30px;height:30px}
+  .dl-emoji{font-size:17px}
+  .dl-btn{margin:3px 5px 3px 0;padding:4px 8px;font-size:12px}
+  .dl-btn-key{font-size:10px}
+}
+</style>
+
+<script>
+(function(){
+  function initDl(){
+    var box = document.getElementById('dlSearch');
+    var table = document.getElementById('dlTable');
+    var no = document.getElementById('dlNoResult');
+    if (!box || !table || box.dataset.dlInit) return;   // 防止 PJAX 重复绑定
+    box.dataset.dlInit = '1';
+    box.addEventListener('input', function(){
+      var q = this.value.trim().toLowerCase();
+      var rows = table.querySelectorAll('.dl-row');
+      var n = 0;
+      rows.forEach(function(c){
+        var ok = !q || c.getAttribute('data-key').indexOf(q) > -1;
+        c.style.display = ok ? '' : 'none';
+        if (ok) n++;
+      });
+      if (no) no.hidden = (n !== 0);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initDl);
+  document.addEventListener('pjax:success', initDl);
+  initDl();
+})();
+</script>

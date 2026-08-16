@@ -1,0 +1,35 @@
+# 下载站资源数据文件（source/_data/download.yml）
+# 用法：把页面 index.md 里的 resources 整段删掉，布局会自动读取这里。
+# 优点：资源多了以后单独管理更清爽，页面本身只留 layout 和标题。
+
+resources:
+  - name: 示例工具箱 v2.3
+    desc: 一款高效的小工具合集，支持 Windows / macOS。
+    emoji: "🧰"
+    tags: [工具, Windows, macOS]
+    date: 2026-08-16
+    size: 18.6 MB
+    note: 解压即用，无需安装
+    links:
+      - type: local
+        name: 本地下载
+        url: /files/tools-v2.3.zip
+      - type: baidu
+        name: 百度网盘
+        url: https://pan.baidu.com/s/1xxxxxx
+        pwd: abcd
+      - type: github
+        name: GitHub
+        url: https://github.com/xxx/toolbox/releases
+
+  - name: 设计素材包
+    desc: 100+ 高清背景与图标素材。
+    icon: /img/design.png
+    tags: [素材, 设计]
+    date: 2026-07-02
+    size: 242 MB
+    links:
+      - type: lanzou
+        name: 蓝奏云
+        url: https://wwp.lanzou.com/zzzzz
+        pwd: 8888

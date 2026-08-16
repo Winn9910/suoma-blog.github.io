@@ -1,6 +1,7 @@
 menu:
   about: /about
   links: /links
+  download: /download
 favicon:
   enable: true
   icon: /image/icon/favicon.ico
