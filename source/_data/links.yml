@@ -1,6 +1,9 @@
 # 友链数据（自动维护，请勿手动编辑）
 # 新友链通过 GitHub Issue 提交，审核通过后由 GitHub Action 自动添加
 blogs:
+  - name: "lcrworld"
+    url: "https://lcrworld.xyz"
+    avatar: "https://lcrworld.xyz/default-avatar.jpeg"
   - name: "林子浩的日记"
     url: "https://lzh1.cn"
     description: "一个努力写日记的博客站长。"
