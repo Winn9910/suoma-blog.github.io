@@ -9,7 +9,7 @@ layout: links
 1. 独立博客；
 2. 全站开启 HTTPS；
 
-```
+```php
 本站头像：https://www.suo.ma/img/favicon.ico
 本站网址：https://suo.ma
 站名：索玛
