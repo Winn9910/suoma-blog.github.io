@@ -9,6 +9,13 @@ resources:
       - type: lanzou     # 蓝奏云
         name: 下载
         url: https://suoma.lanzout.com/ileKX29jidna
+
+  - name: PC版字体压缩生成.woff2字体
+    size: 12MB
+    links:
+      - type: lanzou     # 蓝奏云
+        name: 下载
+        url: https://suoma.lanzout.com/iKRYT3ibopda
 ---
 
 <!--
