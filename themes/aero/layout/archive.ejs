@@ -1,5 +1,6 @@
 <section class="archive-container">
     <% var lastYear; %>
+    <% var latestPath = site.posts.sort('-date').first().path; %>
     <% page.posts.each(function(post, index) { %>
         <% var currentYear=post.date.year(); %>
         <% if (lastYear !==currentYear) { %>
@@ -19,6 +20,7 @@
                 <%= date(post.date, "MM-DD" ) %>
             </span>
             <a class="archive-title" href="<%- url_for(post.path) %>">
+                <% if (post.path === latestPath) { %><span class="new-badge">New</span> <% } %>
                 <%= post.title || 'Untitled' %>
             </a>
         </div>

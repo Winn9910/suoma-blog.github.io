@@ -190,3 +190,31 @@ body {
 .tag-none-link:hover {
     border-bottom-color: var(--primary-color);
 }
+
+/* New badge — only on the latest post, auto-shifts when a newer one is published */
+.new-badge {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+    padding: 1px 7px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #fff;
+    background: linear-gradient(180deg, #ff5a5a, #e02020);
+    border: 1px solid #b91212;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: new-blink 1s ease-in-out infinite;
+    text-shadow: 0 0 2px rgba(255,255,255,0.6);
+}
+
+@keyframes new-blink {
+    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(255,80,80,0.7); }
+    50%      { opacity: 0.45; box-shadow: 0 0 2px rgba(255,80,80,0.3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .new-badge { animation: none; }
+}

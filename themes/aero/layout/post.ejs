@@ -1,5 +1,7 @@
+<% var latestPath = site.posts.sort('-date').first().path; %>
 <div class="card post-full">
     <span class="post-title article-title">
+        <% if (page.path === latestPath) { %><span class="new-badge">New</span><% } %>
         <%= page.title %>
     </span>
 
