@@ -99,6 +99,10 @@ blogs:
     url: "https://zxs.me/"
     description: "一个遥遥领先的网络邻居。"
     avatar: "https://source.zxs.me/img/1736784536826.png"
+  - name: "Wangxinyang"
+    url: "https://wangxinyang.top"
+    description: "个人博客 / 学习交流 / 生活日常"
+    avatar: "https://wangxinyang.top/avatar.png"
 
 circles:
   - name: "博客俱乐部"
