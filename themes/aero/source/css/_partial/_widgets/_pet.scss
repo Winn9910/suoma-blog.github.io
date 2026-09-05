@@ -1,0 +1,21 @@
+.pet-embed {
+    position: relative;
+    width: 100%;
+    max-width: 314px;
+    margin-left: auto;
+    margin-right: auto;
+    aspect-ratio: 314 / 321;
+    container-type: inline-size;
+    container-name: petbox;
+}
+
+.pet-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 314px;
+    height: 321px;
+    transform: translateX(-50%) scale(calc(100cqw / 314px));
+    transform-origin: top center;
+    border: 0;
+}
