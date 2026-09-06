@@ -36,6 +36,18 @@
     border-radius: 3px;
     position: relative;
     margin-bottom: 20px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: url('/img/covergirl.png') no-repeat right center;
+        background-size: contain;
+        opacity: 0.85;
+        pointer-events: none;
+        border-radius: inherit;
+        z-index: 0;
+    }
 }
 
 .post-title {
@@ -70,8 +82,9 @@
 
 .post-content {
     position: relative;
+    z-index: 1;
     padding: 10px;
-    background-color: var(--white-main);
+    background-color: rgba(from var(--white-main) r g b / 0.68);
     box-shadow: 0 0 0 0.5px var(--black-main),
         0 0 0 1.5px var(--white-main);
 }

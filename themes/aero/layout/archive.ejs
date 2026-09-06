@@ -20,7 +20,7 @@
                 <%= date(post.date, "MM-DD" ) %>
             </span>
             <a class="archive-title" href="<%- url_for(post.path) %>">
-                <% if (post.path === latestPath) { %><span class="new-badge">New</span> <% } %>
+                <% if (post.path === latestPath) { %><img src="/img/new.gif" alt="New" class="new-badge-img new-badge-sm"> <% } %>
                 <%= post.title || 'Untitled' %>
             </a>
         </div>

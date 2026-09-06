@@ -218,3 +218,15 @@ body {
 @media (prefers-reduced-motion: reduce) {
     .new-badge { animation: none; }
 }
+
+/* New badge image (new.gif) — replaces the CSS badge on post/archive pages */
+.new-badge-img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 44px;
+    margin-right: 6px;
+}
+
+.new-badge-img.new-badge-sm {
+    height: 22px;
+}
