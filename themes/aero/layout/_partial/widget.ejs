@@ -47,6 +47,23 @@
 <div class="widget pet-embed">
     <iframe src="https://gify.pet/pet/pet.html?name=状元榔&amp;dob=1788602677&amp;gender=f&amp;element=Fire&amp;pet=https://img.cnm.pw/zyl.gif&amp;map=hills.jpg&amp;background=1995.png&amp;tablecolor=black&amp;textcolor=%23000000" title="我的宠物 状元榔" scrolling="no" frameborder="0" loading="lazy"></iframe>
 </div>
+<script>
+(function () {
+    function scalePet() {
+        var embed = document.querySelector('.pet-embed');
+        var iframe = embed && embed.querySelector('iframe');
+        if (!embed || !iframe) return;
+        var scale = Math.min(1, embed.clientWidth / 314);
+        embed.style.setProperty('--pet-scale', scale.toFixed(4));
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scalePet);
+    } else {
+        scalePet();
+    }
+    window.addEventListener('resize', scalePet);
+})();
+</script>
 
 <div class="widget music-widget">
     <div class="player-content">

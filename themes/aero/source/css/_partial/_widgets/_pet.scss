@@ -5,8 +5,7 @@
     margin-left: auto;
     margin-right: auto;
     aspect-ratio: 314 / 321;
-    container-type: inline-size;
-    container-name: petbox;
+    --pet-scale: 1;
 }
 
 .pet-embed iframe {
@@ -15,7 +14,7 @@
     left: 50%;
     width: 314px;
     height: 321px;
-    transform: translateX(-50%) scale(calc(100cqw / 314px));
+    transform: translateX(-50%) scale(var(--pet-scale));
     transform-origin: top center;
     border: 0;
 }
