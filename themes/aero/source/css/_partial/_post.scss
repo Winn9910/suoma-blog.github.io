@@ -120,6 +120,22 @@
     z-index: 2;
 }
 
+.rm-arrow {
+    position: relative;
+    z-index: 2;
+    margin-left: 4px;
+    font-size: 15px;
+    transition: transform 0.25s ease;
+}
+
+.rm-link:hover .rm-arrow {
+    transform: translateX(5px);
+}
+
+.rm-link:hover {
+    width: 132px;
+}
+
 .article-title {
     display: block;
     padding: 20px 0;

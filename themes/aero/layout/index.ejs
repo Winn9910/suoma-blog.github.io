@@ -21,7 +21,8 @@
                 <%- truncate(strip_html(post.excerpt || post.content), {length: 150, omission: '...'}) %>
             </div>
             <a href="<%- url_for(post.path) %>" class="button rm-link">
-                <span class="read-more">Read More...</span>
+                <span class="read-more">Read More</span>
+                <span class="rm-arrow ri-arrow-right-line"></span>
             </a>
         </div>
     </article>

@@ -73,6 +73,24 @@
     padding: 10px;
 }
 
+.profile-badges {
+    padding-bottom: 12px;
+}
+
+.badge-wall {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-wall img {
+    display: block;
+    box-shadow: 0 0 0 1px var(--white-main), 0 0 0 1.5px var(--black-main);
+    image-rendering: pixelated;
+}
+
 .profile-widget {
     position: relative;
     margin-top: -90px;
