@@ -109,9 +109,8 @@ feed:
   enable: true
   type: rss2
   path: feed.xml
-  limit: 20
+  limit: 0
   content: true
-  content_limit: 200
   order_by: -date
 #站点地图
 sitemap:
