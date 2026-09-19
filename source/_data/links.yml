@@ -1,6 +1,10 @@
 # 友链数据（自动维护，请勿手动编辑）
 # 新友链通过 GitHub Issue 提交，审核通过后由 GitHub Action 自动添加
 blogs:
+  - name: "Domain.Fish"
+    url: "https://domain.fish"
+    description: "自营精品域名"
+    avatar: "https://domain.fish/favicon.ico"
   - name: "白熊自留地"
     url: "https://whitebear.im"
     description: "个人自留地"
