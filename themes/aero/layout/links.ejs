@@ -77,6 +77,11 @@
                     <input type="email" id="link-email" name="email" required placeholder="your@email.com">
                 </div>
                 <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off">
+                <% if (theme.turnstile_site_key) { %>
+                <div class="form-row">
+                    <div class="cf-turnstile" data-sitekey="<%= theme.turnstile_site_key %>" data-theme="light"></div>
+                </div>
+                <% } %>
                 <button type="submit" id="link-submit-btn" class="link-submit-btn">提交申请</button>
             </form>
             <div id="link-form-msg" class="link-form-msg"></div>

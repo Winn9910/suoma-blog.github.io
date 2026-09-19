@@ -12,6 +12,34 @@ module.exports = async (req, res) => {
         return res.status(400).json({ ok: false, message: '提交失败' });
     }
 
+    // Cloudflare Turnstile 人机验证（配置了 TURNSTILE_SECRET_KEY 才启用）
+    const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+    if (turnstileSecret) {
+        const cfToken = (req.body || {})['cf-turnstile-response'];
+        if (!cfToken) {
+            return res.status(400).json({ ok: false, message: '请先完成人机验证' });
+        }
+        try {
+            const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+            const verifyResp = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    secret: turnstileSecret,
+                    response: cfToken,
+                    remoteip: ip || undefined
+                })
+            });
+            const verifyData = await verifyResp.json();
+            if (!verifyData.success) {
+                return res.status(400).json({ ok: false, message: '人机验证未通过，请重试' });
+            }
+        } catch (err) {
+            console.error('Turnstile verify error:', err);
+            return res.status(500).json({ ok: false, message: '人机验证服务异常，请稍后重试' });
+        }
+    }
+
     // 必填字段校验
     if (!name || !url || !email) {
         return res.status(400).json({ ok: false, message: '请填写必填项（站名、网址、邮箱）' });

@@ -40,3 +40,6 @@ music:    #音乐播放器
 math:
   enable: true
   engine: mathjax
+# Cloudflare Turnstile 人机验证（友链提交）
+# 前往 https://dash.cloudflare.com/?to=/:account/turnstile 创建站点获取
+turnstile_site_key: '0x4AAAAAAE8ng3T5n6oDN2jo'  # Cloudflare Turnstile Site Key

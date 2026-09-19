@@ -1,4 +1,41 @@
 (function () {
+    // ============ Turnstile 渲染（兼容 PJAX） ============
+    var TURNSTILE_SITE_KEY = document.querySelector('.cf-turnstile');
+    var turnstileRendered = false;
+
+    function renderTurnstile() {
+        var widget = document.querySelector('.cf-turnstile');
+        if (!widget) { turnstileRendered = false; return; }
+        if (typeof window.turnstile === 'undefined') return; // api.js 未加载完
+        if (turnstileRendered) return;
+        try {
+            window.turnstile.render(widget, {
+                sitekey: widget.dataset.sitekey,
+                theme: 'light'
+            });
+            turnstileRendered = true;
+        } catch (e) { /* 已渲染或容器不存在 */ }
+    }
+
+    function loadTurnstileApi() {
+        if (document.querySelector('script[src*="challenges.cloudflare.com/turnstile"]')) return;
+        var s = document.createElement('script');
+        s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+        s.async = true;
+        s.defer = true;
+        s.onload = renderTurnstile;
+        document.head.appendChild(s);
+    }
+
+    if (TURNSTILE_SITE_KEY && TURNSTILE_SITE_KEY.dataset.sitekey) {
+        loadTurnstileApi();
+        // PJAX 跳转回友链页后重新渲染
+        document.addEventListener('pjax:complete', function () {
+            setTimeout(renderTurnstile, 100);
+        });
+    }
+
+    // ============ 表单提交 ============
     // 使用事件委托，兼容 PJAX 无刷新导航
     document.addEventListener('submit', async function (e) {
         var form = document.getElementById('friend-link-form');
@@ -16,6 +53,16 @@
             return;
         }
 
+        // Turnstile 人机验证检查（若站点已启用）
+        var tsInput = form.querySelector('[name="cf-turnstile-response"]');
+        if (document.querySelector('.cf-turnstile')) {
+            if (!tsInput || !tsInput.value) {
+                msg.className = 'link-form-msg error';
+                msg.textContent = '请先完成人机验证';
+                return;
+            }
+        }
+
         var data = {
             name: form.name.value.trim(),
             url: form.url.value.trim(),
@@ -23,6 +70,9 @@
             avatar: form.avatar.value.trim(),
             email: form.email.value.trim()
         };
+        if (tsInput && tsInput.value) {
+            data['cf-turnstile-response'] = tsInput.value;
+        }
 
         // 基础校验
         if (!data.name || !data.url || !data.email) {
@@ -57,9 +107,16 @@
                 msg.className = 'link-form-msg success';
                 msg.textContent = '申请已提交！审核通过后将自动出现在友链列表中。';
                 form.reset();
+                // 重置 Turnstile 以便下次提交
+                if (typeof window.turnstile !== 'undefined' && turnstileRendered) {
+                    try { window.turnstile.reset(); } catch (e) {}
+                }
             } else {
                 msg.className = 'link-form-msg error';
                 msg.textContent = result.message || '提交失败，请稍后重试';
+                if (typeof window.turnstile !== 'undefined' && turnstileRendered) {
+                    try { window.turnstile.reset(); } catch (e) {}
+                }
             }
         } catch (err) {
             msg.className = 'link-form-msg error';
