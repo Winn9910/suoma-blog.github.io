@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - 页面未找到 | 索玛</title>
+<meta name="robots" content="noindex">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #1b3a5c url('/image/bg.jpg') center / cover no-repeat fixed;
+        font-family: "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+        color: #000;
+    }
+
+    .win7-window {
+        width: min(520px, 92vw);
+        border-radius: 8px 8px 4px 4px;
+        overflow: hidden;
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.6),
+            0 0 0 2px rgba(255, 255, 255, 0.7),
+            8px 8px 30px rgba(0, 0, 0, 0.55);
+        animation: win-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes win-pop {
+        from { transform: scale(0.85); opacity: 0; }
+        to   { transform: scale(1); opacity: 1; }
+    }
+
+    .win7-titlebar {
+        height: 38px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.65) 0%,
+            rgba(160, 195, 230, 0.55) 8%,
+            rgba(80, 140, 200, 0.60) 45%,
+            rgba(40, 100, 165, 0.65) 48%,
+            rgba(60, 120, 185, 0.60) 88%,
+            rgba(120, 170, 220, 0.55) 100%);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    }
+
+    .win7-titlebar .app-icon {
+        width: 18px; height: 18px;
+        border-radius: 3px;
+        background: #fff;
+        margin-right: 8px;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: bold; font-size: 11px; color: #2c6ea5;
+        text-shadow: none;
+    }
+
+    .win7-titlebar .title-text {
+        color: #fff;
+        font-size: 13px;
+        text-shadow: 0 0 6px rgba(0, 40, 90, 0.9), 0 0 3px rgba(0, 40, 90, 0.9), 0 1px 1px rgba(0, 0, 0, 0.7);
+        flex: 1;
+    }
+
+    .win7-close {
+        width: 28px; height: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 3px;
+        background: linear-gradient(to bottom, rgba(255,120,110,.85), rgba(200,50,40,.85));
+        color: #fff; font-size: 12px;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .win7-close:hover { background: linear-gradient(to bottom, rgba(255,150,140,.95), rgba(230,70,55,.95)); }
+
+    .win7-body {
+        background: rgba(242, 246, 248, 0.96);
+        padding: 34px 30px 26px;
+        display: flex;
+        gap: 24px;
+        align-items: center;
+    }
+
+    .error-code {
+        font-size: 64px;
+        font-weight: bold;
+        color: #2c6ea5;
+        line-height: 1;
+        text-shadow: 1px 1px 0 rgba(255,255,255,.9), 3px 3px 6px rgba(0,0,0,.25);
+        user-select: none;
+    }
+
+    .error-msg h1 { font-size: 17px; margin-bottom: 8px; }
+    .error-msg p { font-size: 13px; color: #444; line-height: 1.7; margin-bottom: 6px; }
+
+    .win7-btnbar {
+        background: linear-gradient(to bottom, #f6f9fc, #dbe6ef 45%, #c5d5e3 51%, #e8f0f7);
+        padding: 12px 30px 16px;
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        border-top: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .win7-btn {
+        padding: 5px 18px;
+        font-size: 13px;
+        color: #000;
+        text-decoration: none;
+        border-radius: 3px;
+        background: linear-gradient(to bottom, #f2f8fc, #dcebf7 45%, #c6dff0 51%, #e6f2fb);
+        box-shadow:
+            inset 0 0 0 1px rgba(255, 255, 255, 0.8),
+            0 0 0 1px rgba(0, 0, 0, 0.4);
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .win7-btn:hover {
+        background: linear-gradient(to bottom, #eaf6fd, #d3ecfd 45%, #b8e2fc 51%, #d9f0fc);
+        box-shadow:
+            inset 0 0 0 1px rgba(255, 255, 255, 0.9),
+            0 0 6px rgba(90, 170, 230, 0.8),
+            0 0 0 1px rgba(0, 0, 0, 0.4);
+    }
+
+    .win7-statusbar {
+        background: #e8f0f7;
+        border-top: 1px solid rgba(0, 0, 0, 0.15);
+        padding: 4px 12px;
+        font-size: 11px;
+        color: #445;
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+</head>
+<body>
+    <div class="win7-window">
+        <div class="win7-titlebar">
+            <div class="app-icon">su</div>
+            <span class="title-text">Explorer — 无法找到该页面</span>
+            <a class="win7-close" href="/" title="返回首页">✕</a>
+        </div>
+        <div class="win7-body">
+            <div class="error-code">404</div>
+            <div class="error-msg">
+                <h1>糟糕，页面走丢了！</h1>
+                <p>你要找的页面不存在，或者已经被移动到别的地方了。</p>
+                <p>不如回首页逛逛，说不定能找到想要的内容。</p>
+            </div>
+        </div>
+        <div class="win7-btnbar">
+            <a class="win7-btn" href="javascript:history.back()">← 上一页</a>
+            <a class="win7-btn" href="/">返回首页</a>
+        </div>
+        <div class="win7-statusbar">
+            <span>suoma-blog</span>
+            <span id="win7-clock"></span>
+        </div>
+    </div>
+    <script>
+        function tick() {
+            var d = new Date();
+            var p = function (n) { return (n < 10 ? '0' : '') + n; };
+            document.getElementById('win7-clock').textContent =
+                d.getFullYear() + '/' + p(d.getMonth() + 1) + '/' + p(d.getDate()) + ' ' +
+                p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+        }
+        tick();
+        setInterval(tick, 1000);
+    </script>
+</body>
+</html>

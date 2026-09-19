@@ -112,6 +112,12 @@ feed:
   limit: 0
   content: true
   order_by: -date
+#站内搜索
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
 #站点地图
 sitemap:
   path: sitemap.xml
