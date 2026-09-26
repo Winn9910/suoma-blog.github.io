@@ -1,6 +1,10 @@
 # 友链数据（自动维护，请勿手动编辑）
 # 新友链通过 GitHub Issue 提交，审核通过后由 GitHub Action 自动添加
 blogs:
+  - name: "朱某的生活印记"
+    url: "https://zhuxu.asia/"
+    description: "没有销声匿迹，我在热爱生活"
+    avatar: "https://q1.qlogo.cn/g?b=qq&nk=2776686748&s=100"
   - name: "Domain.Fish"
     url: "https://domain.fish"
     description: "自营精品域名"
