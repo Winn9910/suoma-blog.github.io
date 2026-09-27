@@ -1,6 +1,10 @@
 # 友链数据（自动维护，请勿手动编辑）
 # 新友链通过 GitHub Issue 提交，审核通过后由 GitHub Action 自动添加
 blogs:
+  - name: "FGHRSH 日记簿"
+    url: "https://www.fghrsh.net"
+    description: "把喜欢的东西都记下来···"
+    avatar: "https://gravatar.fghrsh.net/avatar/9dd067b26526f97064c68b5ce89d60d1"
   - name: "朱某的生活印记"
     url: "https://zhuxu.asia/"
     description: "没有销声匿迹，我在热爱生活"
