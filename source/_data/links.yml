@@ -1,6 +1,10 @@
 # 友链数据（自动维护，请勿手动编辑）
 # 新友链通过 GitHub Issue 提交，审核通过后由 GitHub Action 自动添加
 blogs:
+  - name: "拥抱日出的小屋"
+    url: "https://blog.byside.top/"
+    description: "拥抱日出，也拥抱生活"
+    avatar: "https://blog.byside.top/upload/logo.jpg"
   - name: "FGHRSH 日记簿"
     url: "https://www.fghrsh.net"
     description: "把喜欢的东西都记下来···"
