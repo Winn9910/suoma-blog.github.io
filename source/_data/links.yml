@@ -125,8 +125,6 @@ blogs:
     avatar: "https://wangxinyang.top/avatar.png"
 
 circles:
-  - name: "博客俱乐部"
-    url: "https://www.blogsclub.org/"
   - name: "博客大联盟"
     url: "https://bo.ke/"
   - name: "博客录"
