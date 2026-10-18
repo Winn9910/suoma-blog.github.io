@@ -19,8 +19,10 @@ function toPlain(html) {
 function formatDate(pub) {
     const d = new Date(pub);
     if (isNaN(d.getTime())) return '';
+    // 统一按北京时间（UTC+8）显示，避免 Vercel 服务器 UTC 造成偏差
+    const bj = new Date(d.getTime() + 8 * 60 * 60 * 1000);
     const p = n => (n < 10 ? '0' : '') + n;
-    return `${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+    return `${p(bj.getUTCMonth() + 1)}-${p(bj.getUTCDate())} ${p(bj.getUTCHours())}:${p(bj.getUTCMinutes())}`;
 }
 
 function parseFeed(xml, limit) {
