@@ -49,6 +49,8 @@
 </script>
 <% } %>
 
+<%# 音乐播放器暂时屏蔽：恢复时把下面的 if (false) 改回 if (true) 即可 %>
+<% if (false) { %>
 <div class="widget music-widget">
     <div class="player-content">
         <div class="song-info">
@@ -96,6 +98,7 @@
         playlist: <%- JSON.stringify(theme.music.songs) %>
     };
 </script>
+<% } %>
 
 <% if (moments && moments.length) { %>
 <div class="widget card moments-widget">

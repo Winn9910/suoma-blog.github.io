@@ -20,14 +20,15 @@
     function render(m) {
         var card = document.querySelector('.moments-widget');
         if (!card) {
-            var music = document.querySelector('.music-widget');
-            if (!music || !music.parentNode) return;
+            // 没有现成挂件时就地插入：优先接在播放器后，否则接在简介卡后
+            var anchor = document.querySelector('.music-widget') || document.querySelector('.profile-widget');
+            if (!anchor || !anchor.parentNode) return;
             card = document.createElement('div');
             card.className = 'widget card moments-widget';
             card.innerHTML = '<div class="moments-title">最新说说</div>' +
                 '<a class="moment-item" target="_blank" rel="noopener">' +
                 '<div class="moment-text"></div><div class="moment-date"></div></a>';
-            music.parentNode.insertBefore(card, music.nextSibling);
+            anchor.parentNode.insertBefore(card, anchor.nextSibling);
         }
 
         var item = card.querySelector('.moment-item');
@@ -54,7 +55,8 @@
     }
 
     function load() {
-        if (!document.querySelector('.music-widget')) return;
+        // 只有带侧栏的页面才拉取；播放器被隐藏后仍能正常工作
+        if (!document.querySelector('.moments-widget') && !document.querySelector('.profile-widget')) return;
         fetch('/api/moments', { headers: { 'Accept': 'application/json' } })
             .then(function (r) { return r.json(); })
             .then(function (data) {
