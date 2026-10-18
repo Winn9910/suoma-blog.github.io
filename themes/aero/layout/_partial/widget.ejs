@@ -99,7 +99,14 @@
     <div class="moments-title">最新说说</div>
     <% moments.forEach(function (m) { %>
     <a class="moment-item" href="<%= m.url %>" target="_blank" rel="noopener">
-        <div class="moment-text"><%= m.text %></div>
+        <% if (m.images && m.images.length) { %>
+        <div class="moment-photos<%- m.images.length > 1 ? ' moment-photos-grid' : '' %>">
+            <% m.images.forEach(function (src) { %>
+            <img src="<%= src %>" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.style.display='none'">
+            <% }); %>
+        </div>
+        <% } %>
+        <% if (m.text) { %><div class="moment-text"><%= m.text %></div><% } %>
         <div class="moment-date"><%= m.date %></div>
     </a>
     <% }); %>

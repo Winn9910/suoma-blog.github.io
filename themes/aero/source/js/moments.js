@@ -1,4 +1,22 @@
 (function () {
+    var MAX_IMAGES = 4;
+
+    function buildPhotos(images) {
+        var wrap = document.createElement('div');
+        wrap.className = 'moment-photos' + (images.length > 1 ? ' moment-photos-grid' : '');
+        images.slice(0, MAX_IMAGES).forEach(function (src) {
+            var img = document.createElement('img');
+            img.src = src;
+            img.alt = '';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.referrerPolicy = 'no-referrer';
+            img.onerror = function () { wrap.style.display = 'none'; };
+            wrap.appendChild(img);
+        });
+        return wrap;
+    }
+
     function render(m) {
         var card = document.querySelector('.moments-widget');
         if (!card) {
@@ -15,7 +33,23 @@
         var item = card.querySelector('.moment-item');
         if (!item) return;
         item.href = m.url;
-        card.querySelector('.moment-text').textContent = m.text;
+
+        var textEl = card.querySelector('.moment-text');
+        if (textEl) {
+            if (m.text) {
+                textEl.textContent = m.text;
+                textEl.hidden = false;
+            } else {
+                textEl.hidden = true;
+            }
+        }
+
+        var old = card.querySelector('.moment-photos');
+        if (old) old.parentNode.removeChild(old);
+        if (m.images && m.images.length) {
+            item.insertBefore(buildPhotos(m.images), item.firstChild);
+        }
+
         card.querySelector('.moment-date').textContent = m.date;
     }
 

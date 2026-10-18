@@ -4,7 +4,9 @@
 // 用法：模板中 moments.forEach(...)，无数据时模板自动隐藏
 
 const FEED_URL = 'https://gov.box/admin.rss';
-const LIMIT = 1;
+// 默认只展示最新 1 条；本地调试可用 MOMENTS_LIMIT=4 临时多显示几条
+const LIMIT = parseInt(process.env.MOMENTS_LIMIT || '1', 10) || 1;
+const MAX_IMAGES = 4;
 
 let moments = [];
 let loaded = false;
@@ -25,6 +27,19 @@ function toPlain(html) {
   return decodeEntities(html).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
+// 从 description 里抽出图片地址（snac 把附件放在 .snac-content-attachments 的 figure > img）
+function pickImages(html) {
+  const imgs = [];
+  const re = /<img[^>]+src=["']?([^"'\s>]+)/gi;
+  const decoded = decodeEntities(html);
+  let m;
+  while ((m = re.exec(decoded)) !== null && imgs.length < MAX_IMAGES) {
+    const src = m[1].trim();
+    if (/^https?:\/\//i.test(src) && imgs.indexOf(src) === -1) imgs.push(src);
+  }
+  return imgs;
+}
+
 function formatDate(pub) {
   const d = new Date(pub);
   if (isNaN(d.getTime())) return '';
@@ -43,15 +58,20 @@ function parseFeed(xml) {
       const m = item.match(new RegExp('<' + tag + '>([\\s\\S]*?)<\\/' + tag + '>'));
       return m ? m[1] : '';
     }
-    const text = toPlain(pick('description')) || toPlain(pick('title'));
+    const desc = pick('description');
+    const images = pickImages(desc);
+    const text = toPlain(desc) || toPlain(pick('title'));
     const url = decodeEntities(pick('link')).trim();
-    if (!text || !url) continue;
+    if ((!text && !images.length) || !url) continue;
 
-    out.push({
+    const moment = {
       text: text.length > 70 ? text.slice(0, 70) + '…' : text,
       url: url,
       date: formatDate(pick('pubDate'))
-    });
+    };
+    if (images.length) moment.images = images;
+
+    out.push(moment);
     if (out.length >= LIMIT) break;
   }
   return out;
