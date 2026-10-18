@@ -93,3 +93,15 @@
         playlist: <%- JSON.stringify(theme.music.songs) %>
     };
 </script>
+
+<% if (moments && moments.length) { %>
+<div class="widget card moments-widget">
+    <div class="moments-title">最新说说</div>
+    <% moments.forEach(function (m) { %>
+    <a class="moment-item" href="<%= m.url %>" target="_blank" rel="noopener">
+        <div class="moment-text"><%= m.text %></div>
+        <div class="moment-date"><%= m.date %></div>
+    </a>
+    <% }); %>
+</div>
+<% } %>

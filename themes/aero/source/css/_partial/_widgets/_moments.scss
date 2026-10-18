@@ -1,0 +1,43 @@
+.moments-widget {
+    padding: 12px 14px;
+}
+
+.moments-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--black-secondary, #555);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.moment-item {
+    display: block;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: var(--black-main);
+    background: var(--white-main);
+    border-radius: 3px;
+    box-shadow: 0 0 0 0.5px var(--black-main), 0 0 0 1.5px var(--white-main);
+    transition: background 0.2s ease;
+}
+
+.moment-item:last-child {
+    margin-bottom: 0;
+}
+
+.moment-item:hover {
+    background: var(--highlight-color);
+}
+
+.moment-text {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.moment-date {
+    font-size: 11px;
+    opacity: 0.55;
+    margin-top: 4px;
+}
