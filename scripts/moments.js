@@ -4,7 +4,7 @@
 // 用法：模板中 moments.forEach(...)，无数据时模板自动隐藏
 
 const FEED_URL = 'https://gov.box/admin.rss';
-const LIMIT = 4;
+const LIMIT = 1;
 
 let moments = [];
 let loaded = false;
