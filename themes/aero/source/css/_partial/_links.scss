@@ -114,6 +114,46 @@
     text-overflow: ellipsis;
 }
 
+/* --- 友链巡检状态 --- */
+.link-health {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    line-height: 1;
+    padding: 2px 6px;
+    border-radius: 3px;
+    width: fit-content;
+    cursor: help;
+}
+
+.link-health .lh-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.link-health.is-ok {
+    color: #4a7d4a;
+    background: rgba(76, 175, 80, 0.12);
+
+    .lh-dot {
+        background: #4caf50;
+        box-shadow: 0 0 3px rgba(76, 175, 80, 0.6);
+    }
+}
+
+.link-health.is-dead {
+    color: #a33;
+    background: rgba(229, 57, 53, 0.12);
+
+    .lh-dot {
+        background: #e53935;
+        box-shadow: 0 0 3px rgba(229, 57, 53, 0.6);
+    }
+}
+
 /* --- 申请表单 --- */
 .link-form-section {
     margin-top: 2em;

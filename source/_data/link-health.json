@@ -1,0 +1,439 @@
+{
+  "checkedAt": "2026-11-05 23:55",
+  "sites": {
+    "https://www.j9.gs": {
+      "name": "祭酒·故事",
+      "ok": true,
+      "code": 200,
+      "ms": 120,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://www.fghrsh.net": {
+      "name": "FGHRSH 日记簿",
+      "ok": true,
+      "code": 200,
+      "ms": 231,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://zhuxu.asia/": {
+      "name": "朱某的生活印记",
+      "ok": true,
+      "code": 200,
+      "ms": 298,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://blog.byside.top/": {
+      "name": "拥抱日出的小屋",
+      "ok": true,
+      "code": 200,
+      "ms": 640,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://liwanr.com": {
+      "name": "liWanr",
+      "ok": true,
+      "code": 200,
+      "ms": 698,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://lcrworld.xyz": {
+      "name": "lcrworld",
+      "ok": true,
+      "code": 200,
+      "ms": 123,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://kokorotsuki.com": {
+      "name": "零ちゃんの委任手帳",
+      "ok": true,
+      "code": 200,
+      "ms": 908,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://upxuu.com": {
+      "name": "upxuu's blog",
+      "ok": true,
+      "code": 200,
+      "ms": 57,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://domain.fish": {
+      "name": "Domain.Fish",
+      "ok": true,
+      "code": 200,
+      "ms": 614,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://blog.dao.js.cn/": {
+      "name": "懋和道人",
+      "ok": true,
+      "code": 200,
+      "ms": 289,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://blog.8765777.xyz": {
+      "name": "没吃饱的天镜镜",
+      "ok": true,
+      "code": 200,
+      "ms": 704,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://blog.gankudadiz.com/": {
+      "name": "gankudadiz",
+      "ok": true,
+      "code": 200,
+      "ms": 113,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://denjuy.com": {
+      "name": "对白",
+      "ok": true,
+      "code": 200,
+      "ms": 340,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://www.hansjack.com/": {
+      "name": "寒士杰克",
+      "ok": true,
+      "code": 200,
+      "ms": 425,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://blog.elysium-stack.cn/": {
+      "name": "ElysiumStack",
+      "ok": true,
+      "code": 200,
+      "ms": 191,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://lzh1.cn": {
+      "name": "林子浩的日记",
+      "ok": true,
+      "code": 200,
+      "ms": 997,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://blog.el9.cn/": {
+      "name": "老卢",
+      "ok": true,
+      "code": 200,
+      "ms": 183,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "http://www.yveji.com/": {
+      "name": "悦己",
+      "ok": true,
+      "code": 200,
+      "ms": 80,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://blog.msglbo.cn": {
+      "name": "买四个萝卜",
+      "ok": true,
+      "code": 200,
+      "ms": 115,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://lb5.net/": {
+      "name": "小野博客",
+      "ok": true,
+      "code": 200,
+      "ms": 391,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://xgrsir.com/": {
+      "name": "南枝已谢",
+      "ok": true,
+      "code": 200,
+      "ms": 553,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://www.pipishe.com/": {
+      "name": "皮皮社",
+      "ok": true,
+      "code": 200,
+      "ms": 191,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://blog.hantaotao.top/": {
+      "name": "一世繁华",
+      "ok": true,
+      "code": 200,
+      "ms": 711,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://okoki.cn/": {
+      "name": "趣由心生",
+      "ok": true,
+      "code": 200,
+      "ms": 156,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://nmsl.cn/": {
+      "name": "nmsl.cn",
+      "ok": true,
+      "code": 200,
+      "ms": 429,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://gblw.cn/": {
+      "name": "隔壁老王",
+      "ok": true,
+      "code": 200,
+      "ms": 521,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://wqg.life/": {
+      "name": "WQG",
+      "ok": true,
+      "code": 200,
+      "ms": 317,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://zxs.me/": {
+      "name": "仲小树",
+      "ok": true,
+      "code": 200,
+      "ms": 391,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://exyon.ee/": {
+      "name": "EXYONE的篝火小屋",
+      "ok": true,
+      "code": 200,
+      "ms": 2270,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://www.htaoo.com/": {
+      "name": "核桃小屋",
+      "ok": true,
+      "code": 200,
+      "ms": 1237,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://wangxinyang.top": {
+      "name": "Wangxinyang",
+      "ok": true,
+      "code": 200,
+      "ms": 358,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://boke.lu/": {
+      "name": "博客录",
+      "ok": true,
+      "code": 200,
+      "ms": 613,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://storeweb.cn/": {
+      "name": "个站商店",
+      "ok": true,
+      "code": 200,
+      "ms": 44,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://www.dalao.net/": {
+      "name": "大佬论坛",
+      "ok": true,
+      "code": 200,
+      "ms": 650,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://liyinwaihe.com/": {
+      "name": "礼印外盒",
+      "ok": true,
+      "code": 200,
+      "ms": 1618,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://foreverblog.cn/": {
+      "name": "十年之约",
+      "ok": true,
+      "code": 200,
+      "ms": 2359,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://www.ba7nyw.com/": {
+      "name": "BA7NYW的菓子工房",
+      "ok": true,
+      "code": 200,
+      "ms": 19592,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    },
+    "https://bo.ke/": {
+      "name": "博客大联盟",
+      "ok": true,
+      "code": 200,
+      "ms": 16738,
+      "failCount": 0,
+      "lastOk": "2026-11-05 23:55"
+    }
+  },
+  "avatars": {
+    "https://blog.byside.top/upload/logo.jpg": {
+      "ok": true,
+      "code": 200
+    },
+    "https://pan.huar.net/d/cd1/CDN/archive/uploads/user/j9.gs.img.png": {
+      "ok": true,
+      "code": 403
+    },
+    "https://q1.qlogo.cn/g?b=qq&nk=2776686748&s=100": {
+      "ok": true,
+      "code": 200
+    },
+    "https://liwanr.com/assets/avatar.png": {
+      "ok": true,
+      "code": 200
+    },
+    "https://www.ba7nyw.com/photos/NTNimage.jpg": {
+      "ok": true,
+      "code": 200
+    },
+    "https://lcrworld.xyz/default-avatar.jpeg": {
+      "ok": true,
+      "code": 200
+    },
+    "https://domain.fish/favicon.ico": {
+      "ok": true,
+      "code": 200
+    },
+    "https://upxuu.com/images/me.jpg": {
+      "ok": true,
+      "code": 200
+    },
+    "https://cn.cravatar.com/avatar/37d41e2b550633a30f5d41de61c1aa92?s=400&r=G&d=mp&ver=1754413756": {
+      "ok": true,
+      "code": 200
+    },
+    "https://www.hansjack.com/favicon.ico": {
+      "ok": true,
+      "code": 200
+    },
+    "https://kokorotsuki.com/assets/materials/library/09a5d1fd2e1741479006b20602f301ff.png": {
+      "ok": true,
+      "code": 200
+    },
+    "https://blog.gankudadiz.com/avatar/avatar-128x128.jpg": {
+      "ok": true,
+      "code": 200
+    },
+    "https://lzh1.cn/img/touxiang.jpg": {
+      "ok": true,
+      "code": 200
+    },
+    "https://blog.el9.cn/usr/uploads/2026/07/2998389502.png": {
+      "ok": true,
+      "code": 200
+    },
+    "https://blog.msglbo.cn/favicon.ico": {
+      "ok": true,
+      "code": 200
+    },
+    "https://gravatar.fghrsh.net/avatar/9dd067b26526f97064c68b5ce89d60d1": {
+      "ok": true,
+      "code": 200
+    },
+    "https://www.yveji.com/vis/yveji_logo.svg": {
+      "ok": true,
+      "code": 200
+    },
+    "https://weavatar.com/avatar/4B224B7FC28787D78FB6374E17E2F15C?s=640": {
+      "ok": true,
+      "code": 200
+    },
+    "https://denjuy.com/img/deepwhitelogo.png": {
+      "ok": false,
+      "code": 404
+    },
+    "https://www.xgrsir.com/upload/xgrsir.ico": {
+      "ok": true,
+      "code": 200
+    },
+    "https://lb5.net/favicon.ico": {
+      "ok": true,
+      "code": 200
+    },
+    "https://old.okoki.cn/avtar.jpg": {
+      "ok": true,
+      "code": 200
+    },
+    "https://www.pipishe.com/logo.png": {
+      "ok": true,
+      "code": 200
+    },
+    "https://img.gblw.cn/gblw/logo/4333.png": {
+      "ok": false,
+      "code": "ENOTFOUND"
+    },
+    "https://nmsl.cn/icon.webp": {
+      "ok": true,
+      "code": 200
+    },
+    "https://img.htaoo.wxxx.net/img/logo1.png": {
+      "ok": true,
+      "code": 200
+    },
+    "https://cdn.wqg.life/common/logo.ico": {
+      "ok": true,
+      "code": 200
+    },
+    "https://wangxinyang.top/avatar.png": {
+      "ok": true,
+      "code": 200
+    },
+    "https://source.zxs.me/img/1736784536826.png": {
+      "ok": true,
+      "code": 403
+    },
+    "https://liyinwaihe.com/wp-content/uploads/2025/11/cropped-lywh.png": {
+      "ok": false,
+      "code": 404
+    },
+    "https://pic1.imgdb.cn/item/68b512ef58cb8da5c8689e8c.webp": {
+      "ok": true,
+      "code": 200
+    },
+    "https://blogr2.8765777.xyz/assets/my/7590A261E0E39A642ABF4873E89EAFF9.jpg": {
+      "ok": true,
+      "code": 200
+    }
+  }
+}

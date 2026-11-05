@@ -1,3 +1,4 @@
+<% var health = site.data['link-health']; %>
 <div class="card post-full">
     <span class="post-title article-title">
         <%= page.title %>
@@ -24,6 +25,13 @@
                     </div>
                     <div class="link-info">
                         <span class="link-name"><%= link.name %></span>
+                        <% var h = health && health.sites && health.sites[link.url]; %>
+                        <% if (h) { %>
+                        <span class="link-health <%= h.ok ? 'is-ok' : 'is-dead' %>"
+                              title="<%= h.ok ? ('HTTP ' + h.code + ' · ' + h.ms + 'ms · 巡检于 ' + health.checkedAt) : ('连续 ' + h.failCount + ' 次巡检失败（' + h.code + '）· 上次正常：' + h.lastOk) %>">
+                            <i class="lh-dot"></i><%= h.ok ? h.ms + 'ms' : '失联 ' + h.failCount + ' 天' %>
+                        </span>
+                        <% } %>
                         <% if (link.description && link.description.trim()) { %>
                         <span class="link-desc"><%= link.description %></span>
                         <% } %>
@@ -43,6 +51,13 @@
                     </div>
                     <div class="link-info">
                         <span class="link-name"><%= link.name %></span>
+                        <% var ch = health && health.sites && health.sites[link.url]; %>
+                        <% if (ch) { %>
+                        <span class="link-health <%= ch.ok ? 'is-ok' : 'is-dead' %>"
+                              title="<%= ch.ok ? ('HTTP ' + ch.code + ' · ' + ch.ms + 'ms · 巡检于 ' + health.checkedAt) : ('连续 ' + ch.failCount + ' 次巡检失败（' + ch.code + '）· 上次正常：' + ch.lastOk) %>">
+                            <i class="lh-dot"></i><%= ch.ok ? ch.ms + 'ms' : '失联 ' + ch.failCount + ' 天' %>
+                        </span>
+                        <% } %>
                     </div>
                 </a>
                 <% }) %>
