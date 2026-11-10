@@ -97,14 +97,6 @@
       "failCount": 0,
       "lastOk": "2026-11-05 23:55"
     },
-    "https://denjuy.com": {
-      "name": "对白",
-      "ok": true,
-      "code": 200,
-      "ms": 340,
-      "failCount": 0,
-      "lastOk": "2026-11-05 23:55"
-    },
     "https://www.hansjack.com/": {
       "name": "寒士杰克",
       "ok": true,
@@ -118,14 +110,6 @@
       "ok": true,
       "code": 200,
       "ms": 191,
-      "failCount": 0,
-      "lastOk": "2026-11-05 23:55"
-    },
-    "https://lzh1.cn": {
-      "name": "林子浩的日记",
-      "ok": true,
-      "code": 200,
-      "ms": 997,
       "failCount": 0,
       "lastOk": "2026-11-05 23:55"
     },
