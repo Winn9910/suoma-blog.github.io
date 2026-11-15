@@ -30,6 +30,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    /* 窗体配色（7.css 的 --w7-w-bg）：雾紫，与极光壁纸呼应。
+       只影响窗框与标题栏着色层，正文白底不变；想换色改这一个值即可。 */
+    --w7-w-bg: #7a5aa0;
 }
 
 .main-window {
