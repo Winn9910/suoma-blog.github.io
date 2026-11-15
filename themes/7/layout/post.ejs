@@ -1,0 +1,72 @@
+<article class="article-view post-full">
+    <h1 class="article-title">
+        <%= page.title %>
+    </h1>
+
+    <div class="article-meta">
+        <span title="<%= date(page.date, 'YYYY-MM-DD HH:mm') %>"><%= date(page.date, 'YYYY-MM-DD') %></span>
+        <% if (page.tags && page.tags.length) { %>
+            <span class="meta-sep">·</span>
+            <%- list_tags(page.tags, { show_count: false, style: 'none', separator: ', ' }) %>
+        <% } %>
+    </div>
+
+    <div class="article-content post-content">
+        <%- page.content %>
+    </div>
+</article>
+
+<% if (page.prev || page.next) { %>
+<nav class="post-nav">
+    <% if (page.prev) { %>
+        <a class="post-nav-item post-nav-prev" href="<%- url_for(page.prev.path) %>" rel="prev">
+            <span class="post-nav-dir"><span class="post-nav-arrow">‹</span> 上一篇</span>
+            <span class="post-nav-title"><%= page.prev.title %></span>
+        </a>
+    <% } else { %>
+        <span class="post-nav-item is-empty"></span>
+    <% } %>
+    <% if (page.next) { %>
+        <a class="post-nav-item post-nav-next" href="<%- url_for(page.next.path) %>" rel="next">
+            <span class="post-nav-dir">下一篇 <span class="post-nav-arrow">›</span></span>
+            <span class="post-nav-title"><%= page.next.title %></span>
+        </a>
+    <% } else { %>
+        <span class="post-nav-item is-empty"></span>
+    <% } %>
+</nav>
+<% } %>
+
+<%
+    // 文章评论开关：全站 comments.enable 为总开关；单篇 front-matter 的 comments 可覆盖
+    // （page.comments === false 单独关；全站关时 page.comments === true 可单独开）。
+    var cmt = theme.comments || {};
+    var cmtTwikoo = cmt.twikoo || {};
+    var cmtEnvId = cmtTwikoo.env_id ? String(cmtTwikoo.env_id).trim() : '';
+    var cmtRegion = cmtTwikoo.region ? String(cmtTwikoo.region).trim() : '';
+    var cmtOn = (page.comments === false) ? false
+              : (page.comments === true) ? true
+              : (cmt.enable !== false);
+%>
+<% if (cmtOn && cmtEnvId) { %>
+<section class="post-comments">
+    <h2 class="post-comments-title">评论</h2>
+    <div id="twikoo-post" class="twikoo-mount"></div>
+    <script src="<%- url_for('/vendor/twikoo.min.js') %>"></script>
+    <script>
+    (function () {
+        function boot() {
+            if (typeof twikoo === 'undefined') return;
+            twikoo.init({
+                envId: '<%- cmtEnvId %>',
+                el: '#twikoo-post'<%- cmtRegion ? (",\n                region: '" + cmtRegion + "'") : '' %>,
+                path: '<%- url_for(page.path) %>'
+            });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', boot);
+        } else { boot(); }
+    })();
+    </script>
+</section>
+<% } %>

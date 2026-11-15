@@ -1,0 +1,65 @@
+<% if (theme.music && theme.music.enable && theme.music.songs && theme.music.songs.length && theme.music.songs[0].url) { %>
+<div class="window music-gadget glass active">
+    <div class="title-bar">
+        <div class="title-bar-text">媒体播放器</div>
+        <div class="title-bar-controls">
+            <button aria-label="Minimize" id="musicToggle"></button>
+        </div>
+    </div>
+    <div class="window-body music-bar">
+        <div class="album-art" id="albumArt"></div>
+        <div class="music-main">
+            <div class="title-row">
+                <span class="song-title" id="songTitle">Loading...</span>
+            </div>
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+        <div class="controls">
+            <button class="btn-glass ctrl-btn" id="prevBtn" aria-label="previous">
+                <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+            </button>
+            <button class="btn-glass play-btn" id="playBtn" aria-label="play">
+                <span id="playIcon">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+                </span>
+            </button>
+            <button class="btn-glass ctrl-btn" id="nextBtn" aria-label="next">
+                <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
+            </button>
+        </div>
+        <audio id="audioPlayer"></audio>
+    </div>
+</div>
+<script>
+    /* 首屏同步应用已保存的拖拽位置 + 折叠状态，避免刷新时先闪现默认态再跳走。 */
+    (function () {
+        var el = document.querySelector('.music-gadget');
+        if (!el) return;
+        try {
+            /* 折叠状态恢复：手动收起后刷新仍保持收起（PC/移动端都生效） */
+            if (localStorage.getItem('win7-music-collapsed') === '1') {
+                el.classList.add('collapsed');
+            }
+            /* 拖拽位置恢复：仅 PC 宽度(>820)生效；无记录则保持模板/CSS 默认位置 */
+            if (window.innerWidth > 820) {
+                var p = JSON.parse(localStorage.getItem('win7-music-pos'));
+                if (p && !isNaN(p.left) && !isNaN(p.top)) {
+                    el.style.left = p.left + 'px';
+                    el.style.top = p.top + 'px';
+                    el.style.right = 'auto';
+                    el.style.bottom = 'auto';
+                }
+            }
+        } catch (e) { /* localStorage 不可用则用默认态 */ }
+    })();
+</script>
+
+<script>
+    var musicConfig = {
+        autoplay: <%= theme.music.autoplay %>,
+        playlist: <%- JSON.stringify(theme.music.songs) %>
+    };
+</script>
+<% } %>

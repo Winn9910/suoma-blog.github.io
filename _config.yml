@@ -49,11 +49,17 @@ highlight:
   auto_detect: true
   tab_replace: ''
   wrap: true
-  hljs: false
+  hljs: true
 prismjs:
   preprocess: true
   line_number: true
   tab_replace: ''
+
+# Markdown 渲染
+markdown:
+  # 关闭裸网址自动转超链接：只有 [文字](链接) 形式才会生成可点击链接
+  disable_rules:
+    - linkify
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -96,7 +102,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: aero
+theme: 7
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

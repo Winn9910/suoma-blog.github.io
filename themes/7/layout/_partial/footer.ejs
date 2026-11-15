@@ -1,0 +1,27 @@
+<%
+    var beian = theme.beian || {};
+    var icp = (beian.icp || '').trim();
+    var police = (beian.police || '').trim();
+    // 公安备案跳转：从备案号中提取纯数字 code，拼成官方查询链接；配置里手动填了 police_link 则优先用手动值
+    var policeCode = police.replace(/\D/g, '');
+    var policeLink = (beian.police_link || '').trim()
+        || (policeCode ? ('https://beian.mps.gov.cn/#/query/webSearch?code=' + policeCode) : 'https://beian.mps.gov.cn/');
+%>
+<div class="status-bar site-footer<%= (icp || police) ? ' has-beian' : '' %>">
+    <p class="status-bar-field footer-copyright">Copyright &copy; <%= date(new Date(), 'YYYY') %> <%= config.author %></p>
+    <p class="status-bar-field footer-powered">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> · Theme win7</p>
+    <% if (config.feed && config.feed.path) { %>
+        <p class="status-bar-field footer-rss"><a href="<%- url_for(config.feed.path) %>" title="RSS 订阅">RSS</a></p>
+    <% } %>
+    <% if (icp || police) { %>
+        <p class="status-bar-field footer-beian">
+            <% if (icp) { %>
+                <a href="<%= beian.icp_link || 'https://beian.miit.gov.cn/' %>" target="_blank" rel="noopener"><%= icp %></a>
+            <% } %>
+            <% if (icp && police) { %><span class="beian-sep">·</span><% } %>
+            <% if (police) { %>
+                <a href="<%= policeLink %>" target="_blank" rel="noopener"><%= police %></a>
+            <% } %>
+        </p>
+    <% } %>
+</div>

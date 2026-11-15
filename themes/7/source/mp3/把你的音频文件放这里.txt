@@ -1,0 +1,1 @@
+﻿把你的音频文件（如 song.mp3）放到本目录，然后在 themes/win7/_config.yml 的 music.songs[0].url 填 /mp3/song.mp3 即可。

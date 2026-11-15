@@ -1,0 +1,20 @@
+<div class="explorer-list taxonomy-cloud-view">
+    <div class="taxonomy-head">
+        <span class="taxonomy-kind">全部标签</span>
+        <span class="taxonomy-count"><%= site.tags.length %> 个</span>
+    </div>
+
+    <% if (site.tags.length) { %>
+        <div class="tag-cloud">
+            <%- tagcloud(site.tags, {
+                min_font: 14,
+                max_font: 24,
+                amount: 200,
+                color: false,
+                unit: 'px'
+            }) %>
+        </div>
+    <% } else { %>
+        <div class="taxonomy-empty">还没有任何标签。</div>
+    <% } %>
+</div>

@@ -1,0 +1,55 @@
+<div class="explorer-list">
+    <div class="list-head">
+        <span class="col-name">名称</span>
+        <span class="col-date">修改日期</span>
+        <span class="col-desc">摘要</span>
+    </div>
+
+    <%
+        // 本地化的目标站风格图标集合；无封面的文章按标题哈希确定性选一个，
+        // 视觉上"随机"分布但每篇文章固定不变（刷新不闪变）。
+        var topicIcons = [
+            'android.webp', 'apple2001.webp', 'chat.webp', 'discord.webp', 'faq.webp',
+            'globe.webp', 'graphics.webp', 'language.webp', 'music.webp', 'software.webp',
+            'toolbox.webp', 'uidesign.webp', 'windows7-3.webp'
+        ];
+        function pickIcon(key) {
+            var h = 0, s = String(key || '');
+            for (var i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) >>> 0; }
+            return topicIcons[h % topicIcons.length];
+        }
+    %>
+
+    <ul class="file-list" id="postFileList">
+        <% page.posts.forEach(function(post){ %>
+        <%
+            var iconSrc = post.cover
+                ? url_for(post.cover)
+                : url_for('/image/icon/topic/' + pickIcon(post.path || post.title));
+        %>
+        <li class="file-row" onclick="location.href='<%- url_for(post.path) %>'" tabindex="0"
+            data-date="<%= date(post.date, 'YYYYMMDDHHmmss') %>"
+            data-title="<%= (post.title || 'Untitled') %>"
+            data-cover="<%- iconSrc %>"
+            data-excerpt="<%= truncate(strip_html(post.excerpt || post.content), {length: 200, omission: '…'}) %>">
+            <span class="col-name">
+                <img class="file-ico" src="<%- iconSrc %>" alt="">
+                <a class="file-title" href="<%- url_for(post.path) %>"><%= post.title || 'Untitled' %></a>
+            </span>
+            <span class="col-date" title="<%= date(post.date, 'YYYY-MM-DD HH:mm') %>">
+                <%= relative_time(post.date) %>
+            </span>
+            <span class="col-desc">
+                <span class="file-excerpt"><%- truncate(strip_html(post.excerpt || post.content), {length: 90, omission: '...'}) %></span>
+                <% if (post.tags && post.tags.length) { %>
+                    <span class="file-tags"><%- list_tags(post.tags, { show_count: false, style: 'none', separator: ' ' }) %></span>
+                <% } %>
+            </span>
+        </li>
+        <% }) %>
+    </ul>
+</div>
+
+<nav class="page-nav">
+    <%- paginator({ prev_text: '‹ 上一页', next_text: '下一页 ›' }) %>
+</nav>

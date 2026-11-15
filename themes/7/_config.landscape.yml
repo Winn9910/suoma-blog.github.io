@@ -1,0 +1,112 @@
+# ======================================
+# hexo-theme-win7  主题配置「示例样本」
+# Windows 7 / Frutiger Aero 玻璃拟态风格
+#
+# 【怎么用这个文件】
+#   1. 把本文件复制一份，改名为  _config.yml  （放在 themes/win7/ 目录下）
+#   2. 按下面的中文注释，把演示数据换成你自己的信息
+#   3. 不需要的项留空即可，留空的组件不会显示
+#
+# 【注意】YAML 语法：冒号后面必须有一个空格，缩进只能用空格、不能用 Tab
+# 下面所有值都是「演示数据」，仅供参考，请替换成你自己的。
+# ======================================
+
+# ---------- 站点导航 ----------
+# 除了内置的 首页/归档/关于，这里可以再加自定义导航项：左边是名字，右边是链接
+menu:
+  about: /about
+  # 友链: /links        # 举例：想在导航里加"友链"入口，去掉行首 # 即可
+
+# ---------- 文章评论（Twikoo） ----------
+# enable: false 一键关闭全站文章评论；单篇文章 front-matter 写 comments: false/true 可单独覆盖。
+# 想用评论，需要自己免费部署一套 Twikoo 后端（CloudBase 或 Vercel），把地址填到 env_id。
+comments:
+  enable: true
+  twikoo:
+    env_id: 'https://your-twikoo.vercel.app/'   # 演示：换成你自己的 Twikoo 后端地址
+    region: ''                                   # CloudBase 非上海地域才填（如 ap-guangzhou）；私有部署/Vercel 留空
+
+# ---------- 站点图标 ----------
+favicon:
+  enable: true
+  icon: /image/icon/vista_messenger.jpg          # 演示：主题自带的图标，可换成 /images/你的favicon.png
+
+# ---------- 顶部个人信息 ----------
+profile:
+  enable: true
+  author: '张三'                    # 演示：昵称；留空则读站点 _config.yml 里的 author
+  avatar: /images/avatar.webp       # 演示：头像图片路径（图片放 source/images/ 下）；留空用主题内置图标
+  avatar_link: '/'                  # 点击头像跳转的链接
+  social:                           # 社交链接，link 为空的项不显示
+    - name: Github
+      link: 'https://github.com/zhangsan'          # 演示：换成你的主页；不想显示就留空 ''
+      icon: /image/icon/github.webp
+    - name: Bilibili
+      link: 'https://space.bilibili.com/12345678'  # 演示：换成你的 B 站空间；不想显示就留空 ''
+      icon: /image/icon/bilibili.webp
+
+# ---------- 友情链接页（/links/，卡片墙，仅显示 Logo + 站名） ----------
+# 新建 source/links/index.md（layout: links）即可访问 /links/；数据来自这里。
+# 卡片一排数量随设备自适应、排名不分先后。items 里：
+#   name 站点名称（必填，显示在 Logo 下方）  link 站点地址（必填）
+#   avatar 站点 Logo（可选，留空/加载失败用默认图标）  desc 仅备注、页面不展示（可选）
+# 分组 group 仅用于配置归类，页面上不显示分组标题。
+friends:
+  intro: '这里是我收藏的一些好朋友的网站，排名不分先后~'    # 演示：页面开场白；留空则不显示
+  apply:
+    # 友链申请：Twikoo 评论区，访客免账号、免登录即可留言申请。
+    twikoo:
+      env_id: 'https://your-twikoo.vercel.app/'   # 演示：CloudBase 环境 ID 或 Vercel 函数地址；留空则用下面 contact 兜底
+      region: ''                                   # CloudBase 非上海地域填（如 ap-guangzhou）；Vercel 留空
+    contact: '邮箱：you@example.com'                # 兜底：env_id 未配置时展示的联系方式；留空则不显示
+  groups:
+    - group: 推荐站点
+      items:
+        - name: 示例博客
+          link: 'https://example.com'
+          avatar: 'https://example.com/favicon.ico'
+          desc: '这是一个演示友链，请替换成你朋友的站点'
+        - name: 另一个朋友
+          link: 'https://friend.example.net'
+          avatar: ''                               # 留空则用默认图标
+          desc: ''
+
+
+# ---------- 顶部音乐播放器（横向玻璃条） ----------
+music:
+  enable: true
+  autoplay: false                   # 是否自动播放（多数浏览器会拦截自动播放，建议 false）
+  songs:
+    # songs[0].url 为空则不渲染播放器；填上音频直链即可（可把 mp3 放 source/mp3/ 下）
+    - title: '演示曲目'
+      artist: 'win7 theme'
+      cover: /image/icon/vista_photo_gallery.jpg   # 演示：封面图
+      url: /mp3/demo.mp3                            # 演示：音频路径；换成你自己的 mp3 直链
+
+# ---------- 最近发表的附件窗口（可拖拽浮窗） ----------
+# 在文章 front-matter 里写 attachments 列表即可自动汇总到此窗口：
+#   attachments:
+#     - name: 文件名.zip      # 显示的文件名（省略则取 url 末段）
+#       url: /uploads/xx.zip  # 附件地址
+#       size: 1.2 MB          # 文件大小（可选，留空则不显示）
+# 全站没有任何文章带 attachments 时，此窗口整体不渲染。
+attachments:
+  max: 10   # 最多显示的附件数量（按发布时间倒序取前 N 个）
+
+# ---------- 数学公式 ----------
+# 在文章 front-matter 里写 mathjax: true 才会在该页加载。
+# 一律使用本地 vendor/mathjax（本包已内置）；不使用任何 CDN。
+math:
+  enable: true
+  local_src: /vendor/mathjax/tex-mml-chtml.js
+
+# ---------- 代码高亮样式 ----------
+# 需站点 _config.yml 里 highlight.hljs = true
+hljs: true
+
+# ---------- 页脚备案号（留空则不显示对应项；仅中国大陆站点需要） ----------
+beian:
+  icp: '京ICP备12345678号-1'                        # 演示：ICP 备案号；留空不显示
+  icp_link: 'https://beian.miit.gov.cn/'            # ICP 备案查询链接
+  police: '京公网安备 11010102000001号'             # 演示：公安备案号；留空不显示
+  police_link: ''                                   # 公安备案查询链接：留空则按 police 里的数字自动拼查询链接

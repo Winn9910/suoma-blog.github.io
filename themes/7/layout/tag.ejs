@@ -1,0 +1,55 @@
+<%
+    // 标签页：显示"当前标签下的文章列表"，复用与归档一致的资源管理器列表结构与图标逻辑。
+    var topicIcons = [
+        'android.webp', 'apple2001.webp', 'chat.webp', 'discord.webp', 'faq.webp',
+        'globe.webp', 'graphics.webp', 'language.webp', 'music.webp', 'software.webp',
+        'toolbox.webp', 'uidesign.webp', 'windows7-3.webp'
+    ];
+    function pickIcon(key) {
+        var h = 0, s = String(key || '');
+        for (var i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) >>> 0; }
+        return topicIcons[h % topicIcons.length];
+    }
+%>
+<div class="explorer-list taxonomy-list-view">
+    <div class="taxonomy-head">
+        <span class="taxonomy-kind">标签</span>
+        <span class="taxonomy-name"><%= page.tag %></span>
+        <span class="taxonomy-count"><%= page.total %> 篇</span>
+    </div>
+
+    <div class="list-head">
+        <span class="col-name">名称</span>
+        <span class="col-date">修改日期</span>
+        <span class="col-desc">摘要</span>
+    </div>
+
+    <ul class="file-list">
+        <% page.posts.each(function(post){ %>
+        <%
+            var iconSrc = post.cover
+                ? url_for(post.cover)
+                : url_for('/image/icon/topic/' + pickIcon(post.path || post.title));
+        %>
+        <li class="file-row" onclick="location.href='<%- url_for(post.path) %>'" tabindex="0"
+            data-title="<%= (post.title || 'Untitled') %>"
+            data-cover="<%- iconSrc %>"
+            data-excerpt="<%= truncate(strip_html(post.excerpt || post.content), {length: 200, omission: '…'}) %>">
+            <span class="col-name">
+                <img class="file-ico" src="<%- iconSrc %>" alt="">
+                <a class="file-title" href="<%- url_for(post.path) %>"><%= post.title || 'Untitled' %></a>
+            </span>
+            <span class="col-date" title="<%= date(post.date, 'YYYY-MM-DD HH:mm') %>">
+                <%= relative_time(post.date) %>
+            </span>
+            <span class="col-desc">
+                <span class="file-excerpt"><%- truncate(strip_html(post.excerpt || post.content), {length: 90, omission: '...'}) %></span>
+            </span>
+        </li>
+        <% }) %>
+    </ul>
+</div>
+
+<nav class="page-nav">
+    <%- paginator({ prev_text: '‹ 上一页', next_text: '下一页 ›' }) %>
+</nav>

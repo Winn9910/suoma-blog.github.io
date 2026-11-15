@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <linearGradient id="drvBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f8fc"/>
+      <stop offset="0.5" stop-color="#d6e2ee"/>
+      <stop offset="0.5" stop-color="#c3d3e4"/>
+      <stop offset="1" stop-color="#e7eef6"/>
+    </linearGradient>
+    <linearGradient id="drvTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#c9d8e8"/>
+    </linearGradient>
+  </defs>
+  <!-- drive body -->
+  <rect x="1.5" y="4.5" width="13" height="8" rx="1.3" fill="url(#drvBody)" stroke="#7d93ab" stroke-width="0.8"/>
+  <!-- top highlight strip -->
+  <rect x="2.2" y="5.2" width="11.6" height="2.2" rx="0.8" fill="url(#drvTop)" opacity="0.85"/>
+  <!-- activity light -->
+  <circle cx="12.4" cy="10.4" r="0.9" fill="#3fbf5a" stroke="#2b8f42" stroke-width="0.4"/>
+  <!-- slot -->
+  <rect x="3.2" y="10" width="5.6" height="1" rx="0.4" fill="#8ea4ba"/>
+</svg>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <% if (page.title) { %><%= page.title %> · <% } %><%= config.title %>
+    </title>
+    <% if (config.description) { %>
+        <meta name="description" content="<%= config.description %>">
+    <% } %>
+    <% if (config.feed && config.feed.path) { %>
+        <link rel="alternate" type="application/rss+xml" title="<%= config.title %>" href="<%= url_for(config.feed.path) %>">
+    <% } %>
+    <%- css('vendor/7.css') %>
+    <%- css('css/style.css') %>
+    <% if (theme.hljs) { %>
+        <%- css('vendor/hljs.css') %>
+    <% } %>
+    <% if (theme.favicon && theme.favicon.enable && theme.favicon.icon) { %>
+        <link rel="icon" href="<%= url_for(theme.favicon.icon) %>">
+    <% } %>
+</head>
+
+<body>
+    <div class="win7-loading" id="win7Loading" aria-hidden="true">
+        <div class="win7-spinner" role="status" aria-label="加载中"></div>
+    </div>
+    <%- js('js/loading.js') %>
+
+    <div class="desktop">
+        <div class="window main-window glass active">
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    <img class="win-icon" src="<%- url_for('/image/icon/vista_pc_1.jpg') %>" alt="">
+                    <% if ((is_post() || is_page()) && page.title) { %>
+                        <%= page.title %>----<%= config.title %>
+                    <% } else { %>
+                        <%= config.title %><% if (config.subtitle) { %> — <%= config.subtitle %><% } %>
+                    <% } %>
+                </div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize" tabindex="-1"></button>
+                    <button aria-label="Maximize" tabindex="-1"></button>
+                    <button aria-label="Close" tabindex="-1"></button>
+                </div>
+            </div>
+
+            <%- partial('_partial/header') %>
+
+            <% if (is_home()) { %>
+                <%- partial('_partial/view-tabs') %>
+            <% } else { %>
+                <%- partial('_partial/view-tabs-static') %>
+            <% } %>
+
+            <% if (theme.music && theme.music.enable && theme.music.songs && theme.music.songs.length && theme.music.songs[0].url) { %>
+                <%- partial('_partial/widget') %>
+            <% } %>
+
+            <%- partial('_partial/attachments') %>
+
+            <div class="window-body explorer-body">
+                <%- partial('_partial/sidebar') %>
+
+                <div class="explorer-content">
+                    <main id="main-container">
+                        <%- body %>
+                    </main>
+                </div>
+            </div>
+
+            <% if (is_home() || is_archive() || is_current('archives')) { %>
+                <div class="details-pane">
+                    <img src="<%- url_for('/image/vista/ui/viewforums.webp') %>" alt="" class="details-pane-ico">
+                    <span class="details-pane-text"><%= site.posts.length %> 篇文章</span>
+                </div>
+            <% } %>
+
+            <%- partial('_partial/footer') %>
+        </div>
+    </div>
+
+    <%- partial('_partial/context-menu') %>
+
+    <div class="scroll-page" aria-hidden="true">
+        <i class="scroll-up" title="回到顶部" aria-label="回到顶部">
+            <svg viewBox="0 0 24 16" width="40" height="40" aria-hidden="true"><path fill="currentColor" d="M12 2 2.5 11.5l1.9 1.9L12 5.8l7.6 7.6 1.9-1.9z"/></svg>
+        </i>
+        <i class="scroll-down" title="到底部" aria-label="到底部">
+            <svg viewBox="0 0 24 16" width="40" height="40" aria-hidden="true"><path fill="currentColor" d="M12 14 21.5 4.5 19.6 2.6 12 10.2 4.4 2.6 2.5 4.5z"/></svg>
+        </i>
+    </div>
+
+    <script>window.__win7Root = '<%- url_for("/") %>';</script>
+    <script defer src="<%- url_for('js/bundle.js') %>"></script>
+    <script defer src="<%- url_for('js/titlebar.js') %>"></script>
+    <script defer src="<%- url_for('js/lightbox.js') %>"></script>
+    <% if (theme.music && theme.music.enable) { %>
+        <script defer src="<%- url_for('js/music.js') %>"></script>
+    <% } %>
+
+    <% if (theme.math && theme.math.enable && page.mathjax) { %>
+        <script>
+            window.MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                    displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+                    processEscapes: true
+                },
+                options: {
+                    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                }
+            };
+        </script>
+        <script src="<%= url_for(theme.math.local_src) %>" id="MathJax-script" async></script>
+    <% } %>
+</body>
+
+</html>

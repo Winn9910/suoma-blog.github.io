@@ -1,0 +1,67 @@
+<aside class="explorer-sidebar" id="explorerSidebar">
+    <% if (theme.profile && theme.profile.enable) { %>
+    <div class="sidebar-profile">
+        <a href="<%= url_for(theme.profile.avatar_link || '/') %>">
+            <span class="profile-avatar-frame">
+                <% if (theme.profile.avatar) { %>
+                    <img src="<%= url_for(theme.profile.avatar) %>" class="profile-img" alt="avatar">
+                <% } else { %>
+                    <img src="<%= url_for('/image/icon/avatar_usertile20.webp') %>" class="profile-img" alt="avatar">
+                <% } %>
+            </span>
+        </a>
+        <div class="profile-name"><%= theme.profile.author || config.author %></div>
+        <% if (config.description) { %>
+            <div class="profile-bio"><%- config.description %></div>
+        <% } %>
+    </div>
+    <% } %>
+
+    <ul class="tree-view nav-tree">
+        <li>
+            <details open>
+                <summary>导航</summary>
+                <ul>
+                    <li>
+                        <a href="<%- url_for('/') %>" class="<%= is_home() ? 'nav-active' : '' %>">
+                            <img src="<%- url_for('/image/icon/home.ico') %>" alt="" class="nav-ico"> 主页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<%- url_for('/tags') %>" class="<%= (is_tag() || is_current('tags')) ? 'nav-active' : '' %>">
+                            <img src="<%- url_for('/image/icon/topic/language.webp') %>" alt="" class="nav-ico"> 标签
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<%- url_for('/about') %>" class="<%= is_current('about') ? 'nav-active' : '' %>">
+                            <img src="<%- url_for('/image/icon/vista_pc_1.jpg') %>" alt="" class="nav-ico"> 关于
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<%- url_for('/links') %>" class="<%= is_current('links') ? 'nav-active' : '' %>">
+                            <img src="<%- url_for('/image/icon/vista_messenger.jpg') %>" alt="" class="nav-ico"> 友情链接
+                        </a>
+                    </li>
+                </ul>
+            </details>
+        </li>
+        <% if (theme.profile && theme.profile.social && theme.profile.social.some(function(s){return s.link})) { %>
+        <li>
+            <details open>
+                <summary>链接</summary>
+                <ul>
+                    <% theme.profile.social.forEach(function(item) { %>
+                        <% if (item.link) { %>
+                        <li>
+                            <a href="<%= url_for(item.link) %>" target="_blank" rel="noopener">
+                                <img src="<%= url_for(item.icon) %>" alt="" class="nav-ico"> <%= item.name %>
+                            </a>
+                        </li>
+                        <% } %>
+                    <% }); %>
+                </ul>
+            </details>
+        </li>
+        <% } %>
+    </ul>
+</aside>

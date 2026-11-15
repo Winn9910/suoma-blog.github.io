@@ -1,0 +1,101 @@
+# ======================================
+# hexo-theme-win7  主题配置
+# Windows 7 / Frutiger Aero 玻璃拟态风格
+# 注意：冒号后面必须有空格（YAML 语法）
+# ======================================
+
+# ---------- 站点导航 ----------
+menu:
+  about: /about
+
+# ---------- 文章评论（Twikoo） ----------
+# enable: false 一键关闭所有文章评论；单篇 front-matter 写 comments: false/true 可覆盖。
+comments:
+  enable: true
+  twikoo:
+    env_id: ''    # Twikoo 后端地址（与友链页可同一个）
+    region: ''    # CloudBase 非上海地域才填；私有部署/Vercel 留空
+
+turnstile_site_key: '0x4AAAAAAE8ng3T5n6oDN2jo'
+
+# ---------- 站点图标 ----------
+favicon:
+  enable: true
+  icon: /image/icon/vista_messenger.jpg
+
+# ---------- 顶部个人信息 ----------
+profile:
+  enable: true
+  author: '索玛'          # 留空则读站点 _config.yml 的 author
+  avatar: '/image/icon/maodie.webp'          # 头像图片，如 /images/avatar.webp（放 source 目录下），留空用主题内置图标
+  avatar_link: '/'    # 点击头像跳转的链接
+  social:             # 社交链接，link 为空的项不显示
+    - name: Github
+      link: ''        # https://github.com/username
+      icon: /image/icon/github.webp
+    - name: Bilibili
+      link: ''        # https://space.bilibili.com/youruid
+      icon: /image/icon/bilibili.webp
+
+# ---------- 友情链接页（/links/，卡片墙，仅显示 Logo + 站名） ----------
+# 新建 source/links/index.md（layout: links）即可访问 /links/；数据来自这里。
+# 卡片一排数量随设备自适应、排名不分先后。items 里：
+#   name 站点名称（必填，显示在 Logo 下方）  link 站点地址（必填）
+#   avatar 站点 Logo（可选，留空/加载失败用默认图标）  desc 仅备注、页面不展示（可选）
+# 分组 group 仅用于配置归类，页面上不显示分组标题。
+friends:
+  # intro: ''       # 可选的页面开场白，留空则不显示
+  apply:
+    # 友链申请：Twikoo 评论区，访客免账号、免登录即可留言申请。
+    # 需部署 Twikoo 免费后端后把环境 ID/函数地址填到 env_id。
+    twikoo:
+      env_id: ''      # CloudBase 环境 ID（'xxxx-xxxxxx'）或 Vercel 函数地址（'https://xxx.vercel.app/'）
+      region: ''      # CloudBase 非上海地域填（如 'ap-guangzhou'）；Vercel 留空
+    contact: ''       # 兜底：env_id 未配置时展示的联系方式（邮箱/QQ 等），留空则不显示
+  groups:
+    - group: 推荐站点
+      items:
+        - name: ''
+          link: ''
+          avatar: ''
+          desc: ''
+
+
+# ---------- 顶部音乐播放器（横向玻璃条） ----------
+music:
+  enable: true
+  autoplay: false
+  songs:
+    # songs[0].url 为空则不渲染播放器；填上音频直链即可
+    - title: 'Sample Track'
+      artist: 'win7 theme'
+      cover: /image/icon/vista_photo_gallery.jpg
+      url: ''
+
+# ---------- 最近发表的附件窗口（可拖拽浮窗） ----------
+# 在文章 front-matter 里写 attachments 列表即可自动汇总到此窗口：
+#   attachments:
+#     - name: 文件名.zip      # 显示的文件名（省略则取 url 末段）
+#       url: /uploads/xx.zip  # 附件地址
+#       size: 1.2 MB          # 文件大小（可选，留空则不显示）
+# 全站没有任何文章带 attachments 时，此窗口整体不渲染。
+attachments:
+  max: 10   # 最多显示的附件数量（按发布时间倒序取前 N 个）
+
+# ---------- 数学公式 ----------
+# 在文章 front-matter 里写 mathjax: true 才会在该页加载。
+# 一律使用本地 vendor/mathjax（本包已内置）；不使用任何 CDN。
+math:
+  enable: true
+  local_src: /vendor/mathjax/tex-mml-chtml.js
+
+# ---------- 代码高亮样式 ----------
+# 需站点 _config.yml 里 highlight.hljs = true
+hljs: true
+
+# ---------- 页脚备案号（留空则不显示对应项；仅中国大陆站点需要） ----------
+beian:
+  icp: ''             # ICP 备案号，如 京ICP备12345678号-1；留空不显示
+  icp_link: 'https://beian.miit.gov.cn/'   # ICP 备案查询链接
+  police: ''          # 公安备案号，如 京公网安备 11010102000001号；留空不显示
+  police_link: ''     # 公安备案查询链接：留空则按 police 里的数字自动拼查询链接

@@ -1,0 +1,85 @@
+<%
+    // 附件窗口数据来源分两种：
+    //  · 文章详情页(is_post)：只取【当前这篇文章】front-matter 的 attachments；本文无附件则整窗不渲染。
+    //  · 其它页面(首页/归档/独立页)：汇总【全站文章】的 attachments，按发布时间倒序取前 max 个。
+    // 附件项格式：attachments: [{ name, url, size }]
+    var attachmentsMax = (theme.attachments && theme.attachments.max) || 10;
+    var allAttach = [];
+    var attachTitle = '最近发表的附件';
+
+    function pushAtt(list, att) {
+        if (att && att.url) {
+            list.push({
+                name: att.name || att.url.split('/').pop(),
+                url: att.url,
+                size: att.size || ''
+            });
+        }
+    }
+
+    if (is_post()) {
+        // 详情页：仅当前文章附件
+        attachTitle = '本文附件';
+        if (page.attachments && page.attachments.length) {
+            page.attachments.forEach(function (att) { pushAtt(allAttach, att); });
+        }
+    } else {
+        // 列表/独立页：全站汇总，倒序取前 max 个
+        site.posts.sort('-date').each(function (post) {
+            if (post.attachments && post.attachments.length) {
+                post.attachments.forEach(function (att) { pushAtt(allAttach, att); });
+            }
+        });
+        allAttach = allAttach.slice(0, attachmentsMax);
+    }
+%>
+<% if (allAttach.length) { %>
+<div class="window attach-gadget glass active">
+    <div class="title-bar">
+        <div class="title-bar-text">
+            <img class="attach-title-ico" src="<%- url_for('/image/vista/ui/portal_attach.webp') %>" alt="" width="16" height="16">
+            <%= attachTitle %>
+        </div>
+        <div class="title-bar-controls">
+            <button aria-label="Minimize" id="attachToggle"></button>
+        </div>
+    </div>
+    <div class="window-body attach-body">
+        <div class="portal-side">
+            <% allAttach.forEach(function (att, i) { %>
+                <% if (i > 0) { %><hr class="dashed"><% } %>
+                <span class="portal-title-span portal-gensmall icon-clip" aria-hidden="true">&nbsp;</span>
+                <a class="portal-title-link" href="<%- url_for(att.url) %>" title="<%= att.name %>" target="_blank" rel="noopener"><%= att.name %></a>
+                <br class="portal-clear">
+                <% if (att.size) { %>
+                    <span class="portal-text-span">文件大小：</span><span class="portal-data-span portal-gensmall"><%= att.size %></span>
+                    <br class="portal-clear">
+                <% } %>
+            <% }); %>
+        </div>
+    </div>
+</div>
+<script>
+    /* 首屏同步应用已保存的拖拽位置 + 折叠状态，避免刷新时先闪现默认态再跳走。 */
+    (function () {
+        var el = document.querySelector('.attach-gadget');
+        if (!el) return;
+        try {
+            /* 折叠状态恢复：手动收起后刷新仍保持收起（PC/移动端都生效） */
+            if (localStorage.getItem('win7-attach-collapsed') === '1') {
+                el.classList.add('collapsed');
+            }
+            /* 拖拽位置恢复：仅 PC 宽度(>820)生效；无记录则保持模板/CSS 默认位置 */
+            if (window.innerWidth > 820) {
+                var p = JSON.parse(localStorage.getItem('win7-attach-pos'));
+                if (p && !isNaN(p.left) && !isNaN(p.top)) {
+                    el.style.left = p.left + 'px';
+                    el.style.top = p.top + 'px';
+                    el.style.right = 'auto';
+                    el.style.bottom = 'auto';
+                }
+            }
+        } catch (e) { /* localStorage 不可用则用默认态 */ }
+    })();
+</script>
+<% } %>

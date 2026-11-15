@@ -1,0 +1,38 @@
+
+<div id="explorer-tabs" class="tabs" role="toolbar" aria-label="视图工具栏">
+    <ul>
+        <li class="tab tab-dd dropdown-container">
+            <a class="tab-link view-toggle dropdown-trigger" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" title="显示排序选项">
+                <img src="<%- url_for('/image/vista/ui/view.webp') %>" alt="">
+                <span>视图</span>
+                <svg class="tab-caret" viewBox="0 0 12 12" width="9" height="9" aria-hidden="true"><path fill="currentColor" d="M2 4.2 6 8.2l4-4z"/></svg>
+            </a>
+            <div class="dropdown" hidden>
+                <div class="pointer"><div class="pointer-inner"></div></div>
+                <div class="dropdown-contents1">
+                    <fieldset class="display-options">
+                        <label>排序：
+                            <select id="sortKey" name="sk">
+                                <option value="date" selected>发表时间</option>
+                                <option value="title">标题</option>
+                            </select>
+                        </label>
+                        <label>排序方向：
+                            <select id="sortDir" name="sd">
+                                <option value="desc" selected>降序</option>
+                                <option value="asc">升序</option>
+                            </select>
+                        </label>
+                        <hr class="dashed">
+                        <input type="button" id="sortApply" class="button2" value="确定">
+                    </fieldset>
+                </div>
+            </div>
+        </li>
+        <div class="helpbutton">
+            <a href="<%- url_for('/about/') %>" rel="help" title="获取帮助" role="menuitem">
+                <img src="<%- url_for('/image/vista/ui/helpbutton.ico') %>" alt="帮助">
+            </a>
+        </div>
+    </ul>
+</div>
