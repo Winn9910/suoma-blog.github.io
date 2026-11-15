@@ -1,3 +1,4 @@
+<% var health = site.data['link-health']; %>
 <article class="win7-article">
   <h1 class="win7-article-title"><%- page.title %></h1>
 
@@ -22,6 +23,13 @@
         </div>
         <div class="win7-link-info">
           <span class="win7-link-name"><%= link.name %></span>
+          <% var h = health && health.sites && health.sites[link.url]; %>
+          <% if (h) { %>
+          <span class="win7-link-health <%= h.ok ? 'is-ok' : 'is-dead' %>"
+                title="<%= h.ok ? ('HTTP ' + h.code + ' · ' + h.ms + 'ms · 巡检于 ' + health.checkedAt) : ('连续 ' + h.failCount + ' 次巡检失败（' + h.code + '）· 上次正常：' + h.lastOk) %>">
+            <i class="lh-dot"></i><%= h.ok ? h.ms + 'ms' : '失联 ' + h.failCount + ' 天' %>
+          </span>
+          <% } %>
           <% if (link.description && link.description.trim()) { %>
           <span class="win7-link-desc"><%= link.description %></span>
           <% } %>
@@ -41,6 +49,13 @@
         </div>
         <div class="win7-link-info">
           <span class="win7-link-name"><%= link.name %></span>
+          <% var ch = health && health.sites && health.sites[link.url]; %>
+          <% if (ch) { %>
+          <span class="win7-link-health <%= ch.ok ? 'is-ok' : 'is-dead' %>"
+                title="<%= ch.ok ? ('HTTP ' + ch.code + ' · ' + ch.ms + 'ms · 巡检于 ' + health.checkedAt) : ('连续 ' + ch.failCount + ' 次巡检失败（' + ch.code + '）· 上次正常：' + ch.lastOk) %>">
+            <i class="lh-dot"></i><%= ch.ok ? ch.ms + 'ms' : '失联 ' + ch.failCount + ' 天' %>
+          </span>
+          <% } %>
         </div>
       </a>
       <% }) %>
@@ -76,6 +91,11 @@
         <input type="email" id="link-email" name="email" required placeholder="your@email.com">
       </div>
       <input type="text" name="website" class="win7-honeypot" tabindex="-1" autocomplete="off">
+      <% if (theme.turnstile_site_key) { %>
+      <div class="win7-form-row">
+        <div class="cf-turnstile" data-sitekey="<%= theme.turnstile_site_key %>" data-theme="light"></div>
+      </div>
+      <% } %>
       <button type="submit" id="link-submit-btn" class="button">提交申请</button>
     </form>
     <div id="link-form-msg" class="win7-link-form-msg"></div>

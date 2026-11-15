@@ -280,3 +280,62 @@
     closeCtx();
   });
 })();
+
+/* ---------------------------------------------------------------
+ * Explorer 标签条：当前页高亮 + 视图切换
+ * ------------------------------------------------------------- */
+(function () {
+  // 当前页高亮（前缀匹配，兼容分页 / 分类路径）
+  var path = window.location.pathname.replace(/\/index\.html?$/, "/");
+  document.querySelectorAll(".tabs-bar [data-tab]").forEach(function (a) {
+    var href = a.getAttribute("href");
+    if (!href) return;
+    href = href.replace(/\/index\.html?$/, "/");
+    if (href === "/" ? path === "/" : path.indexOf(href) === 0) {
+      a.classList.add("is-current");
+    }
+  });
+
+  var toggle = document.getElementById("viewToggle");
+  var menu = document.getElementById("viewMenu");
+  if (!toggle || !menu) return;
+
+  var posts = document.querySelector(".win7-posts");
+  var saved = null;
+  try { saved = localStorage.getItem("win7-view"); } catch (e) {}
+  if (saved === "list" && posts) {
+    posts.classList.add("view-list");
+    markActive("list");
+  }
+
+  function markActive(v) {
+    menu.querySelectorAll("[data-view]").forEach(function (b) {
+      b.classList.toggle("is-active", b.getAttribute("data-view") === v);
+    });
+  }
+
+  toggle.addEventListener("click", function (e) {
+    e.stopPropagation();
+    var open = menu.hidden;
+    menu.hidden = !open;
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
+  menu.addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-view]");
+    if (!btn || !posts) return;
+    var v = btn.getAttribute("data-view");
+    posts.classList.toggle("view-list", v === "list");
+    markActive(v);
+    try { localStorage.setItem("win7-view", v); } catch (err) {}
+    menu.hidden = true;
+    toggle.setAttribute("aria-expanded", "false");
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".tab-dd")) {
+      menu.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
+})();

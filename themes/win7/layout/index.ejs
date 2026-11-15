@@ -12,6 +12,11 @@
   </menu>
 
   <article role="tabpanel" id="tab-posts" class="win7-tabpanel">
+    <div class="list-head" aria-hidden="true">
+      <span>名称</span>
+      <span>修改日期</span>
+      <span>摘要</span>
+    </div>
     <div class="win7-posts">
       <% page.posts.toArray().forEach(function (post) { %>
         <%- partial('partial/post-item', { postItem: post }) %>

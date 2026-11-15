@@ -1,7 +1,7 @@
 /*
  * win7 theme — search index generator.
- * Emits public/search.json consumed by the client-side search in theme.js.
- * No external dependency: pure Node + Hexo locals.
+ * Emits public/search.json consumed by the client-side search box.
+ * Hexo injects a global `hexo` into script files, so no module wrapper here.
  */
 "use strict";
 
@@ -16,39 +16,36 @@ function strip(html) {
     .trim();
 }
 
-module.exports = function (hexo) {
-  hexo.extend.generator.register("win7_search", function (locals) {
-    var tcfg = (hexo.theme && hexo.theme.config) || {};
-    if (tcfg.search === false) return;
+hexo.extend.generator.register("win7_search", function (locals) {
+  var tcfg = (hexo.theme && hexo.theme.config) || {};
+  if (tcfg.search === false) return;
 
-    function recordOf(doc, type) {
-      var text = strip(doc.content);
-      var excerpt = strip(doc.excerpt) || text.slice(0, 180);
-      return {
-        type: type,
-        title: doc.title || "",
-        path: doc.path,
-        date: doc.date ? doc.date.format("YYYY-MM-DD") : "",
-        cats: (doc.categories ? doc.categories : []).toArray
-          ? doc.categories.toArray().map(function (c) { return c.name; })
-          : [],
-        tags: (doc.tags ? doc.tags : []).toArray
-          ? doc.tags.toArray().map(function (t) { return t.name; })
-          : [],
-        text: text.slice(0, 5000),
-        excerpt: excerpt.slice(0, 200)
-      };
-    }
-
-    var posts = locals.posts.toArray().map(function (p) { return recordOf(p, "post"); });
-    var pages = locals.pages.toArray()
-      .filter(function (p) { return p.layout && p.layout !== "home" && p.layout !== "page" && p.source && p.source.indexOf("_posts") === -1; })
-      .map(function (p) { return recordOf(p, "page"); });
-
-    var payload = { posts: posts.concat(pages) };
+  function recordOf(doc, type) {
+    var text = strip(doc.content);
+    var excerpt = strip(doc.excerpt) || text.slice(0, 180);
     return {
-      path: "search.json",
-      data: JSON.stringify(payload)
+      type: type,
+      title: doc.title || "",
+      path: doc.path,
+      date: doc.date ? doc.date.format("YYYY-MM-DD") : "",
+      cats: (doc.categories && doc.categories.toArray)
+        ? doc.categories.toArray().map(function (c) { return c.name; })
+        : [],
+      tags: (doc.tags && doc.tags.toArray)
+        ? doc.tags.toArray().map(function (t) { return t.name; })
+        : [],
+      text: text.slice(0, 5000),
+      excerpt: excerpt.slice(0, 200)
     };
-  });
-};
+  }
+
+  var posts = locals.posts.toArray().map(function (p) { return recordOf(p, "post"); });
+  var pages = locals.pages.toArray()
+    .filter(function (p) { return p.source && p.source.indexOf("_posts") === -1; })
+    .map(function (p) { return recordOf(p, "page"); });
+
+  return {
+    path: "search.json",
+    data: JSON.stringify({ posts: posts.concat(pages) })
+  };
+});

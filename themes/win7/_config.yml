@@ -43,8 +43,12 @@ rss: /atom.xml
 # Text shown in the right side of the status bar.
 copyright: "Powered by Hexo · styled with 7.css"
 
-# --- Comments (optional) ------------------------------------
-# Leave empty to disable. To enable, paste a raw HTML snippet, e.g.
+# --- Friend-link captcha (optional) -------------------------
+# Cloudflare Turnstile site key. Leave empty to disable the widget
+# (the server side still checks TURNSTILE_SECRET_KEY if present).
+turnstile_site_key: '0x4AAAAAAE8ng3T5n6oDN2jo'
+
+# --- Comments (optional) ------------------------------------# Leave empty to disable. To enable, paste a raw HTML snippet, e.g.
 # an Utterances / Disqus / Giscus script. It is injected at the end
 # of every post.
 # comments: |

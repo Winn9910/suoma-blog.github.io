@@ -3,19 +3,33 @@
   var widgets = theme.widgets || ['nav', 'recent_posts', 'tagcloud', 'categories'];
 %>
 
+<%# ---- 个人资料卡 ---- %>
+<div class="sidebar-profile">
+  <a href="<%- url_for('/') %>">
+    <span class="profile-avatar-frame">
+      <img src="<%- url_for('image/icon/maodie.webp') %>" class="profile-img" alt="avatar">
+    </span>
+  </a>
+  <div class="profile-name"><%- config.author %></div>
+  <% if (config.description) { %>
+  <div class="profile-bio"><%- config.description %></div>
+  <% } %>
+</div>
+
 <% widgets.forEach(function (w) { %>
   <% if (w === 'nav') { %>
     <fieldset class="group sidebar-block">
       <legend><%- __('navigation') %></legend>
-      <ul class="tree-view win7-nav">
-        <li class="win7-folder">
+      <ul class="tree-view nav-tree">
+        <li>
           <details open>
             <summary><span class="ico ico-folder"></span> <%- config.title %></summary>
             <ul>
               <% Object.keys(menu).forEach(function (label) { %>
                 <li>
                   <a href="<%- url_for(menu[label]) %>" class="win7-link">
-                    <span class="ico ico-doc"></span> <%- label %>
+                    <img class="nav-ico" src="<%- url_for('image/icon/vista_book_1.jpg') %>" alt="">
+                    <%- label %>
                   </a>
                 </li>
               <% }); %>
@@ -71,17 +85,3 @@
     <a class="button" href="<%- url_for(theme.rss) %>"><span class="ico ico-rss"></span> 订阅 RSS</a>
   </div>
 <% } %>
-
-<%# Display settings — demo 7.css slider (font size) + checkbox (line numbers) %>
-<fieldset class="group sidebar-block win7-display">
-  <legend><%- __('display_settings') %></legend>
-  <div class="win7-fs-row">
-    <label for="win7FontSize">正文字号</label>
-    <input type="range" id="win7FontSize" min="13" max="20" step="1" value="15">
-    <span class="win7-fs-val" id="win7FsVal">15</span>
-  </div>
-  <div class="win7-fs-row">
-    <input type="checkbox" id="win7Gutter" checked>
-    <label for="win7Gutter">显示代码行号</label>
-  </div>
-</fieldset>
