@@ -43,7 +43,25 @@ jobs:
         run: |
           gh issue close ${{ github.event.issue.number }} --repo ${{ github.repository }} --comment "✅ 友链已添加并自动部署！
 
-          页面将在 Vercel 重新构建后更新（通常 1-2 分钟）。"
+          页面将在 Vercel 重新构建后更新（通常 1-2 分钟）。
+
+          已向申请人邮箱发送通过通知。"
+
+      - name: Install mail dependency
+        if: success()
+        run: npm install nodemailer@10 --no-save --no-audit --no-fund
+
+      - name: Email applicant (approved)
+        if: success()
+        env:
+          MAIL_MODE: approved
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+        run: node .github/scripts/notify-mail.mjs
 
       - name: Comment on failure
         if: failure()

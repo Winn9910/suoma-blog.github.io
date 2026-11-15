@@ -1,3 +1,5 @@
+const mail = require('../lib/mail');
+
 module.exports = async (req, res) => {
     // 只允许 POST 请求
     if (req.method !== 'POST') {
@@ -6,6 +8,7 @@ module.exports = async (req, res) => {
 
     // 解析请求体（Vercel 自动解析 JSON Content-Type）
     const { name, url, description, avatar, email, website } = req.body || {};
+    const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim();
 
     // Honeypot 检查 - 隐藏字段被填了说明是机器人
     if (website) {
@@ -20,7 +23,6 @@ module.exports = async (req, res) => {
             return res.status(400).json({ ok: false, message: '请先完成人机验证' });
         }
         try {
-            const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim();
             const verifyResp = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -47,7 +49,10 @@ module.exports = async (req, res) => {
 
     // 网址格式校验
     try {
-        new URL(url);
+        const parsed = new URL(url);
+        if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+            return res.status(400).json({ ok: false, message: '网址必须以 http:// 或 https:// 开头' });
+        }
     } catch {
         return res.status(400).json({ ok: false, message: '网址格式不正确' });
     }
@@ -108,6 +113,28 @@ module.exports = async (req, res) => {
         const data = await resp.json();
 
         if (resp.ok) {
+            // 邮件通知站长（失败不影响申请本身）
+            if (mail.isConfigured()) {
+                try {
+                    const tpl = mail.ownerApplicationMail({
+                        name,
+                        url,
+                        description,
+                        avatar,
+                        email,
+                        issueUrl: data.html_url,
+                        time: new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString().replace('T', ' ').slice(0, 16),
+                        ip
+                    });
+                    await Promise.race([
+                        mail.send({ ...tpl, replyTo: email }),
+                        new Promise((_, reject) => setTimeout(() => reject(new Error('MAIL_TIMEOUT')), 4500))
+                    ]);
+                } catch (mailErr) {
+                    console.error('Friend link mail notify failed:', mailErr && mailErr.message);
+                }
+            }
+
             res.status(200).json({
                 ok: true,
                 message: '申请已提交！审核通过后将自动出现在友链列表中。',
