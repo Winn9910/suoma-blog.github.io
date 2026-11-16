@@ -1,6 +1,10 @@
 # 友链数据（自动维护，请勿手动编辑）
 # 新友链通过 GitHub Issue 提交，审核通过后由 GitHub Action 自动添加
 blogs:
+  - name: "邮件链路测试"
+    url: "https://suo.ma"
+    description: "验证审核回信链路，验证后站长会移除此条目"
+    avatar: "https://domain.fish/favicon.ico"
   - name: "测试"
     url: "https://suo.ma"
     description: "把喜欢的东西都记下来···"
