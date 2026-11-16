@@ -82,7 +82,7 @@
             .then(function (r) { return r.json(); })
             .then(function (res) {
                 if (res && res.ok) {
-                    ok("申请已提交！审核通过后将自动出现在友链墙。");
+                    ok("申请已提交！审核通过后会发邮件通知你，若收件箱没看到请检查垃圾箱。");
                     form.reset();
                 } else {
                     bad((res && res.message) || "提交失败，请稍后重试");

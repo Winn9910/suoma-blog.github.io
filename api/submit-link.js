@@ -137,7 +137,7 @@ module.exports = async (req, res) => {
 
             res.status(200).json({
                 ok: true,
-                message: '申请已提交！审核通过后将自动出现在友链列表中。',
+                message: '申请已提交！审核通过后会发邮件通知你，若收件箱没看到请检查垃圾箱。',
                 issueUrl: data.html_url
             });
         } else {
