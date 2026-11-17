@@ -1861,17 +1861,19 @@ mark.search-hit {
     .music-gadget .controls button.btn-glass.play-btn svg { width: 13px; height: 13px; }
 
     .note-gadget {
+        display: none;
         position: static;
         left: auto;
         right: auto;
         bottom: auto;
         width: auto;
-        margin: 0 6px;
+        margin: 0 6px 8px;
         z-index: auto;
         border-radius: 0;
         box-shadow: none;
         border-bottom: 1px solid #d9c96a;
     }
+    .note-gadget.is-open { display: block; }
     .note-gadget > .title-bar { display: none; }
     .note-gadget.collapsed .window-body { display: block; }
     .note-line { font-size: 13px; }

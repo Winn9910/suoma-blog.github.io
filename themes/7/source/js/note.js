@@ -23,4 +23,25 @@
     if (attach && attach.offsetHeight && !gadget.style.top) {
         gadget.style.bottom = (attach.offsetHeight + 44) + 'px';
     }
+
+    /* 移动端：右上角「?」按钮变成便签开关（桌面端仍是跳转关于页的链接） */
+    var mqMobile = window.matchMedia('(max-width: 820px)');
+    var help = document.querySelector('#explorer-tabs .helpbutton');
+    if (help) {
+        help.addEventListener('click', function (e) {
+            if (!mqMobile.matches) return;
+            e.preventDefault();
+            e.stopPropagation();
+            var open = gadget.classList.toggle('is-open');
+            if (open) {
+                gadget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    }
+    document.addEventListener('click', function (e) {
+        if (!mqMobile.matches) return;
+        if (e.target.closest('.note-gadget')) return;
+        if (e.target.closest('#explorer-tabs .helpbutton')) return;
+        gadget.classList.remove('is-open');
+    });
 })();
