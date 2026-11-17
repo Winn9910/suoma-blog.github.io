@@ -1,0 +1,52 @@
+<div class="window post-props glass active" id="postProps" role="dialog" aria-modal="false"
+    aria-labelledby="postPropsTitle" aria-hidden="true">
+    <div class="title-bar">
+        <div class="title-bar-text" id="postPropsTitle">
+            <svg class="props-title-ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                <rect x="1" y="2" width="14" height="12" rx="1" fill="#cfe3f7" stroke="#4a7ebb"></rect>
+                <rect x="1" y="2" width="14" height="3" rx="1" fill="#7aa9dd"></rect>
+                <circle cx="8" cy="9.4" r="3.1" fill="#f4f8fc" stroke="#4a7ebb"></circle>
+                <path d="M8 7.7v0.2" stroke="#4a7ebb" stroke-width="1.4" stroke-linecap="round"></path>
+                <path d="M8 9.2v1.7" stroke="#4a7ebb" stroke-width="1.4" stroke-linecap="round"></path>
+            </svg>
+            属性
+        </div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" id="postPropsClose" tabindex="-1"></button>
+        </div>
+    </div>
+    <div class="window-body props-body">
+        <div class="props-head">
+            <img class="props-file-ico" id="propsIcon" src="" alt="" width="32" height="32">
+            <div class="props-head-text">
+                <div class="props-name" id="propsName">—</div>
+                <div class="props-kind" id="propsKind">文章文件</div>
+            </div>
+        </div>
+
+        <div class="props-sep" role="presentation"></div>
+
+        <dl class="props-list">
+            <dt>位置</dt>
+            <dd id="propsPath">—</dd>
+            <dt>大小</dt>
+            <dd id="propsSize">—</dd>
+            <dt>创建时间</dt>
+            <dd id="propsCreated">—</dd>
+            <dt>修改时间</dt>
+            <dd id="propsUpdated">—</dd>
+            <dt>标签</dt>
+            <dd id="propsTags">—</dd>
+            <dt>分类</dt>
+            <dd id="propsCats">—</dd>
+        </dl>
+
+        <div class="props-sep" role="presentation"></div>
+
+        <div class="props-actions">
+            <button type="button" id="propsOpen">打开</button>
+            <button type="button" id="propsCopyLink">复制链接</button>
+            <button type="button" id="propsOk" class="props-default">确定</button>
+        </div>
+    </div>
+</div>

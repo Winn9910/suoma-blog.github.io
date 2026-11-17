@@ -1,0 +1,12 @@
+<%
+    /* 供右键「属性」使用的行级元数据，三处列表共用
+       data-date 保持 YYYYMMDDHHmmss 紧凑格式（view-sort.js 靠 parseInt 排序） */
+    var _plain = strip_html(post.content || post.excerpt || '').replace(/\s+/g, ' ').trim();
+    var _chars = _plain.replace(/\s/g, '').length;
+    var _cjk = (_plain.match(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/g) || []).length;
+    var _latin = (_plain.replace(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/g, ' ').match(/[A-Za-z0-9_#+.\-]+/g) || []).length;
+    var _words = _cjk + _latin;
+    var _tags = (post.tags && post.tags.length) ? post.tags.map(function (t) { return t.name; }).join('、') : '';
+    var _cats = (post.categories && post.categories.length) ? post.categories.map(function (c) { return c.name; }).join('、') : '';
+    var _bytes = Buffer.byteLength(_plain, 'utf8');
+%>data-date="<%= date(post.date, 'YYYYMMDDHHmmss') %>" data-updated="<%= date(post.updated || post.date, 'YYYYMMDDHHmmss') %>" data-title="<%= post.title || 'Untitled' %>" data-cover="<%- iconSrc %>" data-excerpt="<%= truncate(strip_html(post.excerpt || post.content), { length: 200, omission: '…' }) %>" data-chars="<%= _chars %>" data-words="<%= _words %>" data-bytes="<%= _bytes %>" data-tags="<%= _tags %>" data-cats="<%= _cats %>" data-url="<%- url_for(post.path) %>"

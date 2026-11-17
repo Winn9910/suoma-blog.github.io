@@ -28,10 +28,7 @@
                 : url_for('/image/icon/topic/' + pickIcon(post.path || post.title));
         %>
         <li class="file-row" onclick="location.href='<%- url_for(post.path) %>'" tabindex="0"
-            data-date="<%= date(post.date, 'YYYYMMDDHHmmss') %>"
-            data-title="<%= (post.title || 'Untitled') %>"
-            data-cover="<%- iconSrc %>"
-            data-excerpt="<%= truncate(strip_html(post.excerpt || post.content), {length: 200, omission: '…'}) %>">
+            <%- partial('_partial/file-row-attrs', { post: post, iconSrc: iconSrc }) %>>
             <span class="col-name">
                 <img class="file-ico" src="<%- iconSrc %>" alt="">
                 <a class="file-title" href="<%- url_for(post.path) %>"><%= post.title || 'Untitled' %></a>
