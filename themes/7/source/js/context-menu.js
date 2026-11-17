@@ -100,6 +100,9 @@
             case 'personalize':
                 if (window.win7Personalize) window.win7Personalize.open();
                 break;
+            case 'snip':
+                if (window.win7Snip) window.win7Snip.start();
+                break;
         }
     });
 

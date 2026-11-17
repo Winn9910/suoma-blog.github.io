@@ -1,0 +1,72 @@
+<div class="snip-layer" id="snipLayer" aria-hidden="true">
+    <video class="snip-video" id="snipVideo" playsinline muted></video>
+    <div class="snip-hint" id="snipHint">拖动鼠标选择要截取的区域，按 Esc 取消</div>
+    <div class="snip-rect" id="snipRect" hidden>
+        <span class="snip-size" id="snipSize">0 × 0</span>
+    </div>
+</div>
+
+<div class="window snip-win glass active" id="snipWin" aria-labelledby="snipWinTitle" aria-hidden="true">
+    <div class="title-bar">
+        <div class="title-bar-text" id="snipWinTitle">
+            <svg class="snip-title-ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                <rect x="2" y="3" width="12" height="10" fill="#fff" stroke="#7f8f9e" stroke-dasharray="2 2"/>
+                <circle cx="5" cy="6" r="1.6" fill="#e2e8ee" stroke="#7f8f9e"/>
+                <circle cx="11" cy="9.6" r="1.6" fill="#e2e8ee" stroke="#7f8f9e"/>
+                <path stroke="#c0392b" stroke-width="1.3" stroke-linecap="round" d="M4.6 6.6 11.4 10.2M11.4 5.8 4.6 10.4"/>
+            </svg>
+            截图工具
+        </div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" id="snipWinClose" tabindex="-1"></button>
+        </div>
+    </div>
+    <div class="window-body snip-body">
+        <div class="snip-toolbar">
+            <button type="button" id="snipNew">
+                <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                    <rect x="1.5" y="2.5" width="13" height="11" fill="none" stroke="currentColor" stroke-dasharray="2.5 2"/>
+                    <path stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M8 5.5v5M5.5 8h5"/>
+                </svg>
+                新建
+            </button>
+            <button type="button" id="snipSave">
+                <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                    <path fill="#eaf3fb" stroke="#4a7ebb" d="M2.5 2.5h8.5L13.5 5v8.5h-11z"/>
+                    <rect x="5" y="2.5" width="5" height="4" fill="#fff" stroke="#4a7ebb"/>
+                    <rect x="4.5" y="9" width="7" height="4.5" fill="#7aa9dd" stroke="#4a7ebb"/>
+                </svg>
+                保存
+            </button>
+            <button type="button" id="snipCopy">
+                <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                    <rect x="2" y="2" width="8.5" height="10" fill="#fff" stroke="#8aa9c6"/>
+                    <rect x="5.5" y="4.5" width="8.5" height="10" fill="#eef5fc" stroke="#8aa9c6"/>
+                </svg>
+                复制
+            </button>
+        </div>
+        <div class="snip-preview">
+            <img id="snipPreview" alt="截图预览">
+        </div>
+        <div class="snip-status">
+            <span id="snipMeta">—</span>
+            <span class="snip-tip">提示：截图会读取屏幕画面，浏览器会先请求一次授权。</span>
+        </div>
+    </div>
+</div>
+
+<div class="window snip-msg active" id="snipMsg" aria-hidden="true" role="alertdialog">
+    <div class="title-bar">
+        <div class="title-bar-text">截图工具</div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" id="snipMsgClose" tabindex="-1"></button>
+        </div>
+    </div>
+    <div class="window-body snip-msg-body">
+        <p id="snipMsgText">无法启动截图。</p>
+        <div class="snip-msg-actions">
+            <button type="button" id="snipMsgOk">确定</button>
+        </div>
+    </div>
+</div>
