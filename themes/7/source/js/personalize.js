@@ -4,8 +4,11 @@
     'use strict';
 
     var STORE = 'win7-appearance';
-    var DEFAULT = { color: '#7a5aa0', tint: 0.6, sound: false };
+    var DEFAULT = { color: '#7a5aa0', tint: 0.6 };
     var root = document.documentElement;
+
+    /* 旧版本遗留的音效键，顺手清掉 */
+    try { localStorage.removeItem('win7-sound'); } catch (e) { /* ignore */ }
 
     function safeParse(raw, fallback) {
         try {
@@ -19,9 +22,7 @@
         try { v = safeParse(localStorage.getItem(STORE), DEFAULT); } catch (e) { /* ignore */ }
         return {
             color: v.color || DEFAULT.color,
-            tint: typeof v.tint === 'number' ? v.tint : DEFAULT.tint,
-            /* 音效开关以 win7-sound 为唯一真相，避免两处状态打架 */
-            sound: window.win7Sound ? window.win7Sound.enabled() : !!v.sound
+            tint: typeof v.tint === 'number' ? v.tint : DEFAULT.tint
         };
     }
 
@@ -35,8 +36,6 @@
         root.style.setProperty('--w7-tint', String(a.tint));
     }
 
-    function sound() { return window.win7Sound; }
-
     /* ---------- UAC ---------- */
     var uacLayer = document.getElementById('uacLayer');
     var uacPending = null;
@@ -47,12 +46,11 @@
         uacLayer.setAttribute('aria-hidden', 'true');
         var p = uacPending;
         uacPending = null;
+        if (!p) return;
         if (confirmed) {
-            if (sound()) sound().play('ding');
-            if (p && p.onYes) p.onYes();
-        } else {
-            if (sound()) sound().play('error');
-            if (p && p.onNo) p.onNo();
+            if (p.onYes) p.onYes();
+        } else if (p.onNo) {
+            p.onNo();
         }
     }
 
@@ -103,7 +101,6 @@
     var swatches = win ? win.querySelectorAll('.pz-swatch') : [];
     var tintInput = document.getElementById('pzTint');
     var tintOut = document.getElementById('pzTintOut');
-    var soundBox = document.getElementById('pzSound');
     var dragBound = false;
     var snapshot = null;
 
@@ -125,15 +122,13 @@
         markSwatch(a.color);
         if (tintInput) tintInput.value = String(Math.round(a.tint * 100));
         if (tintOut) tintOut.textContent = Math.round(a.tint * 100) + '%';
-        if (soundBox) soundBox.checked = !!(sound() && sound().enabled());
     }
 
     function currentForm() {
         var checked = win ? win.querySelector('.pz-swatch[aria-checked=true]') : null;
         return {
             color: checked ? checked.getAttribute('data-color') : DEFAULT.color,
-            tint: tintInput ? Math.min(1, Math.max(0.2, parseInt(tintInput.value, 10) / 100)) : DEFAULT.tint,
-            sound: soundBox ? soundBox.checked : false
+            tint: tintInput ? Math.min(1, Math.max(0.2, parseInt(tintInput.value, 10) / 100)) : DEFAULT.tint
         };
     }
 
@@ -153,7 +148,6 @@
         win.classList.add('is-open');
         win.setAttribute('aria-hidden', 'false');
         if (window.win7CenterWindow) window.win7CenterWindow(win, { dy: -18 });
-        if (sound()) sound().play('open');
     }
 
     function closeWin() {
@@ -165,16 +159,11 @@
 
     function cancelWin() {
         if (snapshot) applyAppearance(snapshot);
-        if (sound()) {
-            if (sound().enabled() !== !!snapshot.sound) sound().setEnabled(!!snapshot.sound);
-            sound().play('close');
-        }
         closeWin();
     }
 
     function commitWin() {
         var next = currentForm();
-        if (sound()) sound().setEnabled(next.sound);
         writeStore(next);
         applyAppearance(next);
         closeWin();
@@ -186,7 +175,6 @@
             if (sw) {
                 markSwatch(sw.getAttribute('data-color'));
                 applyAppearance(currentForm());   /* 即时预览 */
-                if (sound()) sound().play('swap');
                 return;
             }
             var btn = e.target.closest('button');
@@ -210,27 +198,11 @@
                 applyAppearance(currentForm());
             });
         }
-        if (soundBox) {
-            soundBox.addEventListener('change', function () {
-                if (sound()) {
-                    sound().setEnabled(soundBox.checked);
-                    if (soundBox.checked) sound().play('ding');
-                }
-            });
-        }
     }
 
     /* 供右键菜单调用 */
     window.win7Personalize = {
-        open: openWin,
-        toggleSound: function () {
-            var s = sound();
-            if (!s) return false;
-            var on = !s.enabled();
-            s.setEnabled(on);
-            if (on) s.play('ding');
-            return on;
-        }
+        open: openWin
     };
 
     /* 首屏若已有保存值，刷新界面控件状态（变量本身由 head 内联脚本先行应用） */

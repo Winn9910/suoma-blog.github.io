@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 
 const ORDER = [
-  'sound.js',
   'personalize.js',
   'code-dblclick.js',
   'scroll-page.js',

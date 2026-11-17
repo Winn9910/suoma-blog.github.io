@@ -1927,9 +1927,6 @@ mark.search-hit {
 
 .ctx-menu [role=menuitem][hidden] { display: none !important; }
 
-/* 勾选型菜单项：未勾选时只留占位不显示勾 */
-.ctx-menu a[data-action=sound][aria-checked=false] .ctx-check { visibility: hidden; }
-
 /* ---------- 属性窗口 ----------
    注意：7.css 有 .window[role=dialog]{left:50%;top:50%;transform:translate(-50%,-50%)}
    因此这里所有规则都带 .window 前缀提高特异性，避免关闭时被那条居中规则抢占后瞬移 */
@@ -2138,24 +2135,6 @@ mark.search-hit {
     text-align: right;
     color: #33475b;
     font-variant-numeric: tabular-nums;
-}
-
-input#pzSound {
-    width: var(--w7-cb-size, 13px);
-    height: var(--w7-cb-size, 13px);
-}
-.pz-check {
-    display: inline-flex;
-    align-items: center;
-    margin-top: 16px;
-    font-size: 12px;
-    color: #22303d;
-    cursor: pointer;
-}
-.pz-hint {
-    margin: 5px 0 0 22px;
-    font-size: 11px;
-    color: #77848f;
 }
 
 .pz-actions {
