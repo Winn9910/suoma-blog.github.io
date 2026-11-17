@@ -11,8 +11,8 @@ const ORDER = [
   'row-preview.js',
   'img-lazy.js',
   'search.js',
-  'context-menu.js',
   'draggable-window.js',
+  'context-menu.js',
   'attachments.js'
 ];
 

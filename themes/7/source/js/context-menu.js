@@ -134,11 +134,21 @@
     /* ---------- 属性窗口 ---------- */
     var props = document.getElementById('postProps');
     var propsData = null;
+    var dragBound = false;
+
+    /* 拖动依赖于 bundle 里的 draggable-window.js，加载顺序不保证，
+       因此放到首次打开时惰性绑定 */
+    function ensureDrag() {
+        if (dragBound || !props || !window.win7MakeDraggable) return;
+        dragBound = true;
+        window.win7MakeDraggable(props, { storeKey: 'win7-prop-pos', breakpoint: 820 });
+    }
 
     function openProps(row) {
         if (!props) return;
         var d = rowData(row);
         propsData = d;
+        ensureDrag();
 
         var icon = document.getElementById('propsIcon');
         if (icon) icon.src = d.cover;
@@ -186,9 +196,6 @@
     }
 
     if (props) {
-        if (window.win7MakeDraggable) {
-            window.win7MakeDraggable(props, { storeKey: 'win7-prop-pos', breakpoint: 820 });
-        }
         props.addEventListener('click', function (e) {
             var btn = e.target.closest('button');
             if (!btn) return;
