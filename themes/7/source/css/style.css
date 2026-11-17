@@ -1537,6 +1537,48 @@ mark.search-hit {
 .attach-gadget.dragging,
 .attach-gadget.dragging * { cursor: move; }
 
+/* ---------- 便签挂件 ---------- */
+.note-gadget {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    width: 234px;
+    z-index: 50;
+    box-shadow:
+        2px 2px 10px 1px var(--w7-w-bd),
+        inset 0 0 0 1px #fffa,
+        0 12px 30px rgba(0, 0, 0, 0.5);
+}
+.note-gadget.collapsed .window-body { display: none; }
+
+.note-gadget > .title-bar { cursor: move; touch-action: none; }
+.note-gadget > .title-bar .title-bar-controls { cursor: default; }
+.note-gadget.dragging { user-select: none; }
+.note-gadget.dragging,
+.note-gadget.dragging * { cursor: move; }
+
+.note-title-ico { width: 16px; height: 16px; vertical-align: -3px; margin-right: 4px; }
+
+.note-body {
+    padding: 12px 14px;
+    background: #fdf19b;
+    font-family: "KaiTi", "楷体", "STKaiti", "Microsoft YaHei", sans-serif;
+}
+.note-line {
+    margin: 0 0 8px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #4a3f10;
+}
+.note-line:last-of-type { margin-bottom: 0; }
+.note-line a { color: #93700a; text-decoration: underline; }
+.note-foot {
+    margin: 10px 0 0;
+    font-size: 12px;
+    color: #8a7b2e;
+    text-align: right;
+}
+
 .attach-title-ico { width: 16px; height: 16px; vertical-align: -3px; margin-right: 4px; }
 
 .attach-body { padding: 10px 12px; max-height: 320px; overflow-y: auto; }
@@ -1817,6 +1859,22 @@ mark.search-hit {
     .music-gadget .controls button.btn-glass.play-btn { width: 27px; height: 27px; }
     .music-gadget .controls button.btn-glass svg { width: 11px; height: 11px; }
     .music-gadget .controls button.btn-glass.play-btn svg { width: 13px; height: 13px; }
+
+    .note-gadget {
+        position: static;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: auto;
+        margin: 0 6px;
+        z-index: auto;
+        border-radius: 0;
+        box-shadow: none;
+        border-bottom: 1px solid #d9c96a;
+    }
+    .note-gadget > .title-bar { display: none; }
+    .note-gadget.collapsed .window-body { display: block; }
+    .note-line { font-size: 13px; }
 
     .article-title { font-size: 22px; }
     .post-content { font-size: 16px; }

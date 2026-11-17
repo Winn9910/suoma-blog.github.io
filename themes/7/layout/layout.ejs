@@ -59,6 +59,8 @@
                 <%- partial('_partial/widget') %>
             <% } %>
 
+            <%- partial('_partial/note') %>
+
             <%- partial('_partial/attachments') %>
 
             <div class="window-body explorer-body">
@@ -96,6 +98,7 @@
     <script>window.__win7Root = '<%- url_for("/") %>';</script>
     <script defer src="<%- url_for('js/bundle.js') %>"></script>
     <script defer src="<%- url_for('js/titlebar.js') %>"></script>
+    <script defer src="<%- url_for('js/note.js') %>"></script>
     <script defer src="<%- url_for('js/lightbox.js') %>"></script>
     <% if (theme.music && theme.music.enable) { %>
         <script defer src="<%- url_for('js/music.js') %>"></script>

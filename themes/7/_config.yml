@@ -18,6 +18,12 @@ comments:
 
 turnstile_site_key: '0x4AAAAAAE8ng3T5n6oDN2jo'
 
+# ---------- 便签挂件 ----------
+# 内容在 source/_data/note.yml 的 lines 里编辑，改完重新构建生效。
+# PC 端右下角可拖拽浮窗（可折叠，位置记忆）；移动端变成正文上方的黄色便签条。
+note:
+  enable: true
+
 # ---------- 站点图标 ----------
 favicon:
   enable: true

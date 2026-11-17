@@ -1,0 +1,46 @@
+<% if (site.data.note && site.data.note.lines && site.data.note.lines.length) { %>
+<div class="window note-gadget glass active">
+    <div class="title-bar">
+        <div class="title-bar-text">
+            <svg class="note-title-ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                <path fill="#ffd869" d="M1 1h14v10l-4 4H1z"/>
+                <path fill="#e8b93e" d="M15 11h-4v4z"/>
+                <path fill="none" stroke="#caa53a" d="M1.5 1.5h13v9.3L11.3 14.5H1.5z"/>
+            </svg>
+            <%= site.data.note.title || '便签' %>
+        </div>
+        <div class="title-bar-controls">
+            <button aria-label="Minimize" id="noteToggle"></button>
+        </div>
+    </div>
+    <div class="window-body note-body">
+        <% site.data.note.lines.forEach(function (line) { %>
+            <p class="note-line"><%- line %></p>
+        <% }) %>
+        <% if (site.data.note.footnote) { %>
+            <p class="note-foot"><%- site.data.note.footnote %></p>
+        <% } %>
+    </div>
+</div>
+<script>
+    /* 首屏同步已保存的折叠/拖拽状态，避免刷新时闪现默认位置 */
+    (function () {
+        var el = document.querySelector('.note-gadget');
+        if (!el) return;
+        try {
+            if (localStorage.getItem('win7-note-collapsed') === '1') {
+                el.classList.add('collapsed');
+            }
+            if (window.innerWidth > 820) {
+                var p = JSON.parse(localStorage.getItem('win7-note-pos'));
+                if (p && !isNaN(p.left) && !isNaN(p.top)) {
+                    el.style.left = p.left + 'px';
+                    el.style.top = p.top + 'px';
+                    el.style.right = 'auto';
+                    el.style.bottom = 'auto';
+                }
+            }
+        } catch (e) { /* localStorage 不可用则用默认位置 */ }
+    })();
+</script>
+<% } %>
