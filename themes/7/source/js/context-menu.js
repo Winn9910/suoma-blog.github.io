@@ -199,7 +199,7 @@
         props.addEventListener('click', function (e) {
             var btn = e.target.closest('button');
             if (!btn) return;
-            if (btn.id === 'propsClose' || btn.id === 'propsOk') {
+            if (btn.id === 'postPropsClose' || btn.id === 'propsOk') {
                 closeProps();
             } else if (btn.id === 'propsOpen') {
                 if (propsData) location.href = propsData.url;
