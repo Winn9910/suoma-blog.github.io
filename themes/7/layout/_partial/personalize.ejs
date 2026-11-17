@@ -1,0 +1,46 @@
+<div class="window personalize glass active" id="personalizeWin" aria-labelledby="personalizeTitle" aria-hidden="true">
+    <div class="title-bar">
+        <div class="title-bar-text" id="personalizeTitle">
+            <svg class="pz-title-ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                <circle cx="8" cy="8" r="6.4" fill="#eaf3fb" stroke="#4a7ebb"/>
+                <path fill="#c94f4f" d="M8 1.6a6.4 6.4 0 0 1 6.4 6.4H8z"/>
+                <path fill="#4a8f5c" d="M8 8h6.4A6.4 6.4 0 0 1 8 14.4z"/>
+                <path fill="#d8a93b" d="M8 8v6.4A6.4 6.4 0 0 1 1.6 8z"/>
+                <path fill="#4a6fb0" d="M8 8H1.6A6.4 6.4 0 0 1 8 1.6z"/>
+            </svg>
+            个性化
+        </div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" id="personalizeClose" tabindex="-1"></button>
+        </div>
+    </div>
+    <div class="window-body pz-body">
+        <p class="pz-label">窗口颜色</p>
+        <div class="pz-swatches" role="radiogroup" aria-label="窗口颜色">
+            <button type="button" class="pz-swatch" role="radio" data-color="#7a5aa0" data-name="雾紫" aria-checked="true" style="--sw:#7a5aa0"><span>雾紫</span></button>
+            <button type="button" class="pz-swatch" role="radio" data-color="#3f6fa8" data-name="天空蓝" aria-checked="false" style="--sw:#3f6fa8"><span>天空蓝</span></button>
+            <button type="button" class="pz-swatch" role="radio" data-color="#3f7d5c" data-name="翠玉绿" aria-checked="false" style="--sw:#3f7d5c"><span>翠玉绿</span></button>
+            <button type="button" class="pz-swatch" role="radio" data-color="#4d4d52" data-name="石墨灰" aria-checked="false" style="--sw:#4d4d52"><span>石墨灰</span></button>
+            <button type="button" class="pz-swatch" role="radio" data-color="#a8552f" data-name="落日橙" aria-checked="false" style="--sw:#a8552f"><span>落日橙</span></button>
+        </div>
+
+        <p class="pz-label">颜色浓度</p>
+        <div class="pz-range-row">
+            <input type="range" id="pzTint" min="20" max="100" step="5" value="60" aria-label="颜色浓度">
+            <output class="pz-tint-out" id="pzTintOut">60%</output>
+        </div>
+
+        <input type="checkbox" id="pzSound">
+        <label class="pz-check" for="pzSound">
+            <span>启用界面音效</span>
+        </label>
+        <p class="pz-hint">音效由浏览器实时合成，不加载任何音频文件。</p>
+
+        <div class="props-sep" role="presentation"></div>
+
+        <div class="pz-actions">
+            <button type="button" id="pzOk" class="pz-default">确定</button>
+            <button type="button" id="pzCancel">取消</button>
+        </div>
+    </div>
+</div>

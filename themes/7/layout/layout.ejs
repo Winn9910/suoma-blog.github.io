@@ -21,6 +21,17 @@
     <% if (theme.favicon && theme.favicon.enable && theme.favicon.icon) { %>
         <link rel="icon" href="<%= url_for(theme.favicon.icon) %>">
     <% } %>
+    <script>
+        /* 首屏应用保存过的窗口配色，避免刷新时雾紫闪一下 */
+        (function () {
+            try {
+                var a = JSON.parse(localStorage.getItem('win7-appearance') || '{}');
+                var s = document.documentElement.style;
+                if (a && a.color) s.setProperty('--w7-w-bg', a.color);
+                if (a && typeof a.tint === 'number') s.setProperty('--w7-tint', String(a.tint));
+            } catch (e) { /* 无 localStorage 时用默认配色 */ }
+        })();
+    </script>
 </head>
 
 <body>
@@ -86,6 +97,8 @@
 
     <%- partial('_partial/context-menu') %>
     <%- partial('_partial/post-props') %>
+    <%- partial('_partial/personalize') %>
+    <%- partial('_partial/uac') %>
 
     <div class="scroll-page" aria-hidden="true">
         <i class="scroll-up" title="回到顶部" aria-label="回到顶部">

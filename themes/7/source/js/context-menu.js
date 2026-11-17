@@ -48,12 +48,25 @@
         }
     }
 
+    /* 勾选项状态跟随实际音效开关 */
+    function syncSoundItem() {
+        var a = menu.querySelector('[data-action=sound]');
+        if (!a) return;
+        var on = !!(window.win7Sound && window.win7Sound.enabled());
+        a.setAttribute('aria-checked', on ? 'true' : 'false');
+    }
+
+    function beep(name) {
+        if (window.win7Sound) window.win7Sound.play(name);
+    }
+
     document.addEventListener('contextmenu', function (e) {
         if (isMobile()) return;
         if (menu.contains(e.target)) return;
         e.preventDefault();
         lastTarget = e.target;
         setPostContext(e.target.closest ? e.target.closest('.file-row') : null);
+        syncSoundItem();
         openMenu(e.clientX, e.clientY);
     });
 
@@ -66,6 +79,7 @@
         var action = el.getAttribute('data-action');
         var row = lastRow;
         closeMenu();
+        beep('click');
         switch (action) {
             case 'back':
                 history.back();
@@ -96,6 +110,15 @@
                 break;
             case 'props':
                 if (row) openProps(row);
+                break;
+            case 'personalize':
+                if (window.win7Personalize) window.win7Personalize.open();
+                break;
+            case 'sound':
+                if (window.win7Personalize) {
+                    var on = window.win7Personalize.toggleSound();
+                    el.setAttribute('aria-checked', on ? 'true' : 'false');
+                }
                 break;
         }
     });
@@ -165,6 +188,7 @@
         props.classList.add('is-open');
         props.setAttribute('aria-hidden', 'false');
         placeProps();
+        beep('open');
     }
 
     function setText(id, text) {
@@ -190,6 +214,7 @@
 
     function closeProps() {
         if (!props) return;
+        if (props.classList.contains('is-open')) beep('close');
         props.classList.remove('is-open');
         props.setAttribute('aria-hidden', 'true');
         try { localStorage.removeItem('win7-prop-pos'); } catch (e) { /* ignore */ }

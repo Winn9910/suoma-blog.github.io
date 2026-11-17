@@ -2,6 +2,21 @@
 (function () {
     if (window.win7MakeDraggable) return;
 
+    /* 把浮窗摆到视口中央（opts.dx / opts.dy 为偏移量） */
+    window.win7CenterWindow = function (el, opts) {
+        if (!el) return;
+        opts = opts || {};
+        el.style.right = 'auto';
+        el.style.bottom = 'auto';
+        el.style.left = '0px';
+        el.style.top = '0px';
+        var rect = el.getBoundingClientRect();
+        var left = Math.max(8, (window.innerWidth - rect.width) / 2 + (opts.dx || 0));
+        var top = Math.max(8, (window.innerHeight - rect.height) / 2 + (opts.dy || 0));
+        el.style.left = left + 'px';
+        el.style.top = top + 'px';
+    };
+
     window.win7MakeDraggable = function (gadget, options) {
         options = options || {};
         var STORE_KEY = options.storeKey || 'win7-window-pos';
