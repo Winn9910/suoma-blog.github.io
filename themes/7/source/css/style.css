@@ -1918,8 +1918,10 @@ mark.search-hit {
 
 .ctx-menu [role=menuitem][hidden] { display: none !important; }
 
-/* ---------- 属性窗口 ---------- */
-.post-props {
+/* ---------- 属性窗口 ----------
+   注意：7.css 有 .window[role=dialog]{left:50%;top:50%;transform:translate(-50%,-50%)}
+   因此这里所有规则都带 .window 前缀提高特异性，避免关闭时被那条居中规则抢占后瞬移 */
+.window.post-props {
     position: fixed;
     top: 0;
     left: 0;
@@ -1930,17 +1932,19 @@ mark.search-hit {
     opacity: 0;
     transform: scale(.98);
     pointer-events: none;
-    transition: opacity .12s ease, transform .12s ease;
+    /* visibility 延迟到淡出结束再隐藏，否则会瞬间消失 */
+    transition: opacity .12s ease, transform .12s ease, visibility 0s linear .12s;
     box-shadow:
         2px 2px 10px 1px var(--w7-w-bd),
         inset 0 0 0 1px #fffa,
         0 16px 40px rgba(0, 0, 0, 0.45);
 }
-.post-props.is-open {
+.window.post-props.is-open {
     visibility: visible;
     opacity: 1;
     transform: scale(1);
     pointer-events: auto;
+    transition: opacity .12s ease, transform .12s ease, visibility 0s;
 }
 .post-props > .title-bar { cursor: move; touch-action: none; }
 .post-props > .title-bar .title-bar-controls { cursor: default; }
