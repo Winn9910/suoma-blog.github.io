@@ -34,7 +34,11 @@ body {
 }
 
 /* 颜色浓度：覆盖 7.css 里 .window.glass:before 固定的 opacity:.6 */
-.window.glass:before { opacity: var(--w7-tint, .6); }
+.window.glass:before {
+    opacity: var(--w7-tint, .6);
+    /* Aero 取色时让窗体颜色平滑过渡 */
+    transition: background-color .5s ease;
+}
 
 .desktop {
     min-height: 100vh;
@@ -2138,6 +2142,25 @@ mark.search-hit {
     text-align: right;
     color: #33475b;
     font-variant-numeric: tabular-nums;
+}
+
+input#pzAutoTint {
+    width: var(--w7-cb-size, 13px);
+    height: var(--w7-cb-size, 13px);
+}
+.pz-check {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: #22303d;
+    cursor: pointer;
+}
+.pz-hint {
+    margin: 5px 0 0 19px;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #77848f;
 }
 
 .pz-actions {

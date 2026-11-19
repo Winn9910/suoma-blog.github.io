@@ -6,6 +6,7 @@ const path = require('path');
 const ORDER = [
   'personalize.js',
   'rel-date.js',
+  'aero-tint.js',
   'code-dblclick.js',
   'scroll-page.js',
   'view-sort.js',

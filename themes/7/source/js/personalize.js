@@ -4,7 +4,7 @@
     'use strict';
 
     var STORE = 'win7-appearance';
-    var DEFAULT = { color: '#7a5aa0', tint: 0.6 };
+    var DEFAULT = { color: '#7a5aa0', tint: 0.6, autoTint: true };
     var root = document.documentElement;
 
     /* 旧版本遗留的音效键，顺手清掉 */
@@ -22,7 +22,8 @@
         try { v = safeParse(localStorage.getItem(STORE), DEFAULT); } catch (e) { /* ignore */ }
         return {
             color: v.color || DEFAULT.color,
-            tint: typeof v.tint === 'number' ? v.tint : DEFAULT.tint
+            tint: typeof v.tint === 'number' ? v.tint : DEFAULT.tint,
+            autoTint: v.autoTint === false ? false : true
         };
     }
 
@@ -101,6 +102,7 @@
     var swatches = win ? win.querySelectorAll('.pz-swatch') : [];
     var tintInput = document.getElementById('pzTint');
     var tintOut = document.getElementById('pzTintOut');
+    var autoTintBox = document.getElementById('pzAutoTint');
     var dragBound = false;
     var snapshot = null;
 
@@ -122,13 +124,15 @@
         markSwatch(a.color);
         if (tintInput) tintInput.value = String(Math.round(a.tint * 100));
         if (tintOut) tintOut.textContent = Math.round(a.tint * 100) + '%';
+        if (autoTintBox) autoTintBox.checked = a.autoTint !== false;
     }
 
     function currentForm() {
         var checked = win ? win.querySelector('.pz-swatch[aria-checked=true]') : null;
         return {
             color: checked ? checked.getAttribute('data-color') : DEFAULT.color,
-            tint: tintInput ? Math.min(1, Math.max(0.2, parseInt(tintInput.value, 10) / 100)) : DEFAULT.tint
+            tint: tintInput ? Math.min(1, Math.max(0.2, parseInt(tintInput.value, 10) / 100)) : DEFAULT.tint,
+            autoTint: autoTintBox ? autoTintBox.checked : true
         };
     }
 
