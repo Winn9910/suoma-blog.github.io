@@ -49,20 +49,21 @@ hexo.extend.helper.register('relative_time', function (input) {
   const today = startOfDay(now);
 
   let tmp = now - time;
-  if (tmp < 60) return '刚刚';
-  if (tmp < 3600) return Math.floor(tmp / 60) + ' 分钟前';
-  if (tmp < DAY) return Math.floor(tmp / 3600) + ' 小时前';
+  if (tmp < 300) return '刚刚';
+
+  const d = new Date(time * 1000);
+  const p2 = function (n) { return (n < 10 ? '0' : '') + n; };
+  const hm = p2(d.getHours()) + ':' + p2(d.getMinutes());
+
+  // 今天：显示具体时间，避免"过了几小时还叫刚刚"
+  if (tmp < DAY) return '今天 ' + hm;
 
   // 归一到当天 00:00 做日期比较
   const timeDay = startOfDay(time);
 
   // 昨天 / 前天
-  const names2 = ['昨', '前'];
-  for (let k = 0; k < names2.length; k++) {
-    if (today - DAY * (1 + k) <= timeDay) {
-      return names2[k] + '天';
-    }
-  }
+  if (today - DAY <= timeDay) return '昨天 ' + hm;
+  if (today - DAY * 2 <= timeDay) return '前天 ' + hm;
 
   // 本周 / 上周 周几
   const week = ['日', '一', '二', '三', '四', '五', '六'];
