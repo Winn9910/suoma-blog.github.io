@@ -55,15 +55,13 @@ hexo.extend.helper.register('relative_time', function (input) {
   const p2 = function (n) { return (n < 10 ? '0' : '') + n; };
   const hm = p2(d.getHours()) + ':' + p2(d.getMinutes());
 
-  // 今天：显示具体时间，避免"过了几小时还叫刚刚"
-  if (tmp < DAY) return '今天 ' + hm;
-
-  // 归一到当天 00:00 做日期比较
+  // 归一到当天 00:00 做日历日比较（跨过午夜就算"昨天"，不看 24 小时差）
   const timeDay = startOfDay(time);
 
-  // 昨天 / 前天
-  if (today - DAY <= timeDay) return '昨天 ' + hm;
-  if (today - DAY * 2 <= timeDay) return '前天 ' + hm;
+  // 今天 / 昨天 / 前天
+  if (timeDay === today) return '今天 ' + hm;
+  if (timeDay === today - DAY) return '昨天 ' + hm;
+  if (timeDay === today - DAY * 2) return '前天 ' + hm;
 
   // 本周 / 上周 周几
   const week = ['日', '一', '二', '三', '四', '五', '六'];
@@ -115,4 +113,11 @@ hexo.extend.helper.register('relative_time', function (input) {
   const nowYear = new Date(now * 1000).getFullYear();
   const tYear = new Date(time * 1000).getFullYear();
   return (nowYear - tYear) + ' 年前';
+});
+
+/* 构建时间戳：同一次构建内恒定，每次部署变化。
+   用于给 css/js 引用追加 ?v= 参数，确保浏览器与 CDN 在部署后必取新资源。 */
+const BUILD_TS = Date.now();
+hexo.extend.helper.register('build_ts', function () {
+  return BUILD_TS;
 });

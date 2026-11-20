@@ -34,7 +34,7 @@
                 <a class="file-title" href="<%- url_for(post.path) %>"><%= post.title || 'Untitled' %></a>
             </span>
             <span class="col-date" title="<%= date(post.date, 'YYYY-MM-DD HH:mm') %>">
-                <span class="rel-date" data-ts="<%= date(post.date, 'x') %>"><%= relative_time(post.date) %></span>
+                <span class="rel-date" data-ts="<%= date(post.date, 'x') %>"><%= date(post.date, 'MM-DD HH:mm') %></span>
             </span>
             <span class="col-desc">
                 <span class="file-excerpt"><%- truncate(strip_html(post.excerpt || post.content), {length: 90, omission: '...'}) %></span>

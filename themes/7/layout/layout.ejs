@@ -17,10 +17,10 @@
     <% if (config.feed && config.feed.path) { %>
         <link rel="alternate" type="application/rss+xml" title="<%= config.title %>" href="<%= url_for(config.feed.path) %>">
     <% } %>
-    <%- css('vendor/7.css') %>
-    <%- css('css/style.css') %>
+    <link rel="stylesheet" href="<%- url_for('vendor/7.css') %>?v=<%= build_ts() %>">
+    <link rel="stylesheet" href="<%- url_for('css/style.css') %>?v=<%= build_ts() %>">
     <% if (theme.hljs) { %>
-        <%- css('vendor/hljs.css') %>
+        <link rel="stylesheet" href="<%- url_for('vendor/hljs.css') %>?v=<%= build_ts() %>">
     <% } %>
     <% if (theme.favicon && theme.favicon.enable && theme.favicon.icon) { %>
         <link rel="icon" href="<%= url_for(theme.favicon.icon) %>">
@@ -42,7 +42,7 @@
     <div class="win7-loading" id="win7Loading" aria-hidden="true">
         <div class="win7-spinner" role="status" aria-label="加载中"></div>
     </div>
-    <%- js('js/loading.js') %>
+    <script src="<%- url_for('js/loading.js') %>?v=<%= build_ts() %>"></script>
 
     <div class="desktop">
         <div class="window main-window glass active">
@@ -114,12 +114,12 @@
     </div>
 
     <script>window.__win7Root = '<%- url_for("/") %>';</script>
-    <script defer src="<%- url_for('js/bundle.js') %>"></script>
-    <script defer src="<%- url_for('js/titlebar.js') %>"></script>
-    <script defer src="<%- url_for('js/note.js') %>"></script>
-    <script defer src="<%- url_for('js/lightbox.js') %>"></script>
+    <script defer src="<%- url_for('js/bundle.js?v=' + build_ts()) %>"></script>
+    <script defer src="<%- url_for('js/titlebar.js?v=' + build_ts()) %>"></script>
+    <script defer src="<%- url_for('js/note.js?v=' + build_ts()) %>"></script>
+    <script defer src="<%- url_for('js/lightbox.js?v=' + build_ts()) %>"></script>
     <% if (theme.music && theme.music.enable) { %>
-        <script defer src="<%- url_for('js/music.js') %>"></script>
+        <script defer src="<%- url_for('js/music.js?v=' + build_ts()) %>"></script>
     <% } %>
 
     <% if (theme.math && theme.math.enable && page.mathjax) { %>

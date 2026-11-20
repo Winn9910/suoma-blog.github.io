@@ -38,12 +38,11 @@
         function p2(n) { return (n < 10 ? '0' : '') + n; }
         var hm = p2(d.getHours()) + ':' + p2(d.getMinutes());
 
-        if (tmp < DAY) return '今天 ' + hm;
-
         var timeDay = startOfDaySec(time * 1000);
 
-        if (today - DAY <= timeDay) return '昨天 ' + hm;
-        if (today - DAY * 2 <= timeDay) return '前天 ' + hm;
+        if (timeDay === today) return '今天 ' + hm;
+        if (timeDay === today - DAY) return '昨天 ' + hm;
+        if (timeDay === today - DAY * 2) return '前天 ' + hm;
 
         var week = ['日', '一', '二', '三', '四', '五', '六'];
         var dow = d.getDay();
