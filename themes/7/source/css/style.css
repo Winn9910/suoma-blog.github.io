@@ -1154,15 +1154,29 @@ mark.search-hit {
     line-height: 1.7;
     color: #22303d;
 }
-.error-404-actions {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-    padding: 8px 12px 12px;
-    background: var(--w7-surface);
-    border-radius: 0 0 6px 6px;
+.error-404-sub {
+    margin: 10px 0 0;
+    font-size: 12px;
+    line-height: 1.7;
+    color: #5f6f7d;
 }
-.error-404-actions button { min-width: 88px; padding: 3px 12px; }
+.error-404-count {
+    margin: 12px 0 0;
+    padding-top: 10px;
+    border-top: 1px dashed #d3dde6;
+    font-size: 12px;
+    color: #3d5468;
+    text-align: center;
+}
+.error-404-count b {
+    display: inline-block;
+    min-width: 18px;
+    padding: 0 4px;
+    text-align: center;
+    color: #16537e;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+}
 
 .article-view {
     width: 100%;

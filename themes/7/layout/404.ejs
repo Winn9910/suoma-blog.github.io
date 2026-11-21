@@ -9,17 +9,26 @@
             </div>
             <div class="window-body has-space">
                 <p>内容可能迁移或搜索内容为空!</p>
-            </div>
-            <div class="error-404-actions">
-                <button type="button" onclick="history.back()">← 上一页</button>
-                <button type="button" onclick="location.href='<%- url_for('/') %>'">返回首页</button>
+                <p class="error-404-sub">请检查地址是否输入有误，或用右上角「?」搜索站内内容。</p>
+                <p class="error-404-count"><b id="errCountdown">5</b> 秒后自动返回首页…</p>
             </div>
         </div>
     </div>
 </article>
 <script>
     (function () {
-        var btn = document.getElementById('err404Close');
-        if (btn) btn.addEventListener('click', function () { history.back(); });
+        var closeBtn = document.getElementById('err404Close');
+        if (closeBtn) closeBtn.addEventListener('click', function () { history.back(); });
+
+        var n = 5;
+        var el = document.getElementById('errCountdown');
+        var timer = setInterval(function () {
+            n--;
+            if (el) el.textContent = n;
+            if (n <= 0) {
+                clearInterval(timer);
+                location.href = '<%- url_for("/") %>';
+            }
+        }, 1000);
     })();
 </script>
