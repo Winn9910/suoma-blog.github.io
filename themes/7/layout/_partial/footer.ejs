@@ -9,7 +9,6 @@
 %>
 <div class="status-bar site-footer<%= (icp || police) ? ' has-beian' : '' %>">
     <p class="status-bar-field footer-copyright">Copyright &copy; <%= date(new Date(), 'YYYY') %> <%= config.author %></p>
-    <p class="status-bar-field footer-powered">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> · Theme win7</p>
     <% if (config.feed && config.feed.path) { %>
         <p class="status-bar-field footer-rss"><a href="<%- url_for(config.feed.path) %>" title="RSS 订阅">RSS</a></p>
     <% } %>

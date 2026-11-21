@@ -17,7 +17,9 @@ const ORDER = [
   'draggable-window.js',
   'context-menu.js',
   'attachments.js',
-  'toots.js'
+  'toots.js',
+  'toc-nav.js',
+  'addr-nav.js'
 ];
 
 hexo.extend.generator.register('theme_js_bundle', function () {
