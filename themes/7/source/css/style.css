@@ -2306,6 +2306,9 @@ input#pzAutoTint {
 }
 .toot-body::-webkit-scrollbar-thumb:hover { background: linear-gradient(to right, #d8ebfb, #8fb8db); }
 
+.toot-loading[hidden],
+.toot-error[hidden] { display: none; }
+
 .toot-loading {
     display: flex;
     align-items: center;
@@ -2386,8 +2389,7 @@ input#pzAutoTint {
 .toot-error p { margin: 0 0 6px; }
 .toot-error a { color: #1f5c96; }
 
-/* 移动端：默认收起，右上角小按钮唤出居中浮窗 */
-.toot-fab { display: none; }
+/* 移动端：默认收起，右上角「?」按钮唤出居中浮窗 */
 .toot-scrim { display: none; }
 
 @media (max-width: 820px) {
@@ -2419,29 +2421,6 @@ input#pzAutoTint {
         background-repeat: no-repeat;
         background-position: center;
     }
-
-    .toot-fab {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 38px;
-        right: 12px;
-        width: 36px;
-        height: 36px;
-        min-width: 0;
-        padding: 0;
-        z-index: 60;
-        border: 1px solid #8fa6b8;
-        border-radius: 50%;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, .95), rgba(222, 234, 245, .92));
-        box-shadow: 0 2px 8px rgba(10, 30, 50, .28), inset 0 1px 0 #fff;
-        cursor: pointer;
-        transition: transform .12s ease, box-shadow .12s ease;
-    }
-    .toot-fab:active { transform: scale(.94); box-shadow: 0 1px 4px rgba(10, 30, 50, .3); }
-    .toot-fab[aria-expanded="true"] { box-shadow: 0 0 0 2px #3f7fbf99, 0 2px 8px rgba(10, 30, 50, .28); }
-    .toot-fab svg { display: block; }
 
     .toot-scrim {
         display: block;

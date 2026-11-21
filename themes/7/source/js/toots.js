@@ -144,21 +144,14 @@
 
     /* ---------- 折叠 / 拖拽 / 移动端浮窗 ---------- */
     var scrim = document.getElementById('tootScrim');
-    var fab = document.getElementById('tootFab');
 
     function isMobile() { return window.innerWidth <= 820; }
 
     function setMobileOpen(open) {
         gadget.classList.toggle('is-open', open);
         if (scrim) scrim.hidden = !open;
-        if (fab) fab.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
 
-    if (fab) {
-        fab.addEventListener('click', function () {
-            setMobileOpen(!gadget.classList.contains('is-open'));
-        });
-    }
     if (scrim) {
         scrim.addEventListener('click', function () { setMobileOpen(false); });
     }
@@ -173,6 +166,16 @@
                 if (collapsed) localStorage.setItem('win7-toot-collapsed', '1');
                 else localStorage.removeItem('win7-toot-collapsed');
             } catch (e) { /* ignore */ }
+        });
+    }
+
+    /* 右上角「?」按钮：桌面跳 about；手机端改为展开嘟文浮窗 */
+    var helpLink = document.getElementById('helpLink');
+    if (helpLink) {
+        helpLink.addEventListener('click', function (e) {
+            if (!isMobile()) return;
+            e.preventDefault();
+            setMobileOpen(!gadget.classList.contains('is-open'));
         });
     }
 
