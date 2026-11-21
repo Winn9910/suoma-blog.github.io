@@ -1,16 +1,25 @@
-<article class="article-view post-full error-404">
-    <div class="error-404-box">
-        <img class="error-404-ico" src="<%- url_for('/image/icon/topic/faq.webp') %>" alt="">
-        <div class="error-404-code">404</div>
-        <h1 class="error-404-title">找不到此页面</h1>
-        <p class="error-404-desc">
-            你要访问的页面可能已被移动、删除，或从未存在过。<br>
-            请检查地址是否正确，或从下面回到熟悉的地方。
-        </p>
-        <div class="error-404-actions">
-            <button type="button" onclick="location.href='<%- url_for('/') %>'">返回首页</button>
-            <button type="button" onclick="history.back()">返回上一页</button>
-            <button type="button" onclick="location.href='<%- url_for('/archives') %>'">浏览全部文章</button>
+<article class="article-view error-404">
+    <div class="error-404-wrap">
+        <div class="window active error-404-win">
+            <div class="title-bar">
+                <div class="title-bar-text">提示：</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" id="err404Close" tabindex="-1"></button>
+                </div>
+            </div>
+            <div class="window-body has-space">
+                <p>内容可能迁移或搜索内容为空!</p>
+            </div>
+            <div class="error-404-actions">
+                <button type="button" onclick="history.back()">← 上一页</button>
+                <button type="button" onclick="location.href='<%- url_for('/') %>'">返回首页</button>
+            </div>
         </div>
     </div>
 </article>
+<script>
+    (function () {
+        var btn = document.getElementById('err404Close');
+        if (btn) btn.addEventListener('click', function () { history.back(); });
+    })();
+</script>
