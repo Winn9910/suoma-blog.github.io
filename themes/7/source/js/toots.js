@@ -142,10 +142,32 @@
             });
     }
 
-    /* ---------- 折叠 / 拖拽 ---------- */
+    /* ---------- 折叠 / 拖拽 / 移动端浮窗 ---------- */
+    var scrim = document.getElementById('tootScrim');
+    var fab = document.getElementById('tootFab');
+
+    function isMobile() { return window.innerWidth <= 820; }
+
+    function setMobileOpen(open) {
+        gadget.classList.toggle('is-open', open);
+        if (scrim) scrim.hidden = !open;
+        if (fab) fab.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    if (fab) {
+        fab.addEventListener('click', function () {
+            setMobileOpen(!gadget.classList.contains('is-open'));
+        });
+    }
+    if (scrim) {
+        scrim.addEventListener('click', function () { setMobileOpen(false); });
+    }
+
     var toggle = document.getElementById('tootToggle');
     if (toggle) {
         toggle.addEventListener('click', function () {
+            /* 手机端这个键当「关闭」用 */
+            if (isMobile()) { setMobileOpen(false); return; }
             var collapsed = gadget.classList.toggle('collapsed');
             try {
                 if (collapsed) localStorage.setItem('win7-toot-collapsed', '1');
@@ -153,6 +175,12 @@
             } catch (e) { /* ignore */ }
         });
     }
+
+    document.addEventListener('keydown', function (e) {
+        if ((e.key === 'Escape' || e.key === 'Esc') && gadget.classList.contains('is-open')) {
+            setMobileOpen(false);
+        }
+    });
 
     function ensureDrag() {
         if (dragBound || !window.win7MakeDraggable) return;

@@ -2386,8 +2386,76 @@ input#pzAutoTint {
 .toot-error p { margin: 0 0 6px; }
 .toot-error a { color: #1f5c96; }
 
+/* 移动端：默认收起，右上角小按钮唤出居中浮窗 */
+.toot-fab { display: none; }
+.toot-scrim { display: none; }
+
 @media (max-width: 820px) {
-    .toot-gadget { display: none !important; }
+    .toot-gadget { display: none; }
+
+    .toot-gadget.is-open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        right: auto;
+        bottom: auto;
+        transform: translate(-50%, -50%);
+        width: calc(100vw - 36px);
+        max-width: 420px;
+        max-height: 72vh;
+        z-index: 13000;
+        box-shadow: 0 16px 44px rgba(0, 0, 0, .55), inset 0 0 0 1px #fffa;
+    }
+    .toot-gadget.is-open .toot-body {
+        max-height: none;
+        flex: 1 1 auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    /* 手机端标题栏的 Minimize 键当关闭用 */
+    .toot-gadget.is-open #tootToggle {
+        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath stroke='%23444' stroke-width='1.6' stroke-linecap='round' d='M1.5 1.5l7 7M8.5 1.5l-7 7'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .toot-fab {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 38px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+        min-width: 0;
+        padding: 0;
+        z-index: 60;
+        border: 1px solid #8fa6b8;
+        border-radius: 50%;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, .95), rgba(222, 234, 245, .92));
+        box-shadow: 0 2px 8px rgba(10, 30, 50, .28), inset 0 1px 0 #fff;
+        cursor: pointer;
+        transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .toot-fab:active { transform: scale(.94); box-shadow: 0 1px 4px rgba(10, 30, 50, .3); }
+    .toot-fab[aria-expanded="true"] { box-shadow: 0 0 0 2px #3f7fbf99, 0 2px 8px rgba(10, 30, 50, .28); }
+    .toot-fab svg { display: block; }
+
+    .toot-scrim {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 12900;
+        background: rgba(10, 16, 24, .45);
+        -webkit-backdrop-filter: blur(1.5px);
+        backdrop-filter: blur(1.5px);
+    }
+    .toot-scrim[hidden] { display: none; }
 }
 
 /* ---------- 友链页补充：分组标题 / 状态点 / 申请表单 ---------- */
