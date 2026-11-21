@@ -16,7 +16,8 @@ const ORDER = [
   'search.js',
   'draggable-window.js',
   'context-menu.js',
-  'attachments.js'
+  'attachments.js',
+  'toots.js'
 ];
 
 hexo.extend.generator.register('theme_js_bundle', function () {

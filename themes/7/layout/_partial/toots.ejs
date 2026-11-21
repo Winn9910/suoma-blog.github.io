@@ -1,0 +1,47 @@
+<%# 嘟文挂件：实时抓取 gov.box（snac）上 盒子君@admin 的最新嘟文，替代原便签 %>
+<div class="window toot-gadget glass active" id="tootGadget">
+    <div class="title-bar">
+        <div class="title-bar-text">
+            <svg class="toot-title-ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                <path fill="#6366f1" d="M8 .8c3.9 0 6.5 2.6 6.5 6.4 0 2.5-.8 4.4-2.1 5.6-.5.5-1 .9-1.6 1.2l-.3 1.5c-.1.5-.5.8-1 .8H9v-1.3a1 1 0 0 0-2 0V15H5.4c-.5 0-.9-.3-1-.8l-.3-1.4a7 7 0 0 1-1.7-1.3C1.3 10.5.5 8.6.5 7.2 1 .5 4.1.8 8 .8z"/>
+                <circle cx="5.6" cy="6.6" r="1.1" fill="#fff"/>
+                <circle cx="10.4" cy="6.6" r="1.1" fill="#fff"/>
+            </svg>
+            盒子君的嘟文
+        </div>
+        <div class="title-bar-controls">
+            <button aria-label="Minimize" id="tootToggle" tabindex="-1"></button>
+        </div>
+    </div>
+    <div class="window-body toot-body">
+        <div class="toot-loading" id="tootLoading"><span class="toot-spinner"></span>正在抓取最新嘟文…</div>
+        <ul class="toot-list" id="tootList" hidden></ul>
+        <div class="toot-error" id="tootError" hidden>
+            <p>暂时抓不到嘟文。</p>
+            <a href="https://gov.box/admin" target="_blank" rel="noopener">去嘟站看看 →</a>
+        </div>
+    </div>
+    <div class="status-bar">
+        <span class="status-bar-field" id="tootStatus">gov.box</span>
+        <span class="status-bar-field" id="tootUpdated">未同步</span>
+    </div>
+</div>
+<script>
+    /* 首屏同步折叠/拖拽状态，避免闪现 */
+    (function () {
+        var el = document.getElementById('tootGadget');
+        if (!el) return;
+        try {
+            if (localStorage.getItem('win7-toot-collapsed') === '1') el.classList.add('collapsed');
+            if (window.innerWidth > 820) {
+                var p = JSON.parse(localStorage.getItem('win7-toot-pos') || 'null');
+                if (p && !isNaN(p.left) && !isNaN(p.top)) {
+                    el.style.left = p.left + 'px';
+                    el.style.top = p.top + 'px';
+                    el.style.right = 'auto';
+                    el.style.bottom = 'auto';
+                }
+            }
+        } catch (e) { /* localStorage 不可用则用默认位置 */ }
+    })();
+</script>

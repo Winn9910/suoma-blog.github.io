@@ -53,4 +53,7 @@
         e.preventDefault();
         open(img.currentSrc || img.src, img.alt);
     });
+
+    /* 供其他挂件（嘟文等）复用灯箱 */
+    window.win7Lightbox = { open: open, close: close };
 })();
