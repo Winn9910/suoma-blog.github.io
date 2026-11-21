@@ -17,6 +17,19 @@
 </article>
 <script>
     (function () {
+        /* 旧地址智能纠错：/archives/18、/posts/18 等落到 404 时，立即纠正到 /18/ */
+        var m = location.pathname.match(/^\/(?:archives|posts|articles|blog|post)\/(\d+)(?:\/|$)/);
+        if (m) {
+            location.replace('/' + m[1] + '/');
+            return;
+        }
+        /* ?p=18 旧链接格式 */
+        var q = new URLSearchParams(location.search).get('p');
+        if (q && /^\d+$/.test(q)) {
+            location.replace('/' + q + '/');
+            return;
+        }
+
         var closeBtn = document.getElementById('err404Close');
         if (closeBtn) closeBtn.addEventListener('click', function () { history.back(); });
 

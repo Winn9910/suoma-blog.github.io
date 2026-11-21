@@ -6,5 +6,12 @@
     "api/submit-link.js": {
       "maxDuration": 15
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/archives/:num",
+      "destination": "/:num",
+      "permanent": true
+    }
+  ]
 }
