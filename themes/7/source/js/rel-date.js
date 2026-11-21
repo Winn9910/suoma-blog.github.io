@@ -34,44 +34,21 @@
         var tmp = now - time;
         if (tmp < 300) return '刚刚';
 
-        var d = new Date(time * 1000);
-        function p2(n) { return (n < 10 ? '0' : '') + n; }
-        var hm = p2(d.getHours()) + ':' + p2(d.getMinutes());
-
         var timeDay = startOfDaySec(time * 1000);
 
-        if (timeDay === today) return '今天 ' + hm;
-        if (timeDay === today - DAY) return '昨天 ' + hm;
-        if (timeDay === today - DAY * 2) return '前天 ' + hm;
+        if (timeDay === today) return '今天';
+        if (timeDay === today - DAY) return '昨天';
+        if (timeDay === today - DAY * 2) return '前天';
 
-        var week = ['日', '一', '二', '三', '四', '五', '六'];
-        var dow = d.getDay();
-        if (dow === 0) dow = 7;
-        var weekStart = today - DAY * dow;
+        var days = Math.round((today - timeDay) / DAY);
+        if (days < 7) return days + ' 天前';
+        if (days < 30) return Math.floor(days / 7) + ' 周前';
 
-        if (weekStart - DAY * 7 < timeDay) return '本周' + week[d.getDay()];
-        if (weekStart - DAY * 14 < timeDay) return '上周' + week[d.getDay()];
-        if (weekStart - DAY * 21 < timeDay) return '3 周前';
-
-        var mStart = startOfMonthSec(now * 1000);
-        if (mStart <= timeDay) {
-            return Math.floor((today - timeDay) / DAY) + ' 天前';
-        }
-        var prevMonth = startOfMonthSec(mStart * 1000 - 1);
-        if (prevMonth <= timeDay) return '上月';
-
-        var yStart = startOfYearSec(now * 1000);
-        if (yStart <= timeDay) {
-            return (new Date(now * 1000).getMonth() - d.getMonth()) + ' 月前';
-        }
-
-        var yearNames = ['去', '前'];
-        var yCursor = yStart;
-        for (var i = 0; i < yearNames.length; i++) {
-            yCursor = startOfYearSec(yCursor * 1000 - 1);
-            if (yCursor <= timeDay) return yearNames[i] + '年';
-        }
-        return (new Date(now * 1000).getFullYear() - d.getFullYear()) + ' 年前';
+        var d = new Date(time * 1000);
+        var nowDate = new Date(now * 1000);
+        var monthDiff = (nowDate.getFullYear() - d.getFullYear()) * 12 + (nowDate.getMonth() - d.getMonth());
+        if (monthDiff < 12) return monthDiff + ' 月前';
+        return (nowDate.getFullYear() - d.getFullYear()) + ' 年前';
     }
 
     function run() {

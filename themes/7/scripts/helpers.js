@@ -51,68 +51,22 @@ hexo.extend.helper.register('relative_time', function (input) {
   let tmp = now - time;
   if (tmp < 300) return '刚刚';
 
-  const d = new Date(time * 1000);
-  const p2 = function (n) { return (n < 10 ? '0' : '') + n; };
-  const hm = p2(d.getHours()) + ':' + p2(d.getMinutes());
-
-  // 归一到当天 00:00 做日历日比较（跨过午夜就算"昨天"，不看 24 小时差）
+  // 日历日比较（跨过午夜就算昨天）
   const timeDay = startOfDay(time);
 
-  // 今天 / 昨天 / 前天
-  if (timeDay === today) return '今天 ' + hm;
-  if (timeDay === today - DAY) return '昨天 ' + hm;
-  if (timeDay === today - DAY * 2) return '前天 ' + hm;
+  if (timeDay === today) return '今天';
+  if (timeDay === today - DAY) return '昨天';
+  if (timeDay === today - DAY * 2) return '前天';
 
-  // 本周 / 上周 周几
-  const week = ['日', '一', '二', '三', '四', '五', '六'];
-  let dow = new Date(now * 1000).getDay(); // 0=周日
-  if (dow === 0) dow = 7;
-  const weekStart = today - DAY * dow; // 本周周日 00:00 的前一刻基准
+  const days = Math.round((today - timeDay) / DAY);
+  if (days < 7) return days + ' 天前';
+  if (days < 30) return Math.floor(days / 7) + ' 周前';
 
-  const weekNames = ['', '上'];
-  for (let k = 0; k < weekNames.length; k++) {
-    if (weekStart - DAY * 7 * k < timeDay) {
-      return weekNames[k] + '周' + week[new Date(time * 1000).getDay()];
-    }
-  }
-
-  if (weekStart - DAY * 7 * 2 < timeDay) {
-    return '3 周前';
-  }
-
-  // 本月内
-  let mStart = startOfMonth(now);
-  if (mStart <= timeDay) {
-    return Math.floor((today - timeDay) / DAY) + ' 天前';
-  }
-
-  // 上个月
-  const prevMonth = startOfMonth(mStart - 1);
-  if (prevMonth <= timeDay) {
-    return '上月';
-  }
-
-  // 今年内
-  const yStart = startOfYear(now);
-  if (yStart <= timeDay) {
-    const nowMonth = new Date(now * 1000).getMonth() + 1;
-    const tMonth = new Date(time * 1000).getMonth() + 1;
-    return (nowMonth - tMonth) + ' 月前';
-  }
-
-  // 去年 / 前年
-  const yearNames = ['去', '前'];
-  let yCursor = yStart;
-  for (let i = 0; i < yearNames.length; i++) {
-    yCursor = startOfYear(yCursor - 1);
-    if (yCursor <= timeDay) {
-      return yearNames[i] + '年';
-    }
-  }
-
-  const nowYear = new Date(now * 1000).getFullYear();
-  const tYear = new Date(time * 1000).getFullYear();
-  return (nowYear - tYear) + ' 年前';
+  const d = new Date(time * 1000);
+  const nowDate = new Date(now * 1000);
+  const monthDiff = (nowDate.getFullYear() - d.getFullYear()) * 12 + (nowDate.getMonth() - d.getMonth());
+  if (monthDiff < 12) return monthDiff + ' 月前';
+  return (nowDate.getFullYear() - d.getFullYear()) + ' 年前';
 });
 
 /* 构建时间戳：同一次构建内恒定，每次部署变化。
