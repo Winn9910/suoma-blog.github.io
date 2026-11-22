@@ -19,7 +19,8 @@ const ORDER = [
   'attachments.js',
   'toots.js',
   'toc-nav.js',
-  'addr-nav.js'
+  'addr-nav.js',
+  'code-copy.js'
 ];
 
 hexo.extend.generator.register('theme_js_bundle', function () {
