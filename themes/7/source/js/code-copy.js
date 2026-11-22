@@ -29,6 +29,20 @@
         }
     }
 
+    /* Hexo 高亮引擎把每行包在 <span class="line"> 里（行间只有 <br>），
+       直接取 textContent 会丢换行——按行拼接才是真实代码 */
+    function extractCode(pre) {
+        var lines = pre.querySelectorAll('.line');
+        if (lines.length) {
+            var out = [];
+            [].forEach.call(lines, function (l) {
+                out.push(l.textContent.replace(/\r/g, ''));   /* Windows CRLF 行尾残留 */
+            });
+            return out.join('\n').replace(/\n+$/, '');
+        }
+        return pre.textContent.replace(/\r/g, '').replace(/\n$/, '');
+    }
+
     [].slice.call(content.querySelectorAll('pre')).forEach(function (pre) {
         if (pre.parentElement && pre.parentElement.classList.contains('code-copy-wrap')) return;
         var wrap = document.createElement('div');
@@ -44,7 +58,7 @@
         wrap.appendChild(btn);
 
         btn.addEventListener('click', function () {
-            copyText(pre.textContent.replace(/\n$/, ''), function () {
+            copyText(extractCode(pre), function () {
                 btn.textContent = '已复制';
                 btn.classList.add('is-done');
                 setTimeout(function () {
