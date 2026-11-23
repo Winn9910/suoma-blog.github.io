@@ -1,6 +1,10 @@
 # 友链数据（自动维护，请勿手动编辑）
 # 新友链通过 GitHub Issue 提交，审核通过后由 GitHub Action 自动添加
 blogs:
+  - name: "微光集"
+    url: "https://goblincwl.site/"
+    description: "零散的梦，汇聚成未尽的星河。"
+    avatar: "https://goblincwl.site/static/Profile_compressed.png"
   - name: "祭酒·故事"
     url: "https://www.j9.gs"
     description: "花名祭酒的官方博客"
