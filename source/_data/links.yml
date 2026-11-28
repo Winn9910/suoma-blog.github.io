@@ -1,6 +1,10 @@
 # 友链数据（自动维护，请勿手动编辑）
 # 新友链通过 GitHub Issue 提交，审核通过后由 GitHub Action 自动添加
 blogs:
+  - name: "IP纯净度检测"
+    url: "https://www.cha.la/"
+    description: "CHA.LA专注IP纯净度检测、家庭住宅IP检测和代理风险查询，结合归属地、网络类型与风险信息，辅助筛选IP资源、核对商家描述，买前有参考，买后可复查。"
+    avatar: "https://www.cha.la/api/v1/blog/media/f49744fb-0997-4e31-85db-32f7089c0dbd"
   - name: "微光集"
     url: "https://goblincwl.site/"
     description: "零散的梦，汇聚成未尽的星河。"
